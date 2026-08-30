@@ -1,23 +1,59 @@
 (function () {
     "use strict";
 
-    /* ---------- Dark mode ---------- */
-    // The dark class itself is applied by a blocking inline script in <head>
-    // (before first paint) to avoid a flash of the wrong theme. This just
-    // syncs any toggle UI to whatever state that script already set.
-    function initTheme() {
-        syncThemeToggles(document.documentElement.classList.contains("dark"));
+    /* ---------- Theme: light / dark / system ---------- */
+    // The initial `dark` class is applied by a blocking inline script in
+    // <head> (before first paint) to avoid a flash of the wrong theme, using
+    // the same "rowdo-theme" localStorage key read here.
+    function getStoredThemeMode() {
+        return localStorage.getItem("rowdo-theme") || "system";
     }
 
-    function toggleTheme() {
-        const isDark = document.documentElement.classList.toggle("dark");
-        localStorage.setItem("rowdo-theme", isDark ? "dark" : "light");
-        syncThemeToggles(isDark);
+    function applyTheme(mode) {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const isDark = mode === "dark" || (mode === "system" && prefersDark);
+        document.documentElement.classList.toggle("dark", isDark);
     }
 
-    function syncThemeToggles(isDark) {
+    function syncThemeControls(mode) {
+        document.querySelectorAll("[data-theme-set]").forEach(btn => {
+            const active = btn.getAttribute("data-theme-set") === mode;
+            btn.classList.toggle("bg-card", active);
+            btn.classList.toggle("text-foreground", active);
+            btn.classList.toggle("shadow-sm", active);
+            btn.classList.toggle("text-muted-foreground", !active);
+            btn.setAttribute("aria-pressed", String(active));
+        });
         document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
-            btn.setAttribute("aria-pressed", String(isDark));
+            btn.setAttribute("aria-pressed", String(document.documentElement.classList.contains("dark")));
+        });
+    }
+
+    function setThemeMode(mode) {
+        localStorage.setItem("rowdo-theme", mode);
+        applyTheme(mode);
+        syncThemeControls(mode);
+    }
+
+    function initTheme() {
+        const mode = getStoredThemeMode();
+        syncThemeControls(mode);
+
+        document.querySelectorAll("[data-theme-set]").forEach(btn => {
+            btn.addEventListener("click", () => setThemeMode(btn.getAttribute("data-theme-set")));
+        });
+
+        // Legacy single-button toggle (pages without the 3-way control yet):
+        // just flips explicitly between light and dark.
+        document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const isDark = document.documentElement.classList.contains("dark");
+                setThemeMode(isDark ? "light" : "dark");
+            });
+        });
+
+        window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+            if (getStoredThemeMode() === "system") applyTheme("system");
         });
     }
 
