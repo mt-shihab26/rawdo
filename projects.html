@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Completed · Rowdo</title>
+        <title>Projects · Rowdo</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <link rel="stylesheet" href="assets/css/app.css" type="text/tailwindcss" />
     </head>
@@ -147,7 +147,7 @@
                         </a>
                         <a
                             href="completed.html"
-                            class="flex items-center gap-3 rounded-lg bg-sidebar-primary/10 px-3 py-2 text-sm font-semibold text-sidebar-primary"
+                            class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -170,7 +170,7 @@
                     <div>
                         <div class="flex items-center justify-between px-3 pb-2">
                             <span
-                                class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                                class="text-xs font-semibold uppercase tracking-wider text-primary"
                                 >Projects</span
                             >
                             <a
@@ -221,12 +221,6 @@
                                     class="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-chart-2"
                                 ></span>
                                 Personal
-                            </a>
-                            <a
-                                href="projects.html"
-                                class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                            >
-                                View all projects
                             </a>
                         </div>
                     </div>
@@ -318,273 +312,242 @@
                             />
                         </svg>
                     </button>
-                    <div class="relative max-w-md flex-1">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-                            />
-                        </svg>
-                        <input
-                            type="search"
-                            placeholder="Search tasks..."
-                            class="w-full rounded-lg border border-input bg-muted py-2 pl-9 pr-3 text-sm placeholder:text-muted-foreground focus:bg-background focus:outline-none focus:ring-2 focus:ring-ring/30"
-                        />
-                    </div>
-                    <div class="ml-auto flex items-center gap-2">
-                        <button
-                            class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            aria-label="Notifications"
-                        >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                                stroke-width="2"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                                />
-                            </svg>
-                        </button>
-                    </div>
+                    <div class="ml-auto"></div>
                 </header>
 
                 <main class="flex-1 px-4 py-6 lg:px-8 lg:py-8">
-                    <div class="mx-auto max-w-3xl">
+                    <div class="mx-auto max-w-5xl">
                         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-                            <div>
-                                <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
-                                    Completed
-                                </h1>
-                                <p class="mt-1 text-sm text-muted-foreground">
-                                    42 tasks completed this month
-                                </p>
-                            </div>
-                            <select
-                                class="rounded-lg border border-input bg-card px-3 py-1.5 text-sm font-medium text-foreground/80 focus:outline-none focus:ring-2 focus:ring-ring/30"
+                            <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Projects</h1>
+                            <button
+                                data-modal-open="new-project-modal"
+                                class="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
                             >
-                                <option>Today</option>
-                                <option selected>This week</option>
-                                <option>This month</option>
-                                <option>All time</option>
-                            </select>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 4.5v15m7.5-7.5h-15"
+                                    />
+                                </svg>
+                                New project
+                            </button>
                         </div>
 
-                        <div class="space-y-6">
-                            <div>
-                                <h2
-                                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                                >
-                                    Today — Aug 31
-                                </h2>
-                                <div class="rounded-xl border border-border bg-card">
-                                    <ul class="divide-y divide-border">
-                                        <li class="flex items-start gap-3 px-5 py-3.5">
-                                            <span
-                                                class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-3 w-3"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    stroke-width="3"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <div class="min-w-0 flex-1">
-                                                <p
-                                                    class="truncate text-sm font-medium text-muted-foreground line-through"
-                                                >
-                                                    Water the office plants
-                                                </p>
-                                                <p class="mt-1 text-xs text-muted-foreground">
-                                                    Completed at 8:14 AM · Personal
-                                                </p>
-                                            </div>
-                                            <button
-                                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                Restore
-                                            </button>
-                                        </li>
-                                        <li class="flex items-start gap-3 px-5 py-3.5">
-                                            <span
-                                                class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-3 w-3"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    stroke-width="3"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <div class="min-w-0 flex-1">
-                                                <p
-                                                    class="truncate text-sm font-medium text-muted-foreground line-through"
-                                                >
-                                                    Publish blog post: "Q3 roadmap"
-                                                </p>
-                                                <p class="mt-1 text-xs text-muted-foreground">
-                                                    Completed at 9:47 AM · Marketing Plan
-                                                </p>
-                                            </div>
-                                            <button
-                                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                Restore
-                                            </button>
-                                        </li>
-                                    </ul>
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            <a
+                                href="project-detail.html"
+                                class="group rounded-xl border border-border bg-card p-5 transition hover:border-chart-1/40 hover:shadow-sm"
+                            >
+                                <div class="mb-4 flex items-center justify-between">
+                                    <span
+                                        class="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-1/15"
+                                    >
+                                        <span class="h-3 w-3 rounded-full bg-chart-1"></span>
+                                    </span>
+                                    <button
+                                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
+                                        aria-label="Project options"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                                            />
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
+                                <h2 class="font-semibold">Website Redesign</h2>
+                                <p class="mt-1 text-sm text-muted-foreground">
+                                    Marketing site rebuild for the Q4 launch
+                                </p>
+                                <div
+                                    class="mt-4 flex items-center justify-between text-xs text-muted-foreground"
+                                >
+                                    <span>7 of 12 tasks</span>
+                                    <span>58%</span>
+                                </div>
+                                <div
+                                    class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted"
+                                >
+                                    <div
+                                        class="h-full rounded-full bg-chart-1"
+                                        style="width: 58%"
+                                    ></div>
+                                </div>
+                            </a>
 
-                            <div>
-                                <h2
-                                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                                >
-                                    Yesterday — Aug 30
-                                </h2>
-                                <div class="rounded-xl border border-border bg-card">
-                                    <ul class="divide-y divide-border">
-                                        <li class="flex items-start gap-3 px-5 py-3.5">
-                                            <span
-                                                class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-3 w-3"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    stroke-width="3"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <div class="min-w-0 flex-1">
-                                                <p
-                                                    class="truncate text-sm font-medium text-muted-foreground line-through"
-                                                >
-                                                    Merge feature/auth-refresh branch
-                                                </p>
-                                                <p class="mt-1 text-xs text-muted-foreground">
-                                                    Completed at 4:32 PM · Website Redesign
-                                                </p>
-                                            </div>
-                                            <button
-                                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                Restore
-                                            </button>
-                                        </li>
-                                        <li class="flex items-start gap-3 px-5 py-3.5">
-                                            <span
-                                                class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-3 w-3"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    stroke-width="3"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <div class="min-w-0 flex-1">
-                                                <p
-                                                    class="truncate text-sm font-medium text-muted-foreground line-through"
-                                                >
-                                                    Book dentist appointment
-                                                </p>
-                                                <p class="mt-1 text-xs text-muted-foreground">
-                                                    Completed at 1:05 PM · Personal
-                                                </p>
-                                            </div>
-                                            <button
-                                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                Restore
-                                            </button>
-                                        </li>
-                                        <li class="flex items-start gap-3 px-5 py-3.5">
-                                            <span
-                                                class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    class="h-3 w-3"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    stroke="currentColor"
-                                                    stroke-width="3"
-                                                >
-                                                    <path
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5"
-                                                    />
-                                                </svg>
-                                            </span>
-                                            <div class="min-w-0 flex-1">
-                                                <p
-                                                    class="truncate text-sm font-medium text-muted-foreground line-through"
-                                                >
-                                                    Update pricing page copy
-                                                </p>
-                                                <p class="mt-1 text-xs text-muted-foreground">
-                                                    Completed at 11:20 AM · Marketing Plan
-                                                </p>
-                                            </div>
-                                            <button
-                                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                                            >
-                                                Restore
-                                            </button>
-                                        </li>
-                                    </ul>
+                            <a
+                                href="project-detail.html"
+                                class="group rounded-xl border border-border bg-card p-5 transition hover:border-chart-4/40 hover:shadow-sm"
+                            >
+                                <div class="mb-4 flex items-center justify-between">
+                                    <span
+                                        class="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-4/15"
+                                    >
+                                        <span class="h-3 w-3 rounded-full bg-chart-4"></span>
+                                    </span>
+                                    <button
+                                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
+                                        aria-label="Project options"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                                            />
+                                        </svg>
+                                    </button>
                                 </div>
-                            </div>
+                                <h2 class="font-semibold">Marketing Plan</h2>
+                                <p class="mt-1 text-sm text-muted-foreground">
+                                    Campaigns, content calendar, and launch assets
+                                </p>
+                                <div
+                                    class="mt-4 flex items-center justify-between text-xs text-muted-foreground"
+                                >
+                                    <span>5 of 9 tasks</span>
+                                    <span>56%</span>
+                                </div>
+                                <div
+                                    class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted"
+                                >
+                                    <div
+                                        class="h-full rounded-full bg-chart-4"
+                                        style="width: 56%"
+                                    ></div>
+                                </div>
+                            </a>
+
+                            <a
+                                href="project-detail.html"
+                                class="group rounded-xl border border-border bg-card p-5 transition hover:border-chart-2/40 hover:shadow-sm"
+                            >
+                                <div class="mb-4 flex items-center justify-between">
+                                    <span
+                                        class="flex h-10 w-10 items-center justify-center rounded-lg bg-chart-2/15"
+                                    >
+                                        <span class="h-3 w-3 rounded-full bg-chart-2"></span>
+                                    </span>
+                                    <button
+                                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
+                                        aria-label="Project options"
+                                    >
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="h-4 w-4"
+                                            fill="currentColor"
+                                            viewBox="0 0 20 20"
+                                        >
+                                            <path
+                                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
+                                            />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <h2 class="font-semibold">Personal</h2>
+                                <p class="mt-1 text-sm text-muted-foreground">
+                                    Errands, appointments, and life admin
+                                </p>
+                                <div
+                                    class="mt-4 flex items-center justify-between text-xs text-muted-foreground"
+                                >
+                                    <span>4 of 6 tasks</span>
+                                    <span>67%</span>
+                                </div>
+                                <div
+                                    class="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-muted"
+                                >
+                                    <div
+                                        class="h-full rounded-full bg-chart-2"
+                                        style="width: 67%"
+                                    ></div>
+                                </div>
+                            </a>
+
+                            <button
+                                data-modal-open="new-project-modal"
+                                class="flex min-h-[168px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+                            >
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-6 w-6"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="M12 4.5v15m7.5-7.5h-15"
+                                    />
+                                </svg>
+                                <span class="text-sm font-medium">New project</span>
+                            </button>
                         </div>
                     </div>
                 </main>
+            </div>
+        </div>
+
+        <div
+            id="new-project-modal"
+            class="js-modal-backdrop fixed inset-0 z-50 hidden items-start justify-center bg-foreground/50 p-4 pt-24 backdrop-blur-sm"
+        >
+            <div class="w-full max-w-md rounded-xl border border-border bg-card shadow-xl">
+                <form class="p-4">
+                    <h2 class="mb-3 text-sm font-semibold">New project</h2>
+                    <input
+                        type="text"
+                        placeholder="Project name"
+                        class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30"
+                        autofocus
+                    />
+                    <div class="mt-3 flex flex-wrap gap-2">
+                        <button
+                            type="button"
+                            class="h-6 w-6 rounded-full bg-chart-1 ring-2 ring-offset-2 ring-offset-card ring-chart-1"
+                        ></button>
+                        <button type="button" class="h-6 w-6 rounded-full bg-chart-2"></button>
+                        <button type="button" class="h-6 w-6 rounded-full bg-chart-3"></button>
+                        <button type="button" class="h-6 w-6 rounded-full bg-chart-4"></button>
+                        <button type="button" class="h-6 w-6 rounded-full bg-chart-5"></button>
+                        <button type="button" class="h-6 w-6 rounded-full bg-primary"></button>
+                    </div>
+                    <div
+                        class="mt-4 flex items-center justify-end gap-2 border-t border-border pt-4"
+                    >
+                        <button
+                            type="button"
+                            data-modal-close
+                            class="rounded-lg px-3.5 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            type="submit"
+                            class="rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+                        >
+                            Create project
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
 

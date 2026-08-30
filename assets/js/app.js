@@ -1,7 +1,3 @@
-// Rowdo — shared UI interactivity (no framework, no build step)
-// All behavior here toggles Tailwind's own utility classes directly —
-// there are no custom CSS classes anywhere in this project.
-
 (function () {
     "use strict";
 
@@ -123,8 +119,7 @@
                 const title = row ? row.querySelector("[data-task-title]") : null;
                 if (title) {
                     title.classList.toggle("line-through", checkbox.checked);
-                    title.classList.toggle("text-slate-400", checkbox.checked);
-                    title.classList.toggle("dark:text-slate-500", checkbox.checked);
+                    title.classList.toggle("text-muted-foreground", checkbox.checked);
                 }
                 updateTaskCounts();
             });
@@ -159,23 +154,11 @@
                     const target = btn.getAttribute("data-tab");
 
                     buttons.forEach(b => {
-                        b.classList.remove(
-                            "bg-white",
-                            "dark:bg-slate-800",
-                            "text-slate-900",
-                            "dark:text-white",
-                            "shadow-sm",
-                        );
-                        b.classList.add("text-slate-500", "dark:text-slate-400");
+                        b.classList.remove("bg-card", "text-foreground", "shadow-sm");
+                        b.classList.add("text-muted-foreground");
                     });
-                    btn.classList.add(
-                        "bg-white",
-                        "dark:bg-slate-800",
-                        "text-slate-900",
-                        "dark:text-white",
-                        "shadow-sm",
-                    );
-                    btn.classList.remove("text-slate-500", "dark:text-slate-400");
+                    btn.classList.add("bg-card", "text-foreground", "shadow-sm");
+                    btn.classList.remove("text-muted-foreground");
 
                     panels.forEach(p => {
                         p.classList.toggle("hidden", p.getAttribute("data-tab-panel") !== target);
