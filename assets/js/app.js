@@ -2,12 +2,11 @@
     "use strict";
 
     /* ---------- Dark mode ---------- */
+    // The dark class itself is applied by a blocking inline script in <head>
+    // (before first paint) to avoid a flash of the wrong theme. This just
+    // syncs any toggle UI to whatever state that script already set.
     function initTheme() {
-        const stored = localStorage.getItem("rowdo-theme");
-        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const isDark = stored ? stored === "dark" : prefersDark;
-        document.documentElement.classList.toggle("dark", isDark);
-        syncThemeToggles(isDark);
+        syncThemeToggles(document.documentElement.classList.contains("dark"));
     }
 
     function toggleTheme() {
@@ -45,6 +44,21 @@
         if (overlay) {
             overlay.addEventListener("click", () => setOpen(false));
         }
+
+        function setCollapsed(collapsed) {
+            sidebar.setAttribute("data-collapsed", String(collapsed));
+            sidebar.classList.toggle("lg:w-16", collapsed);
+            sidebar.classList.toggle("lg:w-72", !collapsed);
+            localStorage.setItem("rowdo-sidebar-collapsed", String(collapsed));
+        }
+
+        setCollapsed(localStorage.getItem("rowdo-sidebar-collapsed") === "true");
+
+        document.querySelectorAll("[data-sidebar-collapse-toggle]").forEach(btn => {
+            btn.addEventListener("click", () => {
+                setCollapsed(sidebar.getAttribute("data-collapsed") !== "true");
+            });
+        });
     }
 
     /* ---------- Generic dropdown menus ---------- */
