@@ -226,9 +226,5 @@
         initModals();
         initTaskCheckboxes();
         initTabs();
-
-        document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
-            btn.addEventListener("click", toggleTheme);
-        });
     });
 })();
