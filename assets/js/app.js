@@ -24,9 +24,6 @@
             btn.classList.toggle("text-muted-foreground", !active);
             btn.setAttribute("aria-pressed", String(active));
         });
-        document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
-            btn.setAttribute("aria-pressed", String(document.documentElement.classList.contains("dark")));
-        });
     }
 
     function setThemeMode(mode) {
@@ -41,15 +38,6 @@
 
         document.querySelectorAll("[data-theme-set]").forEach(btn => {
             btn.addEventListener("click", () => setThemeMode(btn.getAttribute("data-theme-set")));
-        });
-
-        // Legacy single-button toggle (pages without the 3-way control yet):
-        // just flips explicitly between light and dark.
-        document.querySelectorAll("[data-theme-toggle]").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const isDark = document.documentElement.classList.contains("dark");
-                setThemeMode(isDark ? "light" : "dark");
-            });
         });
 
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
