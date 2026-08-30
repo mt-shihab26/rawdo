@@ -206,6 +206,23 @@
         });
     }
 
+    /* ---------- Password visibility toggles ---------- */
+    function initPasswordToggles() {
+        document.querySelectorAll("[data-password-toggle]").forEach(btn => {
+            const input = btn.parentElement.querySelector('input[type="password"], input[type="text"][data-password-input]');
+            if (!input) return;
+
+            btn.addEventListener("click", () => {
+                const showing = input.type === "text";
+                input.type = showing ? "password" : "text";
+                input.setAttribute("data-password-input", "");
+                btn.querySelector("[data-eye-icon]").classList.toggle("hidden", !showing);
+                btn.querySelector("[data-eye-off-icon]").classList.toggle("hidden", showing);
+                btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+            });
+        });
+    }
+
     /* ---------- Init ---------- */
     document.addEventListener("DOMContentLoaded", () => {
         initTheme();
@@ -214,5 +231,6 @@
         initModals();
         initTaskCheckboxes();
         initTabs();
+        initPasswordToggles();
     });
 })();
