@@ -209,7 +209,9 @@
     /* ---------- Password visibility toggles ---------- */
     function initPasswordToggles() {
         document.querySelectorAll("[data-password-toggle]").forEach(btn => {
-            const input = btn.parentElement.querySelector('input[type="password"], input[type="text"][data-password-input]');
+            const input = btn.parentElement.querySelector(
+                'input[type="password"], input[type="text"][data-password-input]',
+            );
             if (!input) return;
 
             btn.addEventListener("click", () => {
