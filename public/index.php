@@ -1,7 +1,7 @@
 <?php
 
-use Src\Core\Route;
+require __DIR__.'/../vendor/autoload.php';
 
-Route::get('/', function () {
-    return view('home');
-});
+$app = require_once __DIR__.'/../src/Core/app.php';
+
+$app->handle();

@@ -2,4 +2,7 @@
 
 namespace Src\Core;
 
-class Response {}
+class Response
+{
+    //
+}

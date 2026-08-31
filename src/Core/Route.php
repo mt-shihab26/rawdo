@@ -8,4 +8,9 @@ class Route
     {
         return new self;
     }
+
+    public function name(string $route)
+    {
+        return new self;
+    }
 }
