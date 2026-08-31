@@ -27,7 +27,7 @@
                 class="fixed inset-0 z-30 hidden bg-foreground/50 lg:hidden"
             ></div>
             <x-sidebar />
-            {{ $slot }}
+            {!! $slot !!}
         </div>
         <!-- Add Task Modal -->
         <div
