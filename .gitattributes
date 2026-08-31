@@ -1,6 +1,6 @@
 * text=auto eol=lf
 
-*.view.php diff=html
+*.view.php diff=html linguist-language=HTML
 *.css diff=css
 *.html diff=html
 *.md diff=markdown
