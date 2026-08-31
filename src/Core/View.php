@@ -25,10 +25,10 @@ class View
     }
 
     /**
-     * Resolve a view name to its file path (e.g. "tasks/index" -> .../Views/pages/tasks/index.php)
+     * Resolve a view name to its file path (e.g. "tasks/index" -> .../Views/pages/tasks/index.view.php)
      */
     private function filePath(string $name): string
     {
-        return __DIR__.'/../Views/pages/'.$name.'.php';
+        return __DIR__.'/../Views/pages/'.$name.'.view.php';
     }
 }
