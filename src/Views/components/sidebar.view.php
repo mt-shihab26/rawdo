@@ -1,3 +1,8 @@
+<div
+    id="sidebar-overlay"
+    class="fixed inset-0 z-30 hidden bg-foreground/50 lg:hidden"
+></div>
+
 <aside
     id="sidebar"
     class="group fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full transform flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-all duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:translate-x-0"
