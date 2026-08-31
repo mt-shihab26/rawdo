@@ -4,13 +4,92 @@ namespace Src\Core;
 
 class Route
 {
-    public static function get(string $path, $callback): self
+    /**
+     * All routes registered via get()
+     *
+     * @var self[]
+     */
+    private static array $routes = [];
+
+    /**
+     * The route's name, used to look it up via matchByName()
+     */
+    private ?string $name = null;
+
+    /**
+     * Create a new route with its HTTP method, path, and callback
+     */
+    public function __construct(
+        private string $method,
+        private string $path,
+        private $callback,
+    ) {}
+
+    /**
+     * Set a name for the route so it can be looked up later
+     */
+    public function name(string $name): self
     {
-        return new self;
+        $this->name = $name;
+
+        return $this;
     }
 
-    public function name(string $route)
+    /**
+     * Get the route's path
+     */
+    public function getPath(): string
     {
-        return new self;
+        return $this->path;
+    }
+
+    /**
+     * Run the route's callback and return its result
+     */
+    public function call()
+    {
+        return call_user_func($this->callback);
+    }
+
+    /**
+     * Register a new GET route and return it for chaining
+     */
+    public static function get(string $path, callable $callback): self
+    {
+        $route = new self('GET', $path, $callback);
+
+        self::$routes[] = $route;
+
+        return $route;
+    }
+
+    /**
+     * Find the route matching the given HTTP method and path, if any
+     */
+    public static function matchByRequest(string $method, string $path): ?self
+    {
+        $method = strtoupper($method);
+
+        foreach (self::$routes as $route) {
+            if ($route->method === $method && $route->path === $path) {
+                return $route;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Find a route by its registered name, if any
+     */
+    public static function matchByName(string $name): ?self
+    {
+        foreach (self::$routes as $route) {
+            if ($route->name === $name) {
+                return $route;
+            }
+        }
+
+        return null;
     }
 }

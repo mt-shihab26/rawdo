@@ -8,3 +8,4 @@ HOST="${1:-localhost}"
 PORT="${2:-8000}"
 
 php -S "$HOST:$PORT" -t public
+

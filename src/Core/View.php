@@ -10,7 +10,7 @@ class View
     public function render(string $name, ?array $data = null): string
     {
         // Extract array keys as variables for the template
-        extract($data);
+        extract($data ?? []);
 
         // Start output buffering
         ob_start();
