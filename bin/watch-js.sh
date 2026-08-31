@@ -6,4 +6,4 @@ cd "$(dirname "${BASH_SOURCE[0]}")/.."
 
 ./bin/build-js.sh
 
-esbuild assets/js/app.js --bundle --outfile=public/build/js/app.js --watch=forever
+esbuild src/Assets/js/app.js --bundle --outfile=public/build/js/app.js --watch=forever
