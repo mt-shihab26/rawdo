@@ -1,6 +1,7 @@
 <?php
 
 use Src\Core\Response;
+use Src\Core\View;
 
 if (! function_exists('view')) {
     /**
@@ -8,6 +9,8 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        return new Response;
+        $renderedString = (new View)->render($name, $data);
+
+        return new Response($renderedString);
     }
 }
