@@ -1,10 +1,6 @@
 (function () {
     "use strict";
 
-    /* ---------- Theme: light / dark / system ---------- */
-    // The initial `dark` class is applied by a blocking inline script in
-    // <head> (before first paint) to avoid a flash of the wrong theme, using
-    // the same "rowdo-theme" localStorage key read here.
     function getStoredThemeMode() {
         return localStorage.getItem("rowdo-theme") || "system";
     }
