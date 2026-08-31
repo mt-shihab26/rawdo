@@ -66,14 +66,12 @@ class Route
     }
 
     /**
-     * Find the route matching the given HTTP method and path, if any
+     * Find the route matching the given request, if any
      */
-    public static function matchByRequest(string $method, string $path): ?self
+    public static function matchByRequest(Request $request): ?self
     {
-        $method = strtoupper($method);
-
         foreach (self::$routes as $route) {
-            if ($route->method === $method && $route->path === $path) {
+            if ($route->method === $request->method && $route->path === $request->path) {
                 return $route;
             }
         }

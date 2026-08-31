@@ -11,10 +11,9 @@ class App
      */
     public function handle()
     {
-        $method = $_SERVER['REQUEST_METHOD'];
-        $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $request = Request::capture();
 
-        $route = Route::matchByRequest($method, $path);
+        $route = Route::matchByRequest($request);
 
         if (! $route) {
             http_response_code(404);
