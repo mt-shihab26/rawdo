@@ -17,6 +17,7 @@
         </script>
         <title>Today · Rowdo</title>
         <link rel="stylesheet" href="build/css/app.css" />
+        <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
     </head>
     <body class="min-h-screen bg-background font-sans text-foreground antialiased">
         <div class="flex min-h-screen">
@@ -413,8 +414,35 @@
                         <!-- Stats -->
                         <div class="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
                             <div class="rounded-xl border border-border bg-card p-4">
-                                <p class="text-2xl font-bold">5</p>
-                                <p class="text-xs font-medium text-muted-foreground">Due today</p>
+                                <div class="flex items-center gap-3">
+                                    <div class="relative flex h-12 w-12 shrink-0 items-center justify-center">
+                                        <svg viewBox="0 0 36 36" class="h-12 w-12 -rotate-90">
+                                            <circle
+                                                cx="18"
+                                                cy="18"
+                                                r="15.9155"
+                                                fill="none"
+                                                class="stroke-primary/15"
+                                                stroke-width="3.5"
+                                            />
+                                            <circle
+                                                cx="18"
+                                                cy="18"
+                                                r="15.9155"
+                                                fill="none"
+                                                class="stroke-primary"
+                                                stroke-width="3.5"
+                                                stroke-linecap="round"
+                                                stroke-dasharray="20 100"
+                                            />
+                                        </svg>
+                                        <span class="absolute text-[10px] font-bold">1/5</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-2xl font-bold">5</p>
+                                        <p class="text-xs font-medium text-muted-foreground">Due today</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="rounded-xl border border-border bg-card p-4">
                                 <p class="text-2xl font-bold text-destructive">2</p>
@@ -423,6 +451,26 @@
                             <div class="rounded-xl border border-border bg-card p-4">
                                 <p class="text-2xl font-bold text-chart-2">8</p>
                                 <p class="text-xs font-medium text-muted-foreground">Completed</p>
+                                <svg viewBox="0 0 120 36" class="mt-2 h-8 w-full" aria-hidden="true">
+                                    <polyline
+                                        points="4,20.8 22.7,9.6 41.3,15.2 60,4 78.7,20.8 97.3,26.4"
+                                        fill="none"
+                                        class="stroke-muted-foreground/40"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
+                                    <line
+                                        x1="97.3"
+                                        y1="26.4"
+                                        x2="116"
+                                        y2="32"
+                                        class="stroke-primary"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                    />
+                                    <circle cx="116" cy="32" r="4" class="fill-primary stroke-card" stroke-width="2" />
+                                </svg>
                             </div>
                             <div class="rounded-xl border border-border bg-card p-4">
                                 <p class="text-2xl font-bold">3</p>

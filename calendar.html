@@ -16,6 +16,7 @@
         </script>
         <title>Calendar · Rowdo</title>
         <link rel="stylesheet" href="build/css/app.css" />
+        <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
     </head>
     <body class="min-h-screen bg-background font-sans text-foreground antialiased">
         <div class="flex min-h-screen">
@@ -448,6 +449,22 @@
                             </div>
                         </div>
 
+                        <!-- Legend -->
+                        <div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+                            <span class="flex items-center gap-1.5">
+                                <span class="h-2 w-2 rounded-full bg-destructive"></span>
+                                Deadline
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="h-2 w-2 rounded-full bg-chart-1"></span>
+                                Launch
+                            </span>
+                            <span class="flex items-center gap-1.5">
+                                <span class="h-2 w-2 rounded-full bg-primary"></span>
+                                Today
+                            </span>
+                        </div>
+
                         <!-- Month view -->
                         <div
                             data-tab-panel="month"
@@ -465,7 +482,9 @@
                                 <div class="py-2.5">Fri</div>
                                 <div class="py-2.5">Sat</div>
                             </div>
-                            <div class="grid grid-cols-7">
+                            <div
+                                class="grid grid-cols-7 [&>*:nth-child(7n+1)]:bg-muted/30 [&>*:nth-child(7n)]:bg-muted/30"
+                            >
                                 <!-- Week 1 -->
                                 <div
                                     class="min-h-24 border-b border-r border-border p-2 text-xs text-muted-foreground/50 sm:min-h-28"
@@ -522,7 +541,7 @@
                                         >4</span
                                     >
                                     <div
-                                        class="rounded bg-destructive/10 px-1.5 py-0.5 text-[11px] font-medium text-destructive"
+                                        class="rounded border-l-2 border-destructive bg-destructive/10 px-1.5 py-0.5 text-[11px] font-medium text-destructive"
                                     >
                                         Budget review
                                     </div>
@@ -577,7 +596,7 @@
                                         >13</span
                                     >
                                     <div
-                                        class="rounded bg-chart-1/15 px-1.5 py-0.5 text-[11px] font-medium text-chart-1"
+                                        class="rounded border-l-2 border-chart-1 bg-chart-1/15 px-1.5 py-0.5 text-[11px] font-medium text-chart-1"
                                     >
                                         Blog launch
                                     </div>
@@ -662,7 +681,7 @@
                                     28
                                 </div>
                                 <div
-                                    class="min-h-24 border-primary bg-primary/5 p-2 text-xs ring-1 ring-inset ring-primary/30 sm:min-h-28"
+                                    class="min-h-24 border-primary !bg-primary/5 p-2 text-xs ring-1 ring-inset ring-primary/30 sm:min-h-28"
                                 >
                                     <span
                                         class="mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground"
