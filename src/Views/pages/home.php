@@ -38,7 +38,7 @@
                 >
                     <a href="index.html" class="flex items-center gap-2">
                         <span
-                            class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground"
+                            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground"
                             >R</span
                         >
                         <span
@@ -235,7 +235,7 @@
                                 href="project-detail.html"
                                 class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                 ><span
-                                    class="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-chart-1"
+                                    class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-1"
                                 ></span
                                 >Website Redesign</a
                             >
@@ -243,7 +243,7 @@
                                 href="project-detail.html"
                                 class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                 ><span
-                                    class="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-chart-4"
+                                    class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-4"
                                 ></span
                                 >Marketing Plan</a
                             >
@@ -251,7 +251,7 @@
                                 href="project-detail.html"
                                 class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                                 ><span
-                                    class="h-2.5 w-2.5 flex-shrink-0 rounded-full bg-chart-2"
+                                    class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-2"
                                 ></span
                                 >Personal</a
                             >
@@ -296,7 +296,7 @@
                         <img
                             src="https://i.pravatar.cc/64?img=12"
                             alt=""
-                            class="h-8 w-8 flex-shrink-0 rounded-full ring-2 ring-sidebar"
+                            class="h-8 w-8 shrink-0 rounded-full ring-2 ring-sidebar"
                         />
                         <div class="min-w-0 flex-1 group-data-[collapsed=true]:hidden">
                             <p class="truncate text-sm font-semibold">Alex Morgan</p>
@@ -826,6 +826,6 @@
             </div>
         </div>
 
-        <script src="assets/js/app.js"></script>
+        <script src="build/js/app.js"></script>
     </body>
 </html>
