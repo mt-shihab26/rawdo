@@ -11,9 +11,7 @@ class View
      */
     public function render(string $name, array $data = []): string
     {
-        $template = file_get_contents($this->filePath($name));
-
-        $compiled = (new Compiler)->compile($template);
+        $this->ensureCompiled($name);
 
         // Extract array keys as variables for the template
         extract($data);
@@ -21,10 +19,31 @@ class View
         // Start output buffering
         ob_start();
 
-        eval('?>'.$compiled);
+        include $this->cachePath($name);
 
         // Get the contents of the buffer and turn it off
         return ob_get_clean();
+    }
+
+    /**
+     * Compile a view into the cache if it's missing or older than its source
+     */
+    public function ensureCompiled(string $name): void
+    {
+        $source = $this->filePath($name);
+        $cached = $this->cachePath($name);
+
+        if (is_file($cached) && filemtime($cached) >= filemtime($source)) {
+            return;
+        }
+
+        $compiled = (new Compiler)->compile(file_get_contents($source));
+
+        if (! is_dir(dirname($cached))) {
+            mkdir(dirname($cached), recursive: true);
+        }
+
+        file_put_contents($cached, $compiled);
     }
 
     /**
@@ -52,10 +71,18 @@ class View
     }
 
     /**
-     * Resolve a view name to its file path (e.g. "pages/home" -> .../Views/pages/home.view.php)
+     * Resolve a view name to its source file path (e.g. "pages/home" -> .../Views/pages/home.view.php)
      */
     private function filePath(string $name): string
     {
         return __DIR__.'/../Views/'.$name.'.view.php';
+    }
+
+    /**
+     * Resolve a view name to its compiled cache path (e.g. "pages/home" -> .../storage/views/pages/home.php)
+     */
+    private function cachePath(string $name): string
+    {
+        return __DIR__.'/../../storage/views/'.$name.'.php';
     }
 }
