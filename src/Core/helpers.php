@@ -6,11 +6,11 @@ use Src\Core\View;
 
 if (! function_exists('view')) {
     /**
-     * Render view templates and return as Response object
+     * Render a page view and return it as a Response object
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = (new View)->render($name, $data);
+        $renderedString = (new View)->render("pages/$name", $data ?? []);
 
         return new Response($renderedString);
     }
