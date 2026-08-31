@@ -1,7 +1,9 @@
 <?php
 
+use Src\Core\App;
+
 require __DIR__.'/../vendor/autoload.php';
 
-$app = require_once __DIR__.'/../src/Core/app.php';
+$app = new App;
 
 $app->handle();

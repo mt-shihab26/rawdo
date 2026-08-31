@@ -2,6 +2,8 @@
 
 namespace Src\Core;
 
+use Closure;
+
 class Route
 {
     /**
@@ -22,7 +24,7 @@ class Route
     public function __construct(
         private string $method,
         private string $path,
-        private $callback,
+        private Closure $callback,
     ) {}
 
     /**
@@ -56,7 +58,7 @@ class Route
      */
     public static function get(string $path, callable $callback): self
     {
-        $route = new self('GET', $path, $callback);
+        $route = new self('GET', $path, Closure::fromCallable($callback));
 
         self::$routes[] = $route;
 

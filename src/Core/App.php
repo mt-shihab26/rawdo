@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\Route;
+namespace Src\Core;
 
 require __DIR__.'/../routes.php';
 
@@ -33,7 +33,3 @@ class App
         exit();
     }
 }
-
-$app = new App;
-
-return $app;
