@@ -5,7 +5,7 @@
                 class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-base font-bold text-primary-foreground"
                 >R</span
             >
-            <span class="text-xl font-bold tracking-tight">Rowdo</span>
+            <span class="text-xl font-bold tracking-tight">Rawdo</span>
         </a>
 
         <div class="w-full max-w-sm rounded-xl border border-border bg-card p-6 shadow-sm">

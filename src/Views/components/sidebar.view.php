@@ -11,16 +11,7 @@
     <div
         class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0"
     >
-        <a href="{{ route('home.index') }}" class="flex items-center gap-2">
-            <span
-                class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground"
-                >R</span
-            >
-            <span
-                class="text-lg font-bold tracking-tight group-data-[collapsed=true]:hidden"
-                >Rowdo</span
-            >
-        </a>
+        <x-logo /> 
         <button
             data-sidebar-toggle
             class="rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:hidden"

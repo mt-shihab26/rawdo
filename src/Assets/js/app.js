@@ -2,7 +2,7 @@
     "use strict";
 
     function getStoredThemeMode() {
-        return localStorage.getItem("rowdo-theme") || "system";
+        return localStorage.getItem("Rawdo-theme") || "system";
     }
 
     function applyTheme(mode) {
@@ -23,7 +23,7 @@
     }
 
     function setThemeMode(mode) {
-        localStorage.setItem("rowdo-theme", mode);
+        localStorage.setItem("Rawdo-theme", mode);
         applyTheme(mode);
         syncThemeControls(mode);
     }
@@ -69,10 +69,10 @@
             sidebar.setAttribute("data-collapsed", String(collapsed));
             sidebar.classList.toggle("lg:w-16", collapsed);
             sidebar.classList.toggle("lg:w-72", !collapsed);
-            localStorage.setItem("rowdo-sidebar-collapsed", String(collapsed));
+            localStorage.setItem("Rawdo-sidebar-collapsed", String(collapsed));
         }
 
-        setCollapsed(localStorage.getItem("rowdo-sidebar-collapsed") === "true");
+        setCollapsed(localStorage.getItem("Rawdo-sidebar-collapsed") === "true");
 
         document.querySelectorAll("[data-sidebar-collapse-toggle]").forEach(btn => {
             btn.addEventListener("click", () => {

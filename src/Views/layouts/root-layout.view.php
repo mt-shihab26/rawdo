@@ -9,7 +9,7 @@
         <script>
             (function () {
                 try {
-                    var m = localStorage.getItem("rowdo-theme") || "system";
+                    var m = localStorage.getItem("Rawdo-theme") || "system";
                     var d =
                         m === "dark" ||
                         (m === "system" &&
@@ -18,7 +18,7 @@
                 } catch (e) {}
             })();
         </script>
-        <title>{{ $title }} - Rowdo</title>
+        <title>{{ $title }} - Rawdo</title>
         <link rel="stylesheet" href="build/css/app.css" />
         <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     </head>

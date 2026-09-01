@@ -46,12 +46,16 @@ class View
 
     /**
      * Render a <x-name> component or layout, passing its slot content if given
+     *
+     * Dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
      */
     public function component(string $name, array $props = [], ?string $slot = null): string
     {
         if ($slot !== null) {
             $props['slot'] = $slot;
         }
+
+        $name = str_replace('.', '/', $name);
 
         $path = $this->exists("components/$name") ? "components/$name" : "layouts/$name";
 
