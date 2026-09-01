@@ -1,12 +1,8 @@
 <x-root-layout title="Sign up" description="Create a Rawdo account to start tracking your tasks.">
     <div class="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-        <a href="{{ route('home.index') }}" class="mb-8 flex items-center gap-2">
-            <span
-                class="flex h-9 w-9 items-center justify-center rounded-lg bg-primary text-base font-bold text-primary-foreground"
-                >R</span
-            >
-            <span class="text-xl font-bold tracking-tight">Rawdo</span>
-        </a>
+        <div class="mb-8">
+            <x-elements.logo />
+        </div>
 
         <div class="w-full max-w-sm rounded-xl border border-border bg-card p-6 shadow-sm">
             <h1 class="text-xl font-bold tracking-tight">Create your account</h1>
