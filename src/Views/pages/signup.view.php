@@ -1,20 +1,11 @@
 <x-auth-layout title="Sign up" description="Create a Rawdo account to start tracking your tasks.">
     <div class="w-full max-w-sm space-y-6 rounded-xl border border-border bg-card p-6 shadow-sm">
-        <x-elements.heading heading="Create your account" subheading="Start organizing your work in minutes." />
-
-        <div class="space-y-2.5">
-            <x-ui.button variant="outline" class="w-full">
-                <x-icons.google-icon />
-                Continue with Google
-            </x-ui.button>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-border"></div>
-            <span class="text-xs font-medium text-muted-foreground">OR</span>
-            <div class="h-px flex-1 bg-border"></div>
-        </div>
-
+        <x-elements.heading 
+            heading="Create your account"
+            subheading="Start organizing your work in minutes."
+        />
+        <x-auth-layout.google-login />
+        <x-auth-layout.or-separator />
         <form class="space-y-4">
             <x-elements.text-input
                 label="Full name"

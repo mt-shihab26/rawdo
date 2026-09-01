@@ -2,7 +2,7 @@
     <div class="mx-auto max-w-3xl space-y-6">
         <div class="flex items-start gap-4">
             <span
-                class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-chart-1/15"
+                class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-chart-1/15"
             >
                 <span class="h-4 w-4 rounded-full bg-chart-1"></span>
             </span>

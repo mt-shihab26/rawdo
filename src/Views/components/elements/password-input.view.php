@@ -1,8 +1,8 @@
-@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '', 'required' => false, 'class' => '', 'attrs' => array()])
+@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '', 'required' => false, 'error' => '', 'class' => '', 'attrs' => array()])
 
 <div class="space-y-1.5">
     <div class="flex items-center justify-between">
-        <label for="<?= htmlspecialchars($id, ENT_QUOTES) ?>" class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground">{{ $label }}<?php if ($required) { ?> <span class="text-destructive">*</span><?php } ?></label>
+        <x-ui.label :for="$id" :required="$required">{{ $label }}</x-ui.label>
         <?= $slot ?? '' ?>
     </div>
     <div class="relative">
@@ -18,4 +18,5 @@
             <x-icons.eye-off-icon />
         </x-ui.button>
     </div>
+    <x-ui.input-error :error="$error" />
 </div>

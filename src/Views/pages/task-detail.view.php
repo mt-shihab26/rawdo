@@ -96,7 +96,7 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                         <img
                             src="https://i.pravatar.cc/64?img=12"
                             alt=""
-                            class="h-7 w-7 flex-shrink-0 rounded-full"
+                            class="h-7 w-7 shrink-0 rounded-full"
                         />
                         <div class="min-w-0 flex-1 space-y-0.5">
                             <p class="text-sm">
@@ -115,7 +115,7 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                         <img
                             src="https://i.pravatar.cc/64?img=5"
                             alt=""
-                            class="h-7 w-7 flex-shrink-0 rounded-full"
+                            class="h-7 w-7 shrink-0 rounded-full"
                         />
                         <div class="min-w-0 flex-1 space-y-1">
                             <div class="rounded-lg bg-muted px-3 py-2 text-sm">
@@ -131,7 +131,7 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                         <img
                             src="https://i.pravatar.cc/64?img=12"
                             alt=""
-                            class="h-7 w-7 flex-shrink-0 rounded-full"
+                            class="h-7 w-7 shrink-0 rounded-full"
                         />
                         <div class="min-w-0 flex-1 space-y-0.5">
                             <p class="text-sm">
@@ -152,7 +152,7 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                     <img
                         src="https://i.pravatar.cc/64?img=12"
                         alt=""
-                        class="h-7 w-7 flex-shrink-0 rounded-full"
+                        class="h-7 w-7 shrink-0 rounded-full"
                     />
                     <input
                         type="text"

@@ -1,20 +1,8 @@
 <x-auth-layout title="Log in" description="Log in to keep on top of your tasks.">
     <div class="w-full max-w-sm space-y-6 rounded-xl border border-border bg-card p-6 shadow-sm">
         <x-elements.heading heading="Welcome back" subheading="Log in to keep on top of your tasks." />
-
-        <div class="space-y-2.5">
-            <x-ui.button variant="outline" class="w-full">
-                <x-icons.google-icon />
-                Continue with Google
-            </x-ui.button>
-        </div>
-
-        <div class="flex items-center gap-3">
-            <div class="h-px flex-1 bg-border"></div>
-            <span class="text-xs font-medium text-muted-foreground">OR</span>
-            <div class="h-px flex-1 bg-border"></div>
-        </div>
-
+        <x-auth-layout.google-login />
+        <x-auth-layout.or-separator />
         <form class="space-y-4">
             <x-elements.email-input
                 id="email"
@@ -43,7 +31,6 @@
             </x-ui.button>
         </form>
     </div>
-
     <p class="text-sm text-muted-foreground">
         Don't have an account?
         <a href="{{ route('signup.index') }}" class="font-semibold text-primary hover:underline">Sign up</a>

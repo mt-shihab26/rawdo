@@ -1,4 +1,5 @@
 @props(['variant' => 'default', 'size' => 'default', 'rounded' => 'lg', 'justify' => 'center', 'display' => 'inline-flex', 'class' => '', 'attrs' => []])
+
 <?php
 $variantClasses = [
     'default' => 'bg-primary text-primary-foreground hover:bg-primary/90',
@@ -35,4 +36,5 @@ $justifyClass = [
 
 $classes = trim("{$display} items-center {$justifyClass} whitespace-nowrap transition {$roundedClass} {$variantClasses} {$sizeClasses} {$class}");
 ?>
+
 <button<?php foreach ($attrs as $key => $value) { ?> <?= htmlspecialchars($key, ENT_QUOTES) ?>="<?= htmlspecialchars($value, ENT_QUOTES) ?>"<?php } ?> class="<?= htmlspecialchars($classes, ENT_QUOTES) ?>"><?= $slot ?? '' ?></button>

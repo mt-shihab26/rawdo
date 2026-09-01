@@ -125,7 +125,7 @@
 
             <button
                 data-modal-open="new-project-modal"
-                class="flex min-h-[168px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+                class="flex min-h-42 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition hover:border-primary/40 hover:text-primary"
             >
                 <x-icons.plus-large-icon />
                 <span class="text-sm font-medium">New project</span>
