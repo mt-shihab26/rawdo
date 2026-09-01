@@ -11,44 +11,8 @@
     <div
         class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0"
     >
-        <x-logo /> 
-        <button
-            data-sidebar-toggle
-            class="rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:hidden"
-            aria-label="Close menu"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M6 18L18 6M6 6l12 12"
-                />
-            </svg>
-        </button>
-        <button
-            data-sidebar-collapse-toggle
-            class="hidden rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:inline-flex group-data-[collapsed=true]:hidden"
-            aria-label="Collapse sidebar"
-        >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <rect x="3.75" y="4.5" width="16.5" height="15" rx="2" />
-                <path stroke-linecap="round" d="M9.75 4.5v15" />
-            </svg>
-        </button>
+        <x-logo />
+        <x-sidebar-toggle-buttons />
     </div>
     <div class="px-4 group-data-[collapsed=true]:px-2">
         <button
@@ -274,17 +238,7 @@
             class="mt-1 hidden w-full items-center justify-center rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:group-data-[collapsed=true]:flex"
             aria-label="Expand sidebar"
         >
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="2"
-            >
-                <rect x="3.75" y="4.5" width="16.5" height="15" rx="2" />
-                <path stroke-linecap="round" d="M9.75 4.5v15" />
-            </svg>
+            <x-icons.collapse-icon />
         </button>
     </div>
 </aside>

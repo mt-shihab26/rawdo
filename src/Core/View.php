@@ -5,6 +5,18 @@ namespace Src\Core;
 class View
 {
     /**
+     * Base directories searched, in order, when resolving a <x-name> tag; the last is used as the fallback
+     *
+     * @var string[]
+     */
+    private const COMPONENT_DIRECTORIES = ['components', 'layouts', 'screens'];
+
+    /**
+     * Base directory the view() helper renders page names from
+     */
+    public const PAGES_DIRECTORY = 'pages';
+
+    /**
      * Render a view file to a string, passing $data in as local variables
      */
     public function render(string $name, array $data = []): string
@@ -21,6 +33,14 @@ class View
 
         // Get the contents of the buffer and turn it off
         return ob_get_clean();
+    }
+
+    /**
+     * Render a page view, proxying render() with the pages/ base directory prefixed
+     */
+    public function renderPage(string $name, array $data = []): string
+    {
+        return $this->render(self::PAGES_DIRECTORY."/$name", $data);
     }
 
     /**
@@ -45,7 +65,7 @@ class View
     }
 
     /**
-     * Render a <x-name> component or layout, passing its slot content if given
+     * Render a <x-name> component, layout, or screen, passing its slot content if given
      *
      * Dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
      */
@@ -57,7 +77,13 @@ class View
 
         $name = str_replace('.', '/', $name);
 
-        $path = $this->exists("components/$name") ? "components/$name" : "layouts/$name";
+        foreach (self::COMPONENT_DIRECTORIES as $directory) {
+            $path = "$directory/$name";
+
+            if ($this->exists($path)) {
+                break;
+            }
+        }
 
         return $this->render($path, $props);
     }

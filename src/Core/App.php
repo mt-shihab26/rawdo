@@ -61,7 +61,7 @@ class App
             return $response;
         }
 
-        if (Container::get(View::class)->exists("pages/{$statusCode}")) {
+        if (Container::get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {

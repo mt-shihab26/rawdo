@@ -13,9 +13,9 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = Container::get(View::class)->render("pages/$name", $data ?? []);
+        $renderedString = Container::get(View::class)->renderPage($name, $data ?? []);
 
-        return new Response($renderedString);
+        return new Response(renderedString: $renderedString, statusCode: 200);
     }
 }
 
