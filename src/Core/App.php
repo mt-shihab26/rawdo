@@ -2,8 +2,6 @@
 
 namespace Src\Core;
 
-use Src\Core\Concerns\RegistersRoutes;
-
 class App
 {
     use RegistersRoutes;

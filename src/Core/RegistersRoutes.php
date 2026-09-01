@@ -1,9 +1,6 @@
 <?php
 
-namespace Src\Core\Concerns;
-
-use Src\Core\Request;
-use Src\Core\Route;
+namespace Src\Core;
 
 trait RegistersRoutes
 {
