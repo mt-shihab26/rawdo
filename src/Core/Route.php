@@ -7,14 +7,7 @@ use Closure;
 class Route
 {
     /**
-     * All routes registered via get()
-     *
-     * @var self[]
-     */
-    private static array $routes = [];
-
-    /**
-     * The route's name, used to look it up via matchByName()
+     * The route's name, used to look it up via App::matchRouteByName()
      */
     private ?string $name = null;
 
@@ -38,11 +31,27 @@ class Route
     }
 
     /**
+     * Get the route's HTTP method
+     */
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    /**
      * Get the route's path
      */
     public function getPath(): string
     {
         return $this->path;
+    }
+
+    /**
+     * Get the route's name
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
     }
 
     /**
@@ -61,7 +70,7 @@ class Route
     }
 
     /**
-     * Register a new GET route and return it for chaining
+     * Register a new GET route with the App and return it for chaining
      *
      * The callback may be a closure or a [ControllerClass, 'method'] array,
      * in which case the controller is instantiated when the route is called.
@@ -70,36 +79,8 @@ class Route
     {
         $route = new self('GET', $path, $callback);
 
-        self::$routes[] = $route;
+        App::addRoute($route);
 
         return $route;
-    }
-
-    /**
-     * Find the route matching the given request, if any
-     */
-    public static function matchByRequest(Request $request): ?self
-    {
-        foreach (self::$routes as $route) {
-            if ($route->method === $request->method && $route->path === $request->path) {
-                return $route;
-            }
-        }
-
-        return null;
-    }
-
-    /**
-     * Find a route by its registered name, if any
-     */
-    public static function matchByName(string $name): ?self
-    {
-        foreach (self::$routes as $route) {
-            if ($route->name === $name) {
-                return $route;
-            }
-        }
-
-        return null;
     }
 }

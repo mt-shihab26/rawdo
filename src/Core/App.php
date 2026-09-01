@@ -2,10 +2,12 @@
 
 namespace Src\Core;
 
-require __DIR__.'/../routes.php';
+use Src\Core\Concerns\RegistersRoutes;
 
 class App
 {
+    use RegistersRoutes;
+
     /**
      * Match the current request to a route and send back its response
      */
@@ -13,7 +15,7 @@ class App
     {
         $request = Request::capture();
 
-        $route = Route::matchByRequest($request);
+        $route = self::matchRouteByRequest($request);
 
         if (! $route) {
             http_response_code(404);
@@ -32,3 +34,5 @@ class App
         exit();
     }
 }
+
+require __DIR__.'/../routes.php';
