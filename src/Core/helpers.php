@@ -1,7 +1,6 @@
 <?php
 
 use Src\Core\App;
-use Src\Core\Container;
 use Src\Core\HttpException;
 use Src\Core\Response;
 use Src\Core\RouteHelper;
@@ -14,7 +13,7 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = Container::get(View::class)->renderPage($name, $data ?? []);
+        $renderedString = App::get(View::class)->renderPage($name, $data ?? []);
 
         return new Response(renderedString: $renderedString, statusCode: 200);
     }

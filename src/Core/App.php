@@ -6,7 +6,7 @@ use Throwable;
 
 class App
 {
-    use HasReasonPhrases, RegistersRoutes;
+    use Container, HasReasonPhrases, RegistersRoutes;
 
     /**
      * Match the current request to a route and send back its response
@@ -15,12 +15,12 @@ class App
     {
         $request = Request::capture();
 
-        Container::instance(Request::class, $request);
+        self::instance(Request::class, $request);
 
         $route = self::matchRouteByRequest($request);
 
         if ($route) {
-            Container::instance(Route::class, $route);
+            self::instance(Route::class, $route);
         }
 
         try {
@@ -65,7 +65,7 @@ class App
             return $response;
         }
 
-        if (Container::get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
+        if (self::get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {
@@ -76,7 +76,7 @@ class App
     }
 }
 
-Container::registerProviders([
+App::registerProviders([
     CoreServiceProvider::class,
     ...require __DIR__.'/../providers.php',
 ]);

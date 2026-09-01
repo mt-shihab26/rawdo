@@ -12,7 +12,7 @@ class RouteHelper
     public function current(string $name): bool
     {
         try {
-            $route = Container::get(Route::class);
+            $route = App::get(Route::class);
         } catch (RuntimeException) {
             return false;
         }

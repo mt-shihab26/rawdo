@@ -10,7 +10,7 @@ use ReflectionMethod;
 use ReflectionNamedType;
 use RuntimeException;
 
-class Container
+trait Container
 {
     /**
      * Resolved singleton instances, keyed by class/abstract name
@@ -65,7 +65,7 @@ class Container
     public static function get(string $class): object
     {
         return self::resolveRegistered($class) ?? throw new RuntimeException(
-            "Nothing is bound for [{$class}]. Use Container::make() to autowire it instead."
+            "Nothing is bound for [{$class}]. Use App::make() to autowire it instead."
         );
     }
 

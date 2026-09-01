@@ -9,7 +9,7 @@ class CoreServiceProvider implements ServiceProvider
      */
     public function register(): void
     {
-        Container::singleton(View::class, fn () => new View);
+        App::singleton(View::class, fn () => new View);
     }
 
     /**

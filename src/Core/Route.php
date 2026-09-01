@@ -57,11 +57,11 @@ class Route
     /**
      * Run the route's callback and return its result
      *
-     * The callback's type-hinted parameters (e.g. Request) are autowired via the Container.
+     * The callback's type-hinted parameters (e.g. Request) are autowired via App.
      */
     public function call()
     {
-        return Container::call($this->callback);
+        return App::call($this->callback);
     }
 
     /**
