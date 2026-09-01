@@ -33,7 +33,11 @@ class App
     public function handleNotFound()
     {
         http_response_code(404);
-        echo 'Not found';
+        if (Container::get(View::class)->exists('pages/404')) {
+            $this->handleResponse(view('404'));
+        } else {
+            echo 'Not found';
+        }
     }
 
     /**
