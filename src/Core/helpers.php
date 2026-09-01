@@ -4,6 +4,7 @@ use Src\Core\App;
 use Src\Core\Container;
 use Src\Core\Response;
 use Src\Core\View;
+use Symfony\Component\VarDumper\VarDumper;
 
 if (! function_exists('view')) {
     /**
@@ -30,5 +31,33 @@ if (! function_exists('route')) {
         }
 
         return $route->getPath();
+    }
+}
+
+if (! function_exists('dump')) {
+    /**
+     * Dump one or more values without halting execution
+     *
+     * Returns the single value (or all values) back so it can be chained inline, e.g. return dump($x);
+     */
+    function dump(mixed ...$values): mixed
+    {
+        foreach ($values as $value) {
+            VarDumper::dump($value);
+        }
+
+        return count($values) === 1 ? $values[0] : $values;
+    }
+}
+
+if (! function_exists('dd')) {
+    /**
+     * Dump one or more values and halt execution
+     */
+    function dd(mixed ...$values): never
+    {
+        dump(...$values);
+
+        exit(1);
     }
 }
