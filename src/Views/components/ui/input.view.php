@@ -1,9 +1,9 @@
-@props(['type' => 'text', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '', 'required' => false, 'class' => '', 'attrs' => array()])
+@props(['type' => 'text', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '', 'autocomplete' => '', 'minlength' => '', 'maxlength' => '', 'required' => false, 'class' => '', 'attrs' => array()])
 
 <?php
 $classes = trim("w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30 {$class}");
 
-$attrs = array_filter(['id' => $id, 'name' => $name, 'value' => $value], fn ($value) => $value !== '') + $attrs;
+$attrs = array_filter(['id' => $id, 'name' => $name, 'value' => $value, 'autocomplete' => $autocomplete, 'minlength' => $minlength, 'maxlength' => $maxlength], fn ($value) => $value !== '') + $attrs;
 ?>
 
 <input

@@ -12,29 +12,30 @@
                 id="name"
                 name="name"
                 placeholder="Alex Morgan"
+                autocomplete="name"
                 :required="true"
-                :attrs="['autocomplete' => 'name']"
             />
             <x-elements.email-input
                 id="email"
                 name="email"
                 :required="true"
-                :attrs="['autocomplete' => 'email']"
             />
             <x-elements.password-input
                 id="password"
                 name="password"
                 placeholder="At least 8 characters"
+                autocomplete="new-password"
+                minlength="8"
                 :required="true"
-                :attrs="['minlength' => '8', 'autocomplete' => 'new-password']"
             />
             <x-elements.password-input
                 label="Confirm password"
                 id="password_confirmation"
                 name="password_confirmation"
                 placeholder="Re-enter your password"
+                autocomplete="new-password"
+                minlength="8"
                 :required="true"
-                :attrs="['minlength' => '8', 'autocomplete' => 'new-password']"
             />
             <x-elements.checkbox id="terms" name="terms">
                 I agree to the <x-ui.link href="#" class="font-medium">Terms of Service</x-ui.link> and <x-ui.link href="#" class="font-medium">Privacy Policy</x-ui.link>

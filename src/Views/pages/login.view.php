@@ -8,13 +8,11 @@
                 id="email"
                 name="email"
                 :required="true"
-                :attrs="['autocomplete' => 'email']"
             />
             <x-elements.password-input
                 id="password"
                 name="password"
                 :required="true"
-                :attrs="['autocomplete' => 'current-password']"
             >
                 <x-ui.link href="#" class="text-xs font-medium">Forgot?</x-ui.link>
             </x-elements.password-input>

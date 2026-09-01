@@ -1,4 +1,4 @@
-@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '••••••••', 'required' => false, 'error' => '', 'class' => '', 'attrs' => array()])
+@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '••••••••', 'autocomplete' => 'current-password', 'minlength' => '', 'maxlength' => '', 'required' => false, 'error' => '', 'class' => '', 'attrs' => array()])
 
 <div class="space-y-1.5">
     <div class="flex items-center justify-between">
@@ -6,7 +6,7 @@
         <?= $slot ?? '' ?>
     </div>
     <div class="relative">
-        <x-ui.input type="password" :id="$id" :name="$name" :value="$value" :placeholder="$placeholder" :required="$required" :class="'pr-10 '.$class" :attrs="$attrs" />
+        <x-ui.input type="password" :id="$id" :name="$name" :value="$value" :placeholder="$placeholder" :autocomplete="$autocomplete" :minlength="$minlength" :maxlength="$maxlength" :required="$required" :class="'pr-10 '.$class" :attrs="$attrs" />
         <x-ui.button
             variant="ghost"
             size="icon-sm"
