@@ -37,7 +37,8 @@ $projects = [
                     class="flex items-center justify-between rounded-lg px-3 py-2 text-sm group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2 <?= $item['active'] ? 'bg-sidebar-primary/10 font-semibold text-sidebar-primary' : 'font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground' ?>"
                 >
                     <span class="flex items-center gap-3">
-                        <?= $this->component($item['icon']) ?><span class="group-data-[collapsed=true]:hidden"><?= htmlspecialchars($item['label'], ENT_QUOTES) ?></span>
+                        <x-elements.dynamic :name="$item['icon']" />
+                        <span class="group-data-[collapsed=true]:hidden"><?= htmlspecialchars($item['label'], ENT_QUOTES) ?></span>
                     </span>
                     <?php if ($item['badge'] !== null) { ?>
                         <span 
