@@ -12,40 +12,46 @@ class App
     public function handle()
     {
         $request = Request::capture();
+
         Container::instance(Request::class, $request);
+
         $route = self::matchRouteByRequest($request);
-        if (! $route) {
-            $this->handleNotFound();
-        } else {
-            $response = $route->call();
-            $this->handleResponse($response);
-        }
+
+        $response = $route ? $route->call() : new Response('Not found', 404);
+
+        $this->handleResponse($response);
+
         // Force data to be sent to the browser
         ob_flush();
         flush();
+
         // Terminate the request
         exit();
     }
 
     /**
-     * Send a 404 response for a request with no matching route
+     * Send a response to the browser, rendering the pages/404 view for any 404 response if one exists
      */
-    public function handleNotFound()
+    private function handleResponse(Response $response)
     {
-        http_response_code(404);
-        if (Container::get(View::class)->exists('pages/404')) {
-            $this->handleResponse(view('404'));
-        } else {
-            echo 'Not found';
-        }
+        $response = $this->resolve404Response($response);
+
+        http_response_code($response->statusCode);
+
+        echo $response->renderedString;
     }
 
     /**
-     * Send a matched route's response to the browser
+     * Swap a 404 response's body for the pages/404 view, if one is defined
      */
-    public function handleResponse(Response $response)
+    private function resolve404Response(Response $response): Response
     {
-        echo $response->renderedString;
+        if ($response->statusCode === 404 && Container::get(View::class)->exists('pages/404')) {
+            $response = view('404');
+            $response->statusCode = 404;
+        }
+
+        return $response;
     }
 }
 
