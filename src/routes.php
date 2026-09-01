@@ -1,7 +1,6 @@
 <?php
 
 use Src\Core\Route;
+use Src\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home.index');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');

@@ -24,7 +24,7 @@ class Route
     public function __construct(
         private string $method,
         private string $path,
-        private Closure $callback,
+        private Closure|array $callback,
     ) {}
 
     /**
@@ -50,15 +50,25 @@ class Route
      */
     public function call()
     {
-        return call_user_func($this->callback);
+        $callback = $this->callback;
+
+        if (is_array($callback)) {
+            [$class, $method] = $callback;
+            $callback = [new $class, $method];
+        }
+
+        return call_user_func($callback);
     }
 
     /**
      * Register a new GET route and return it for chaining
+     *
+     * The callback may be a closure or a [ControllerClass, 'method'] array,
+     * in which case the controller is instantiated when the route is called.
      */
-    public static function get(string $path, callable $callback): self
+    public static function get(string $path, Closure|array $callback): self
     {
-        $route = new self('GET', $path, Closure::fromCallable($callback));
+        $route = new self('GET', $path, $callback);
 
         self::$routes[] = $route;
 
