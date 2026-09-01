@@ -5,10 +5,12 @@ namespace Src\Core;
 class Compiler
 {
     /**
-     * Compile <x-name> component tags and {{ }} / {!! !!} echoes into plain PHP
+     * Compile @props(...), <x-name> component tags, and {{ }} / {!! !!} echoes into plain PHP
      */
     public function compile(string $template): string
     {
+        $template = $this->compilePropsDirective($template);
+
         $template = preg_replace('/\{!!\s*(.+?)\s*!!\}/', '<?= $1 ?>', $template);
 
         $template = preg_replace('/\{\{\s*(.+?)\s*\}\}/', '<?= htmlspecialchars($1, ENT_QUOTES) ?>', $template);
@@ -20,6 +22,20 @@ class Compiler
         );
 
         return $this->compilePairedTags($template);
+    }
+
+    /**
+     * Compile @props(['name' => default, ...]) into code that fills in any prop
+     * not already passed in (unset or explicitly null), so a component can
+     * declare its own defaults instead of every use site writing $x ?? default
+     */
+    private function compilePropsDirective(string $template): string
+    {
+        return preg_replace(
+            '/^@props\((.+)\)\s*$/m',
+            '<?php foreach ($1 as $__prop => $__default) { if (! isset($$__prop)) { $$__prop = $__default; } } ?>',
+            $template
+        );
     }
 
     /**
@@ -39,7 +55,7 @@ class Compiler
      */
     private function compileTag(string $name, string $attributes, ?string $slot = null): string
     {
-        $props = $this->compileProps($attributes);
+        $props = $this->compileAttributes($attributes);
 
         if ($slot === null) {
             return "<?= \$this->component('{$name}', {$props}) ?>";
@@ -54,7 +70,7 @@ class Compiler
      * A plain attr="..." becomes a literal string; a :attr="..." is evaluated
      * as a raw PHP expression, so pages can forward variables into a component.
      */
-    private function compileProps(string $attributes): string
+    private function compileAttributes(string $attributes): string
     {
         preg_match_all('/(:?)([\w-]+)="([^"]*)"/', $attributes, $matches, PREG_SET_ORDER);
 

@@ -1,4 +1,6 @@
-<x-root-layout :title="$title ?? null" :description="$description ?? null">
+@props(['title' => null, 'description' => null])
+
+<x-root-layout :title="$title" :description="$description">
     <div class="flex min-h-screen">
         <x-sidebar />
         <div class="flex min-w-0 flex-1 flex-col">
