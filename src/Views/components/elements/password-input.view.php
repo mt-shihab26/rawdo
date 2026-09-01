@@ -1,4 +1,4 @@
-@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '', 'required' => false, 'error' => '', 'class' => '', 'attrs' => array()])
+@props(['label' => 'Password', 'id' => '', 'name' => '', 'value' => '', 'placeholder' => '••••••••', 'required' => false, 'error' => '', 'class' => '', 'attrs' => array()])
 
 <div class="space-y-1.5">
     <div class="flex items-center justify-between">

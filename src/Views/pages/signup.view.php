@@ -36,30 +36,17 @@
                 :required="true"
                 :attrs="['minlength' => '8', 'autocomplete' => 'new-password']"
             />
-            <label class="flex items-start gap-2 text-sm text-muted-foreground">
-                <input
-                    type="checkbox"
-                    class="mt-0.5 h-4 w-4 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
-                />
-                <span
-                    >I agree to the
-                    <a href="#" class="font-medium text-primary hover:underline"
-                        >Terms of Service</a
-                    >
-                    and
-                    <a href="#" class="font-medium text-primary hover:underline"
-                        >Privacy Policy</a
-                    ></span
-                >
-            </label>
+            <x-elements.checkbox id="terms" name="terms">
+                I agree to the <x-ui.link href="#" class="font-medium">Terms of Service</x-ui.link> and <x-ui.link href="#" class="font-medium">Privacy Policy</x-ui.link>
+            </x-elements.checkbox>
             <x-ui.button class="w-full" :attrs="['type' => 'submit']">
                 Create account
             </x-ui.button>
         </form>
     </div>
-
-    <p class="text-sm text-muted-foreground">
-        Already have an account?
-        <a href="{{ route('login.index') }}" class="font-semibold text-primary hover:underline">Log in</a>
-    </p>
+    <x-auth-layout.footer-link
+        prompt="Already have an account?"
+        label="Log in"
+        :href="route('login.index')"
+    />
 </x-auth-layout>

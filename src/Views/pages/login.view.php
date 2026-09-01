@@ -13,26 +13,22 @@
             <x-elements.password-input
                 id="password"
                 name="password"
-                placeholder="••••••••"
                 :required="true"
                 :attrs="['autocomplete' => 'current-password']"
             >
-                <a href="#" class="text-xs font-medium text-primary hover:underline">Forgot?</a>
+                <x-ui.link href="#" class="text-xs font-medium">Forgot?</x-ui.link>
             </x-elements.password-input>
-            <label class="flex items-center gap-2 text-sm text-muted-foreground">
-                <input
-                    type="checkbox"
-                    class="h-4 w-4 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
-                />
+            <x-elements.checkbox id="remember" name="remember">
                 Remember me for 30 days
-            </label>
+            </x-elements.checkbox>
             <x-ui.button class="w-full" :attrs="['type' => 'submit']">
                 Log in
             </x-ui.button>
         </form>
     </div>
-    <p class="text-sm text-muted-foreground">
-        Don't have an account?
-        <a href="{{ route('signup.index') }}" class="font-semibold text-primary hover:underline">Sign up</a>
-    </p>
+    <x-auth-layout.footer-link
+        prompt="Don't have an account?"
+        label="Sign up"
+        :href="route('signup.index')"
+    />
 </x-auth-layout>
