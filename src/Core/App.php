@@ -19,6 +19,10 @@ class App
 
         $route = self::matchRouteByRequest($request);
 
+        if ($route) {
+            Container::instance(Route::class, $route);
+        }
+
         try {
             $response = $route ? $route->call() : new Response('Not found', 404);
         } catch (HttpException $e) {

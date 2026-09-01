@@ -4,6 +4,7 @@ use Src\Core\App;
 use Src\Core\Container;
 use Src\Core\HttpException;
 use Src\Core\Response;
+use Src\Core\RouteHelper;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -21,10 +22,14 @@ if (! function_exists('view')) {
 
 if (! function_exists('route')) {
     /**
-     * Resolve a named route to its path
+     * Resolve a named route to its path, or get the RouteHelper when called with no name
      */
-    function route(string $name): string
+    function route(?string $name = null): string|RouteHelper
     {
+        if ($name === null) {
+            return new RouteHelper;
+        }
+
         $route = App::matchRouteByName($name);
 
         if (! $route) {

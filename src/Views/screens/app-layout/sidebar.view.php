@@ -1,9 +1,9 @@
 <?php
 $links = [
-    ['route' => 'home.index', 'icon' => 'icons.today-icon', 'label' => 'Today', 'badge' => 5, 'active' => true],
-    ['route' => 'calendar.index', 'icon' => 'icons.upcoming-icon', 'label' => 'Upcoming', 'badge' => null, 'active' => false],
-    ['route' => 'tasks.index', 'icon' => 'icons.list-icon', 'label' => 'All tasks', 'badge' => 12, 'active' => false],
-    ['route' => 'completed.index', 'icon' => 'icons.check-circle-icon', 'label' => 'Completed', 'badge' => null, 'active' => false],
+    ['route' => 'home.index', 'icon' => 'icons.today-icon', 'label' => 'Today', 'badge' => 5],
+    ['route' => 'calendar.index', 'icon' => 'icons.upcoming-icon', 'label' => 'Upcoming', 'badge' => null],
+    ['route' => 'tasks.index', 'icon' => 'icons.list-icon', 'label' => 'All tasks', 'badge' => 12],
+    ['route' => 'completed.index', 'icon' => 'icons.check-circle-icon', 'label' => 'Completed', 'badge' => null],
 ];
 
 $projects = [
@@ -31,18 +31,18 @@ $projects = [
         class="mt-6 flex-1 space-y-6 overflow-y-auto px-3 pb-4 group-data-[collapsed=true]:px-2"
     >
         <div class="space-y-1">
-            <?php foreach ($links as $item) { ?>
+            <?php foreach ($links as $item) { $active = route()->current($item['route']); ?>
                 <a
                     href="{{ route($item['route']) }}"
-                    class="flex items-center justify-between rounded-lg px-3 py-2 text-sm group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2 <?= $item['active'] ? 'bg-sidebar-primary/10 font-semibold text-sidebar-primary' : 'font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground' ?>"
+                    class="flex items-center justify-between rounded-lg px-3 py-2 text-sm group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2 <?= $active ? 'bg-sidebar-primary/10 font-semibold text-sidebar-primary' : 'font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground' ?>"
                 >
                     <span class="flex items-center gap-3">
                         <x-elements.dynamic :name="$item['icon']" />
                         <span class="group-data-[collapsed=true]:hidden"><?= htmlspecialchars($item['label'], ENT_QUOTES) ?></span>
                     </span>
                     <?php if ($item['badge'] !== null) { ?>
-                        <span 
-                            class="rounded-full px-2 py-0.5 text-xs group-data-[collapsed=true]:hidden <?= $item['active'] ? 'bg-sidebar-primary font-bold text-sidebar-primary-foreground' : 'bg-sidebar-accent font-semibold text-sidebar-accent-foreground' ?>"
+                        <span
+                            class="rounded-full px-2 py-0.5 text-xs group-data-[collapsed=true]:hidden <?= $active ? 'bg-sidebar-primary font-bold text-sidebar-primary-foreground' : 'bg-sidebar-accent font-semibold text-sidebar-accent-foreground' ?>"
                         >
                             <?= $item['badge'] ?>
                         </span>
