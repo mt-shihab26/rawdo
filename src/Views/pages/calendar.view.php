@@ -278,7 +278,7 @@
                     28
                 </div>
                 <div
-                    class="min-h-24 border-primary !bg-primary/5 p-2 text-xs ring-1 ring-inset ring-primary/30 sm:min-h-28"
+                    class="min-h-24 border-primary bg-primary/5! p-2 text-xs ring-1 ring-inset ring-primary/30 sm:min-h-28"
                 >
                     <span
                         class="mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground"

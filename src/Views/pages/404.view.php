@@ -9,8 +9,8 @@
             The page you're looking for doesn't exist, moved, or the link is out of date.
         </p>
         <a
-            href="{{ route('home.index') }}"
             class="mt-6 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
+            href="{{ route('home.index') }}"
         >
             Back to dashboard
         </a>
