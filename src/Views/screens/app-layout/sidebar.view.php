@@ -26,7 +26,7 @@ $projects = [
         <x-elements.logo />
         <x-app-layout.header-controls />
     </div>
-    <x-app-layout.task-modal />
+    <x-app-layout.task-modal-button />
     <nav
         class="mt-6 flex-1 space-y-6 overflow-y-auto px-3 pb-4 group-data-[collapsed=true]:px-2"
     >
@@ -51,10 +51,7 @@ $projects = [
         </div>
         <div class="group-data-[collapsed=true]:hidden">
             <div class="flex items-center justify-between px-3 pb-2">
-                <span
-                    class="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                    >Projects</span
-                >
+                <span class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Projects</span>
                 <a
                     href="{{ route('projects.index') }}"
                     class="rounded p-0.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
@@ -65,14 +62,13 @@ $projects = [
             </div>
             <div class="space-y-1">
                 <?php foreach ($projects as $project) { ?>
-                <a
-                    href="{{ route('project-detail.index') }}"
-                    class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    ><span
-                        class="h-2.5 w-2.5 shrink-0 rounded-full <?= $project['color'] ?>"
-                    ></span
-                    ><?= htmlspecialchars($project['label'], ENT_QUOTES) ?></a
-                >
+                    <a
+                        href="{{ route('project-detail.index') }}"
+                        class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                    >
+                        <span class="h-2.5 w-2.5 shrink-0 rounded-full <?= $project['color'] ?>"></span>
+                        <?= htmlspecialchars($project['label'], ENT_QUOTES) ?>
+                    </a>
                 <?php } ?>
                 <a
                     href="{{ route('projects.index') }}"

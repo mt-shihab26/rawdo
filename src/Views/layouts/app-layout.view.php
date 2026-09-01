@@ -9,5 +9,6 @@
                 {!! $slot !!}
             </main>
         </div>
+        <x-app-layout.task-modal-content />
     </div>
 </x-root-layout>
