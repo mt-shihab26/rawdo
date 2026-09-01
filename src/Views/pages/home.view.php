@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout title="Today" description="See today's tasks, streaks, and progress at a glance.">
     <div class="mx-auto max-w-3xl">
         <div class="mb-8 flex flex-col gap-1">
             <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">

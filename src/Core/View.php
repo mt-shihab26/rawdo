@@ -2,8 +2,6 @@
 
 namespace Src\Core;
 
-use Closure;
-
 class View
 {
     /**
@@ -49,12 +47,10 @@ class View
     /**
      * Render a <x-name> component or layout, passing its slot content if given
      */
-    public function component(string $name, array $props = [], ?Closure $slot = null): string
+    public function component(string $name, array $props = [], ?string $slot = null): string
     {
-        if ($slot) {
-            ob_start();
-            $slot();
-            $props['slot'] = ob_get_clean();
+        if ($slot !== null) {
+            $props['slot'] = $slot;
         }
 
         $path = $this->exists("components/$name") ? "components/$name" : "layouts/$name";
