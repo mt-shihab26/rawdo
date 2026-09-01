@@ -11,8 +11,8 @@
     <div
         class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0"
     >
-        <x-logo />
-        <x-sidebar-toggle-buttons />
+        <x-elements.logo />
+        <x-app-layout.sidebar-toggle-buttons />
     </div>
     <div class="px-4 group-data-[collapsed=true]:px-2">
         <button
