@@ -10,7 +10,7 @@
 >
     <div class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0">
         <x-elements.logo />
-        <x-app-layout.controls />
+        <x-app-layout.header-controls />
     </div>
     <x-app-layout.task-modal />
     <nav
@@ -127,12 +127,6 @@
                 <p class="truncate text-xs text-muted-foreground">test@example.com</p>
             </div>
         </div>
-        <button
-            data-sidebar-collapse-toggle
-            class="mt-1 hidden w-full items-center justify-center rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:group-data-[collapsed=true]:flex"
-            aria-label="Expand sidebar"
-        >
-            <x-icons.collapse-icon />
-        </button>
+        <x-app-layout.footer-controls />
     </div>
 </aside>
