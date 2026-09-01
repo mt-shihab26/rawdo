@@ -15,6 +15,8 @@ class App
     {
         $request = Request::capture();
 
+        Container::instance(Request::class, $request);
+
         $route = self::matchRouteByRequest($request);
 
         if (! $route) {

@@ -56,17 +56,12 @@ class Route
 
     /**
      * Run the route's callback and return its result
+     *
+     * The callback's type-hinted parameters (e.g. Request) are autowired via the Container.
      */
     public function call()
     {
-        $callback = $this->callback;
-
-        if (is_array($callback)) {
-            [$class, $method] = $callback;
-            $callback = [new $class, $method];
-        }
-
-        return call_user_func($callback);
+        return Container::call($this->callback);
     }
 
     /**
