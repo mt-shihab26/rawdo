@@ -11,7 +11,7 @@
     <div
         class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0"
     >
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="{{ route('home.index') }}" class="flex items-center gap-2">
             <span
                 class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground"
                 >R</span
@@ -86,7 +86,7 @@
     >
         <div class="space-y-1">
             <a
-                href="index.html"
+                href="{{ route('home.index') }}"
                 class="flex items-center justify-between rounded-lg bg-sidebar-primary/10 px-3 py-2 text-sm font-semibold text-sidebar-primary group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
                 ><span class="flex items-center gap-3"
                     ><svg
@@ -109,7 +109,7 @@
                 ></a
             >
             <a
-                href="calendar.html"
+                href="{{ route('calendar.index') }}"
                 class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
                 ><span class="flex items-center gap-3"
                     ><svg
@@ -131,7 +131,7 @@
                 ></a
             >
             <a
-                href="tasks.html"
+                href="{{ route('tasks.index') }}"
                 class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
                 ><span class="flex items-center gap-3"
                     ><svg
@@ -156,7 +156,7 @@
                 ></a
             >
             <a
-                href="completed.html"
+                href="{{ route('completed.index') }}"
                 class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
                 ><span class="flex items-center gap-3"
                     ><svg
@@ -185,7 +185,7 @@
                     >Projects</span
                 >
                 <a
-                    href="projects.html"
+                    href="{{ route('projects.index') }}"
                     class="rounded p-0.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     aria-label="Add project"
                 >
@@ -207,7 +207,7 @@
             </div>
             <div class="space-y-1">
                 <a
-                    href="project-detail.html"
+                    href="{{ route('project-detail.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     ><span
                         class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-1"
@@ -215,7 +215,7 @@
                     >Website Redesign</a
                 >
                 <a
-                    href="project-detail.html"
+                    href="{{ route('project-detail.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     ><span
                         class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-4"
@@ -223,7 +223,7 @@
                     >Marketing Plan</a
                 >
                 <a
-                    href="project-detail.html"
+                    href="{{ route('project-detail.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     ><span
                         class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-2"
@@ -231,7 +231,7 @@
                     >Personal</a
                 >
                 <a
-                    href="projects.html"
+                    href="{{ route('projects.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                 >
                     View all projects
@@ -241,7 +241,7 @@
     </nav>
     <div class="border-t border-sidebar-border p-3">
         <a
-            href="settings.html"
+            href="{{ route('settings.index') }}"
             class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
         >
             <svg

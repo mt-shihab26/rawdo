@@ -5,13 +5,13 @@ namespace Src\Http\Controllers;
 use Src\Core\Request;
 use Src\Core\Response;
 
-class HomeController
+class SignupController
 {
     /**
-     * Show the home page
+     * Show the signup page
      */
     public function index(Request $request): Response
     {
-        return view('home');
+        return view('signup');
     }
 }

@@ -5,13 +5,13 @@ namespace Src\Http\Controllers;
 use Src\Core\Request;
 use Src\Core\Response;
 
-class HomeController
+class CalendarController
 {
     /**
-     * Show the home page
+     * Show the calendar page
      */
     public function index(Request $request): Response
     {
-        return view('home');
+        return view('calendar');
     }
 }

@@ -101,7 +101,7 @@
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                         aria-label="Mark task complete"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Finalize Q3 investor deck
                         </p>
@@ -144,7 +144,7 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Review pull request #482
                         </p>
@@ -184,7 +184,7 @@
                         checked
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p
                             data-task-title
                             class="truncate text-sm font-medium line-through text-muted-foreground"
@@ -210,7 +210,7 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Sync with design team on new icons
                         </p>
@@ -249,7 +249,7 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Book flights for conference
                         </p>
@@ -317,7 +317,7 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Send client invoice #1092
                         </p>
@@ -336,7 +336,7 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="task-detail.html" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Renew domain registration
                         </p>
