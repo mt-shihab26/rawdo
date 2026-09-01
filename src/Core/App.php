@@ -46,6 +46,13 @@ class App
      */
     private function handleResponse(Response $response)
     {
+        if ($response->redirectTo !== null) {
+            http_response_code($response->statusCode);
+            header("Location: {$response->redirectTo}");
+
+            return;
+        }
+
         $response = $this->resolveStatusPageResponse($response);
 
         http_response_code($response->statusCode);

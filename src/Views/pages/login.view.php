@@ -3,11 +3,14 @@
         <x-elements.heading heading="Welcome back" subheading="Log in to keep on top of your tasks." />
         <x-auth-layout.google-login />
         <x-auth-layout.or-separator />
-        <form class="space-y-4">
+        <form class="space-y-4" method="POST" action="{{ route('login.store') }}">
+            {!! csrf_field() !!}
             <x-elements.email-input
                 id="email"
                 name="email"
                 :required="true"
+                :value="$old['email'] ?? ''"
+                :error="$errors['email'] ?? ''"
             />
             <x-elements.password-input
                 id="password"

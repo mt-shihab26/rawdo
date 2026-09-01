@@ -72,7 +72,23 @@ class Route
      */
     public static function get(string $path, Closure|array $callback): self
     {
-        $route = new self('GET', $path, $callback);
+        return self::register('GET', $path, $callback);
+    }
+
+    /**
+     * Register a new POST route with the App and return it for chaining
+     */
+    public static function post(string $path, Closure|array $callback): self
+    {
+        return self::register('POST', $path, $callback);
+    }
+
+    /**
+     * Build a route for the given method, register it with the App, and return it for chaining
+     */
+    private static function register(string $method, string $path, Closure|array $callback): self
+    {
+        $route = new self($method, $path, $callback);
 
         App::addRoute($route);
 

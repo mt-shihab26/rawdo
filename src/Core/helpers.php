@@ -2,8 +2,10 @@
 
 use Src\Core\App;
 use Src\Core\HttpException;
+use Src\Core\Request;
 use Src\Core\Response;
 use Src\Core\RouteHelper;
+use Src\Core\Session;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
 
@@ -36,6 +38,48 @@ if (! function_exists('route')) {
         }
 
         return $route->getPath();
+    }
+}
+
+if (! function_exists('redirect')) {
+    /**
+     * Build a redirect response to the given URL
+     */
+    function redirect(string $path): Response
+    {
+        return Response::redirect($path);
+    }
+}
+
+if (! function_exists('csrf_token')) {
+    /**
+     * Get the current session's CSRF token
+     */
+    function csrf_token(): string
+    {
+        return App::make(Session::class)->token();
+    }
+}
+
+if (! function_exists('csrf_field')) {
+    /**
+     * Build the hidden input field carrying the CSRF token, for use inside a <form>
+     */
+    function csrf_field(): string
+    {
+        return '<input type="hidden" name="_token" value="'.htmlspecialchars(csrf_token(), ENT_QUOTES).'">';
+    }
+}
+
+if (! function_exists('verify_csrf')) {
+    /**
+     * Abort with a 419 if the request's _token doesn't match the session's CSRF token
+     */
+    function verify_csrf(Request $request): void
+    {
+        if (! hash_equals(csrf_token(), (string) $request->input('_token', ''))) {
+            abort(419, 'Page expired. Please refresh and try again.');
+        }
     }
 }
 

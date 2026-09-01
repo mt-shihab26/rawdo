@@ -4,14 +4,77 @@ namespace Src\Http\Controllers;
 
 use Src\Core\Request;
 use Src\Core\Response;
+use Src\Core\Session;
+use Src\Models\User;
 
 class SignupController
 {
     /**
      * Show the signup page
      */
-    public function index(Request $request): Response
+    public function index(Session $session): Response
     {
-        return view('signup');
+        return view('signup', [
+            'errors' => $session->pull('errors', []),
+            'old' => $session->pull('old', []),
+        ]);
+    }
+
+    /**
+     * Validate and create a new account, then log the user in
+     */
+    public function store(Request $request, Session $session, User $users): Response
+    {
+        verify_csrf($request);
+
+        $name = trim((string) $request->input('name', ''));
+        $email = trim((string) $request->input('email', ''));
+        $password = (string) $request->input('password', '');
+        $passwordConfirmation = (string) $request->input('password_confirmation', '');
+        $termsAccepted = $request->input('terms') !== null;
+
+        $errors = [];
+
+        if ($name === '') {
+            $errors['name'] = 'Please enter your full name.';
+        }
+
+        if ($email === '') {
+            $errors['email'] = 'Please enter your email address.';
+        } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Please enter a valid email address.';
+        } elseif ($users->emailExists($email)) {
+            $errors['email'] = 'An account with this email already exists.';
+        }
+
+        if ($password === '') {
+            $errors['password'] = 'Please enter a password.';
+        } elseif (strlen($password) < 8) {
+            $errors['password'] = 'Password must be at least 8 characters.';
+        } elseif ($password !== $passwordConfirmation) {
+            $errors['password'] = 'Passwords do not match.';
+        }
+
+        if (! $termsAccepted) {
+            $errors['terms'] = 'You must agree to the Terms of Service and Privacy Policy.';
+        }
+
+        if ($errors) {
+            $session->put('errors', $errors);
+            $session->put('old', ['name' => $name, 'email' => $email]);
+
+            return redirect(route('signup.index'));
+        }
+
+        $userId = $users->create([
+            'name' => $name,
+            'email' => $email,
+            'password' => password_hash($password, PASSWORD_DEFAULT),
+        ]);
+
+        $session->put('user_id', $userId);
+        $session->regenerate();
+
+        return redirect(route('home.index'));
     }
 }

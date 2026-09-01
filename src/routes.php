@@ -21,4 +21,7 @@ Route::get('/settings', [SettingsController::class, 'index'])->name('settings.in
 Route::get('/task-detail', [TaskDetailController::class, 'index'])->name('task-detail.index');
 Route::get('/tasks', [TasksController::class, 'index'])->name('tasks.index');
 Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 Route::get('/signup', [SignupController::class, 'index'])->name('signup.index');
+Route::post('/signup', [SignupController::class, 'store'])->name('signup.store');
