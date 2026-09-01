@@ -38,11 +38,11 @@ class App
     }
 
     /**
-     * Send a response to the browser, rendering the pages/404 view for any 404 response if one exists
+     * Send a response to the browser, rendering a matching pages/{status} view for any error response if one exists
      */
     private function handleResponse(Response $response)
     {
-        $response = $this->resolve404Response($response);
+        $response = $this->resolveStatusPageResponse($response);
 
         http_response_code($response->statusCode);
 
@@ -50,13 +50,15 @@ class App
     }
 
     /**
-     * Swap a 404 response's body for the pages/404 view, if one is defined
+     * Swap an error response's body for its pages/{status} view (e.g. pages/404, pages/500), if one is defined
      */
-    private function resolve404Response(Response $response): Response
+    private function resolveStatusPageResponse(Response $response): Response
     {
-        if ($response->statusCode === 404 && Container::get(View::class)->exists('pages/404')) {
-            $response = view('404');
-            $response->statusCode = 404;
+        $statusCode = $response->statusCode;
+
+        if ($statusCode >= 400 && Container::get(View::class)->exists("pages/{$statusCode}")) {
+            $response = view((string) $statusCode);
+            $response->statusCode = $statusCode;
         }
 
         return $response;
