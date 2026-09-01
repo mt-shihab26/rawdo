@@ -1,6 +1,6 @@
 <header
-        class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur lg:px-8"
-    >
+    class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur lg:px-8"
+>
     <button
         data-sidebar-toggle
         class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground lg:hidden"
@@ -64,4 +64,3 @@
         </button>
     </div>
 </header>
-
