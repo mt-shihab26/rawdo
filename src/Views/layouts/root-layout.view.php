@@ -9,18 +9,17 @@
         <script>
             (function () {
                 try {
-                    var m = localStorage.getItem("Rawdo-theme") || "system";
-                    var d =
-                        m === "dark" ||
-                        (m === "system" &&
-                            window.matchMedia("(prefers-color-scheme: dark)").matches);
+                    const m = localStorage.getItem("rawdo-theme") || "system";
+                    const d = m === "dark" || (m === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
                     if (d) document.documentElement.classList.add("dark");
-                } catch (e) {}
+                } catch (e) {
+                    console.log(e);
+                }
             })();
         </script>
         <title>{{ $title }} - Rawdo</title>
-        <link rel="stylesheet" href="build/css/app.css" />
         <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+        <link rel="stylesheet" href="build/css/app.css" />
     </head>
     <body class="min-h-screen bg-background font-sans text-foreground antialiased">
         {!! $slot !!}
