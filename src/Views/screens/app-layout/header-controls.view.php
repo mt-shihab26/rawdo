@@ -7,7 +7,7 @@
 </button>
 <button
     data-sidebar-collapse-toggle
-    class="hidden rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:inline-flex group-data-[collapsed=true]:hidden"
+    class="hidden rounded-lg p-1.5 text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground lg:group-data-[collapsed=false]:inline-flex"
     aria-label="Collapse sidebar"
 >
     <x-icons.collapse-icon />

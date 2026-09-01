@@ -1,4 +1,4 @@
-export function initModals() {
+export const initTaskModals = () => {
     document.querySelectorAll("[data-modal-open]").forEach(btn => {
         btn.addEventListener("click", () => {
             const id = btn.getAttribute("data-modal-open");
@@ -37,4 +37,4 @@ export function initModals() {
             });
         }
     });
-}
+};

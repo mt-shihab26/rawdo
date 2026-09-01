@@ -1,19 +1,18 @@
-import { initModals } from "./task-modal.js";
+import { initTaskModals } from "./task-modal.js";
+import { initControls } from "./controls.js";
 
-(function () {
+(() => {
     "use strict";
 
-    function getStoredThemeMode() {
-        return localStorage.getItem("rawdo-theme") || "system";
-    }
+    const getStoredThemeMode = () => localStorage.getItem("rawdo-theme") || "system";
 
-    function applyTheme(mode) {
+    const applyTheme = mode => {
         const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
         const isDark = mode === "dark" || (mode === "system" && prefersDark);
         document.documentElement.classList.toggle("dark", isDark);
-    }
+    };
 
-    function syncThemeControls(mode) {
+    const syncThemeControls = mode => {
         document.querySelectorAll("[data-theme-set]").forEach(btn => {
             const active = btn.getAttribute("data-theme-set") === mode;
             btn.classList.toggle("bg-card", active);
@@ -22,15 +21,15 @@ import { initModals } from "./task-modal.js";
             btn.classList.toggle("text-muted-foreground", !active);
             btn.setAttribute("aria-pressed", String(active));
         });
-    }
+    };
 
-    function setThemeMode(mode) {
+    const setThemeMode = mode => {
         localStorage.setItem("rawdo-theme", mode);
         applyTheme(mode);
         syncThemeControls(mode);
-    }
+    };
 
-    function initTheme() {
+    const initTheme = () => {
         const mode = getStoredThemeMode();
         syncThemeControls(mode);
 
@@ -41,50 +40,10 @@ import { initModals } from "./task-modal.js";
         window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
             if (getStoredThemeMode() === "system") applyTheme("system");
         });
-    }
-
-    /* ---------- Mobile sidebar ---------- */
-    function initSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        const overlay = document.getElementById("sidebar-overlay");
-        if (!sidebar) return;
-
-        function setOpen(open) {
-            sidebar.classList.toggle("-translate-x-full", !open);
-            sidebar.classList.toggle("translate-x-0", open);
-            if (overlay) overlay.classList.toggle("hidden", !open);
-            document.body.classList.toggle("overflow-hidden", open && window.innerWidth < 1024);
-        }
-
-        document.querySelectorAll("[data-sidebar-toggle]").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const isOpen = sidebar.classList.contains("translate-x-0");
-                setOpen(!isOpen);
-            });
-        });
-
-        if (overlay) {
-            overlay.addEventListener("click", () => setOpen(false));
-        }
-
-        function setCollapsed(collapsed) {
-            sidebar.setAttribute("data-collapsed", String(collapsed));
-            sidebar.classList.toggle("lg:w-16", collapsed);
-            sidebar.classList.toggle("lg:w-72", !collapsed);
-            localStorage.setItem("Rawdo-sidebar-collapsed", String(collapsed));
-        }
-
-        setCollapsed(localStorage.getItem("Rawdo-sidebar-collapsed") === "true");
-
-        document.querySelectorAll("[data-sidebar-collapse-toggle]").forEach(btn => {
-            btn.addEventListener("click", () => {
-                setCollapsed(sidebar.getAttribute("data-collapsed") !== "true");
-            });
-        });
-    }
+    };
 
     /* ---------- Generic dropdown menus ---------- */
-    function initDropdowns() {
+    const initDropdowns = () => {
         document.addEventListener("click", e => {
             const trigger = e.target.closest("[data-dropdown-trigger]");
             const openMenus = document.querySelectorAll(".js-dropdown-menu:not(.hidden)");
@@ -103,10 +62,10 @@ import { initModals } from "./task-modal.js";
                 openMenus.forEach(m => m.classList.add("hidden"));
             }
         });
-    }
+    };
 
     /* ---------- Task checkbox strike-through ---------- */
-    function initTaskCheckboxes() {
+    const initTaskCheckboxes = () => {
         document.querySelectorAll("[data-task-checkbox]").forEach(checkbox => {
             checkbox.addEventListener("change", () => {
                 const row = checkbox.closest("[data-task-row]");
@@ -118,10 +77,10 @@ import { initModals } from "./task-modal.js";
                 updateTaskCounts();
             });
         });
-    }
+    };
 
     /* ---------- Optional stat counters that reflect checked tasks ---------- */
-    function updateTaskCounts() {
+    const updateTaskCounts = () => {
         document.querySelectorAll("[data-task-count-scope]").forEach(scope => {
             const container = document.querySelector(scope.getAttribute("data-task-count-scope"));
             if (!container) return;
@@ -133,10 +92,10 @@ import { initModals } from "./task-modal.js";
                 ? String(total - done)
                 : String(done);
         });
-    }
+    };
 
     /* ---------- Tabs (settings, calendar view switcher, etc.) ---------- */
-    function initTabs() {
+    const initTabs = () => {
         document.querySelectorAll("[data-tabs]").forEach(group => {
             const buttons = group.querySelectorAll("[data-tab]");
             const panels = document.querySelectorAll(
@@ -160,10 +119,10 @@ import { initModals } from "./task-modal.js";
                 });
             });
         });
-    }
+    };
 
     /* ---------- Password visibility toggles ---------- */
-    function initPasswordToggles() {
+    const initPasswordToggles = () => {
         document.querySelectorAll("[data-password-toggle]").forEach(btn => {
             const input = btn.parentElement.querySelector(
                 'input[type="password"], input[type="text"][data-password-input]',
@@ -179,14 +138,14 @@ import { initModals } from "./task-modal.js";
                 btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
             });
         });
-    }
+    };
 
     /* ---------- Init ---------- */
     document.addEventListener("DOMContentLoaded", () => {
         initTheme();
-        initSidebar();
+        initControls();
         initDropdowns();
-        initModals();
+        initTaskModals();
         initTaskCheckboxes();
         initTabs();
         initPasswordToggles();
