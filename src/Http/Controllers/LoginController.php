@@ -12,12 +12,9 @@ class LoginController
     /**
      * Show the login page
      */
-    public function index(Session $session): Response
+    public function index(): Response
     {
-        return view('login', [
-            'errors' => $session->pull('errors', []),
-            'old' => $session->pull('old', []),
-        ]);
+        return view('login');
     }
 
     /**
@@ -33,8 +30,8 @@ class LoginController
         $user = $email !== '' ? $users->findByEmail($email) : null;
 
         if (! $user || ! password_verify($password, $user['password'])) {
-            $session->put('errors', ['email' => 'These credentials do not match our records.']);
-            $session->put('old', ['email' => $email]);
+            $session->flash('errors', ['email' => 'These credentials do not match our records.']);
+            $session->flash('old', ['email' => $email]);
 
             return redirect(route('login.index'));
         }

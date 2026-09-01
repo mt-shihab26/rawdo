@@ -42,6 +42,14 @@ trait Container
     }
 
     /**
+     * Whether a singleton/instance has already been resolved for the given class this request
+     */
+    public static function resolved(string $class): bool
+    {
+        return isset(self::$instances[$class]);
+    }
+
+    /**
      * Register a factory that builds a fresh instance every time it's resolved
      */
     public static function bind(string $abstract, Closure $factory): void

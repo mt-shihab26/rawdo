@@ -7,13 +7,14 @@ class Session
     /**
      * Start the session with hardened cookie params, unless one is already active
      */
-    public function __construct()
-    {
+    public function __construct(
+        private Request $request
+    ) {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_set_cookie_params([
                 'httponly' => true,
                 'samesite' => 'Lax',
-                'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+                'secure' => $this->request->secure,
             ]);
 
             session_start();
@@ -54,6 +55,33 @@ class Session
     public function forget(string $key): void
     {
         unset($_SESSION[$key]);
+    }
+
+    /**
+     * Put a value into the session that's readable via get() for exactly the next
+     * request, then automatically removed even if nothing ever reads it
+     */
+    public function flash(string $key, mixed $value): void
+    {
+        $_SESSION[$key] = $value;
+        $_SESSION['_flash']['new'][] = $key;
+    }
+
+    /**
+     * Age flash data by one request: drop whatever was readable this request (it's now
+     * two requests old), then promote what was flashed last request to be readable now
+     *
+     * Called once by App::handle(), after the response has rendered, so data flashed
+     * during this request survives to be read on the very next one.
+     */
+    public function flashClear(): void
+    {
+        foreach ($_SESSION['_flash']['old'] ?? [] as $key) {
+            unset($_SESSION[$key]);
+        }
+
+        $_SESSION['_flash']['old'] = $_SESSION['_flash']['new'] ?? [];
+        $_SESSION['_flash']['new'] = [];
     }
 
     /**

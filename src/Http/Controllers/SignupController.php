@@ -12,12 +12,9 @@ class SignupController
     /**
      * Show the signup page
      */
-    public function index(Session $session): Response
+    public function index(): Response
     {
-        return view('signup', [
-            'errors' => $session->pull('errors', []),
-            'old' => $session->pull('old', []),
-        ]);
+        return view('signup');
     }
 
     /**
@@ -60,8 +57,8 @@ class SignupController
         }
 
         if ($errors) {
-            $session->put('errors', $errors);
-            $session->put('old', ['name' => $name, 'email' => $email]);
+            $session->flash('errors', $errors);
+            $session->flash('old', ['name' => $name, 'email' => $email]);
 
             return redirect(route('signup.index'));
         }

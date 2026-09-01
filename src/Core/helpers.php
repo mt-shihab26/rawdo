@@ -71,6 +71,29 @@ if (! function_exists('csrf_field')) {
     }
 }
 
+if (! function_exists('old')) {
+    /**
+     * Get a value flashed as old input on the previous request's validation failure,
+     * or the whole old-input array when called with no key
+     */
+    function old(?string $key = null, mixed $default = null): mixed
+    {
+        $old = App::make(Session::class)->get('old', []);
+
+        return $key === null ? $old : ($old[$key] ?? $default);
+    }
+}
+
+if (! function_exists('errors')) {
+    /**
+     * Get the validation errors flashed on the previous request's failed submission
+     */
+    function errors(): array
+    {
+        return App::make(Session::class)->get('errors', []);
+    }
+}
+
 if (! function_exists('verify_csrf')) {
     /**
      * Abort with a 419 if the request's _token doesn't match the session's CSRF token

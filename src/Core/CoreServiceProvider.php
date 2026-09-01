@@ -11,7 +11,6 @@ class CoreServiceProvider implements ServiceProvider
     {
         App::singleton(View::class, fn () => new View);
         App::singleton(Database::class, fn () => new Database);
-        App::singleton(Session::class, fn () => new Session);
     }
 
     /**

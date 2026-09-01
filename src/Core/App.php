@@ -16,9 +16,9 @@ class App
         $request = Request::capture();
 
         self::instance(Request::class, $request);
+        self::singleton(Session::class, fn () => new Session($request));
 
         $route = self::matchRouteByRequest($request);
-
         if ($route) {
             self::instance(Route::class, $route);
         }
@@ -33,11 +33,11 @@ class App
 
         $this->handleResponse($response);
 
-        // Force data to be sent to the browser
+        self::get(Session::class)->flashClear();
+
         ob_flush();
         flush();
 
-        // Terminate the request
         exit();
     }
 

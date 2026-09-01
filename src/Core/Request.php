@@ -5,12 +5,13 @@ namespace Src\Core;
 class Request
 {
     /**
-     * Create a request from its HTTP method, path, and body data
+     * Create a request from its HTTP method, path, body data, and whether it arrived over HTTPS
      */
     public function __construct(
         public string $method,
         public string $path,
         public array $data = [],
+        public bool $secure = false,
     ) {
         $this->method = strtoupper($this->method);
     }
@@ -24,6 +25,7 @@ class Request
             $_SERVER['REQUEST_METHOD'],
             parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH),
             $_POST,
+            isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
         );
     }
 
