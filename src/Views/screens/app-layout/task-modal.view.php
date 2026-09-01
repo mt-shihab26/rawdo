@@ -1,3 +1,26 @@
+<div class="px-4 group-data-[collapsed=true]:px-2">
+    <button
+        data-modal-open="add-task-modal"
+        class="flex h-8 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm shadow-primary/20 transition hover:bg-primary/90 group-data-[collapsed=true]:mx-auto group-data-[collapsed=true]:w-8 group-data-[collapsed=true]:px-0"
+    >
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2.5"
+        >
+            <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 4.5v15m7.5-7.5h-15"
+            />
+        </svg>
+        <span class="group-data-[collapsed=true]:hidden">Add task</span>
+    </button>
+</div>
+
 <div
     id="add-task-modal"
     class="js-modal-backdrop fixed inset-0 z-50 hidden items-start justify-center bg-foreground/50 p-4 pt-24 backdrop-blur-sm"

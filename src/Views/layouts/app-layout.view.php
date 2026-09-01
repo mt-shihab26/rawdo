@@ -10,5 +10,4 @@
             </main>
         </div>
     </div>
-    <x-app-layout.task-modal />
 </x-root-layout>
