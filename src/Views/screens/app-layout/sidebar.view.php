@@ -1,3 +1,17 @@
+<?php
+$links = [
+    ['route' => 'home.index', 'icon' => 'icons.today-icon', 'label' => 'Today', 'badge' => 5, 'active' => true],
+    ['route' => 'calendar.index', 'icon' => 'icons.upcoming-icon', 'label' => 'Upcoming', 'badge' => null, 'active' => false],
+    ['route' => 'tasks.index', 'icon' => 'icons.list-icon', 'label' => 'All tasks', 'badge' => 12, 'active' => false],
+    ['route' => 'completed.index', 'icon' => 'icons.check-circle-icon', 'label' => 'Completed', 'badge' => null, 'active' => false],
+];
+
+$projects = [
+    ['label' => 'Website Redesign', 'color' => 'bg-chart-1'],
+    ['label' => 'Marketing Plan', 'color' => 'bg-chart-4'],
+    ['label' => 'Personal', 'color' => 'bg-chart-2'],
+];
+?>
 <div
     id="sidebar-overlay"
     class="fixed inset-0 z-30 hidden bg-foreground/50 lg:hidden"
@@ -17,46 +31,23 @@
         class="mt-6 flex-1 space-y-6 overflow-y-auto px-3 pb-4 group-data-[collapsed=true]:px-2"
     >
         <div class="space-y-1">
-            <a
-                href="{{ route('home.index') }}"
-                class="flex items-center justify-between rounded-lg bg-sidebar-primary/10 px-3 py-2 text-sm font-semibold text-sidebar-primary group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
-                ><span class="flex items-center gap-3"
-                    ><x-icons.today-icon /><span class="group-data-[collapsed=true]:hidden">Today</span></span
-                ><span
-                    class="rounded-full bg-sidebar-primary px-2 py-0.5 text-xs font-bold text-sidebar-primary-foreground group-data-[collapsed=true]:hidden"
-                    >5</span
-                ></a
-            >
-            <a
-                href="{{ route('calendar.index') }}"
-                class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
-                ><span class="flex items-center gap-3"
-                    ><x-icons.upcoming-icon /><span class="group-data-[collapsed=true]:hidden"
-                        >Upcoming</span
-                    ></span
-                ></a
-            >
-            <a
-                href="{{ route('tasks.index') }}"
-                class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
-                ><span class="flex items-center gap-3"
-                    ><x-icons.list-icon /><span class="group-data-[collapsed=true]:hidden"
-                        >All tasks</span
-                    ></span
-                ><span
-                    class="rounded-full bg-sidebar-accent px-2 py-0.5 text-xs font-semibold text-sidebar-accent-foreground group-data-[collapsed=true]:hidden"
-                    >12</span
-                ></a
-            >
-            <a
-                href="{{ route('completed.index') }}"
-                class="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
-                ><span class="flex items-center gap-3"
-                    ><x-icons.check-circle-icon /><span class="group-data-[collapsed=true]:hidden"
-                        >Completed</span
-                    ></span
-                ></a
-            >
+            <?php foreach ($links as $item) { ?>
+                <a
+                    href="{{ route($item['route']) }}"
+                    class="flex items-center justify-between rounded-lg px-3 py-2 text-sm group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2 <?= $item['active'] ? 'bg-sidebar-primary/10 font-semibold text-sidebar-primary' : 'font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground' ?>"
+                >
+                    <span class="flex items-center gap-3">
+                        <?= $this->component($item['icon']) ?><span class="group-data-[collapsed=true]:hidden"><?= htmlspecialchars($item['label'], ENT_QUOTES) ?></span>
+                    </span>
+                    <?php if ($item['badge'] !== null) { ?>
+                        <span 
+                            class="rounded-full px-2 py-0.5 text-xs group-data-[collapsed=true]:hidden <?= $item['active'] ? 'bg-sidebar-primary font-bold text-sidebar-primary-foreground' : 'bg-sidebar-accent font-semibold text-sidebar-accent-foreground' ?>"
+                        >
+                            <?= $item['badge'] ?>
+                        </span>
+                    <?php } ?>
+                </a>
+            <?php } ?>
         </div>
         <div class="group-data-[collapsed=true]:hidden">
             <div class="flex items-center justify-between px-3 pb-2">
@@ -73,30 +64,16 @@
                 </a>
             </div>
             <div class="space-y-1">
+                <?php foreach ($projects as $project) { ?>
                 <a
                     href="{{ route('project-detail.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                     ><span
-                        class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-1"
+                        class="h-2.5 w-2.5 shrink-0 rounded-full <?= $project['color'] ?>"
                     ></span
-                    >Website Redesign</a
+                    ><?= htmlspecialchars($project['label'], ENT_QUOTES) ?></a
                 >
-                <a
-                    href="{{ route('project-detail.index') }}"
-                    class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    ><span
-                        class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-4"
-                    ></span
-                    >Marketing Plan</a
-                >
-                <a
-                    href="{{ route('project-detail.index') }}"
-                    class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    ><span
-                        class="h-2.5 w-2.5 shrink-0 rounded-full bg-chart-2"
-                    ></span
-                    >Personal</a
-                >
+                <?php } ?>
                 <a
                     href="{{ route('projects.index') }}"
                     class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
