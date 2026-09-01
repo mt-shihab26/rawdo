@@ -2,6 +2,12 @@
     "name": "mt.shihab26/rowdo",
     "type": "project",
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Shihab Mahamud",
+            "email": "shihab4t@gmail.com"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "Src\\": "src/"
@@ -10,13 +16,13 @@
             "src/Core/helpers.php"
         ]
     },
-    "authors": [
-        {
-            "name": "Shihab Mahamud",
-            "email": "shihab4t@gmail.com"
-        }
-    ],
+    "scripts": {
+        "format": "pint"
+    },
     "require": {
         "symfony/var-dumper": "^8.1"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.30"
     }
 }
