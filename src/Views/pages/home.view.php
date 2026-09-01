@@ -21,26 +21,7 @@
             <div class="rounded-xl border border-border bg-card p-4">
                 <div class="flex items-center gap-3">
                     <div class="relative flex h-12 w-12 shrink-0 items-center justify-center">
-                        <svg viewBox="0 0 36 36" class="h-12 w-12 -rotate-90">
-                            <circle
-                                cx="18"
-                                cy="18"
-                                r="15.9155"
-                                fill="none"
-                                class="stroke-primary/15"
-                                stroke-width="3.5"
-                            />
-                            <circle
-                                cx="18"
-                                cy="18"
-                                r="15.9155"
-                                fill="none"
-                                class="stroke-primary"
-                                stroke-width="3.5"
-                                stroke-linecap="round"
-                                stroke-dasharray="20 100"
-                            />
-                        </svg>
+                        <x-icons.progress-ring-icon />
                         <span class="absolute text-[10px] font-bold">1/5</span>
                     </div>
                     <div>
@@ -56,26 +37,7 @@
             <div class="rounded-xl border border-border bg-card p-4">
                 <p class="text-2xl font-bold text-chart-2">8</p>
                 <p class="text-xs font-medium text-muted-foreground">Completed</p>
-                <svg viewBox="0 0 120 36" class="mt-2 h-8 w-full" aria-hidden="true">
-                    <polyline
-                        points="4,20.8 22.7,9.6 41.3,15.2 60,4 78.7,20.8 97.3,26.4"
-                        fill="none"
-                        class="stroke-muted-foreground/40"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    />
-                    <line
-                        x1="97.3"
-                        y1="26.4"
-                        x2="116"
-                        y2="32"
-                        class="stroke-primary"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                    />
-                    <circle cx="116" cy="32" r="4" class="fill-primary stroke-card" stroke-width="2" />
-                </svg>
+                <x-icons.sparkline-icon />
             </div>
             <div class="rounded-xl border border-border bg-card p-4">
                 <p class="text-2xl font-bold">3</p>
@@ -125,16 +87,7 @@
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                         aria-label="More options"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </li>
 
@@ -164,16 +117,7 @@
                     <button
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </li>
 
@@ -230,16 +174,7 @@
                     <button
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </li>
 
@@ -269,16 +204,7 @@
                     <button
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </li>
             </ul>
@@ -292,20 +218,7 @@
                 <h2
                     class="flex items-center gap-2 text-sm font-semibold text-destructive"
                 >
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"
-                        />
-                    </svg>
+                    <x-icons.clock-icon />
                     Overdue
                 </h2>
                 <span class="text-xs font-medium text-destructive/70">2 tasks</span>

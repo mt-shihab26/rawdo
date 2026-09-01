@@ -10,39 +10,13 @@
                         class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                         aria-label="Previous month"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M15.75 19.5 8.25 12l7.5-7.5"
-                            />
-                        </svg>
+                        <x-icons.chevron-left-icon />
                     </button>
                     <button
                         class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                         aria-label="Next month"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            stroke-width="2"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="m8.25 4.5 7.5 7.5-7.5 7.5"
-                            />
-                        </svg>
+                        <x-icons.chevron-right-icon />
                     </button>
                     <button
                         class="ml-1 rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-foreground/80 hover:bg-accent"

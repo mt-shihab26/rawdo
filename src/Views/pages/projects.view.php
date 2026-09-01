@@ -6,20 +6,7 @@
                 data-modal-open="new-project-modal"
                 class="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                </svg>
+                <x-icons.plus-icon />
                 New project
             </button>
         </div>
@@ -39,16 +26,7 @@
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                         aria-label="Project options"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </div>
                 <h2 class="font-semibold">Website Redesign</h2>
@@ -85,16 +63,7 @@
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                         aria-label="Project options"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </div>
                 <h2 class="font-semibold">Marketing Plan</h2>
@@ -131,16 +100,7 @@
                         class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
                         aria-label="Project options"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-4 w-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                d="M10 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"
-                            />
-                        </svg>
+                        <x-icons.more-icon />
                     </button>
                 </div>
                 <h2 class="font-semibold">Personal</h2>
@@ -167,20 +127,7 @@
                 data-modal-open="new-project-modal"
                 class="flex min-h-[168px] flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border text-muted-foreground transition hover:border-primary/40 hover:text-primary"
             >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M12 4.5v15m7.5-7.5h-15"
-                    />
-                </svg>
+                <x-icons.plus-large-icon />
                 <span class="text-sm font-medium">New project</span>
             </button>
         </div>

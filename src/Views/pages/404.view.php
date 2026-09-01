@@ -1,11 +1,7 @@
 <x-root-layout title="Page not found" description="The page you're looking for doesn't exist, moved, or the link is out of date.">
     <div class="flex min-h-screen flex-col items-center justify-center px-4 py-12 text-center">
         <div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-muted">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-muted-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                <circle cx="10.5" cy="10.5" r="6.5" />
-                <path stroke-linecap="round" d="M15.35 15.35 21 21" />
-                <path stroke-linecap="round" d="M8.25 8.25 12.75 12.75M12.75 8.25 8.25 12.75" />
-            </svg>
+            <x-icons.search-off-icon />
         </div>
         <p class="text-sm font-semibold uppercase tracking-wider text-primary">404</p>
         <h1 class="mt-1 text-2xl font-bold tracking-tight">Page not found</h1>

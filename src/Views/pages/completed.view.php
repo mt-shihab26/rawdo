@@ -32,20 +32,7 @@
                             <span
                                 class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3 w-3"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m4.5 12.75 6 6 9-13.5"
-                                    />
-                                </svg>
+                                <x-icons.check-icon />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p
@@ -67,20 +54,7 @@
                             <span
                                 class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3 w-3"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m4.5 12.75 6 6 9-13.5"
-                                    />
-                                </svg>
+                                <x-icons.check-icon />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p
@@ -114,20 +88,7 @@
                             <span
                                 class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3 w-3"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m4.5 12.75 6 6 9-13.5"
-                                    />
-                                </svg>
+                                <x-icons.check-icon />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p
@@ -149,20 +110,7 @@
                             <span
                                 class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3 w-3"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m4.5 12.75 6 6 9-13.5"
-                                    />
-                                </svg>
+                                <x-icons.check-icon />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p
@@ -184,20 +132,7 @@
                             <span
                                 class="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-chart-2 text-primary-foreground"
                             >
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    class="h-3 w-3"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    stroke-width="3"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="m4.5 12.75 6 6 9-13.5"
-                                    />
-                                </svg>
+                                <x-icons.check-icon />
                             </span>
                             <div class="min-w-0 flex-1">
                                 <p
