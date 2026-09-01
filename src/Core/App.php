@@ -6,7 +6,7 @@ use Throwable;
 
 class App
 {
-    use RegistersRoutes;
+    use HasReasonPhrases, RegistersRoutes;
 
     /**
      * Match the current request to a route and send back its response
@@ -50,15 +50,22 @@ class App
     }
 
     /**
-     * Swap an error response's body for its pages/{status} view (e.g. pages/404, pages/500), if one is defined
+     * Swap an error response's body for its pages/{status} view (e.g. pages/404, pages/500), if one is
+     * defined; otherwise fall back to "{status} {reason phrase}" text when the response has no body of its own
      */
     private function resolveStatusPageResponse(Response $response): Response
     {
         $statusCode = $response->statusCode;
 
-        if ($statusCode >= 400 && Container::get(View::class)->exists("pages/{$statusCode}")) {
+        if ($statusCode < 400) {
+            return $response;
+        }
+
+        if (Container::get(View::class)->exists("pages/{$statusCode}")) {
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
+        } elseif ($response->renderedString === '') {
+            $response->renderedString = $this->getStatusText($statusCode);
         }
 
         return $response;

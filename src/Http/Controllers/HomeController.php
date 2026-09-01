@@ -12,6 +12,8 @@ class HomeController
      */
     public function index(Request $request): Response
     {
+        abort(403);
+
         return view('home');
     }
 }
