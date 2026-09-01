@@ -2,6 +2,8 @@
 
 namespace Src\Core;
 
+use Throwable;
+
 class App
 {
     use RegistersRoutes;
@@ -21,6 +23,8 @@ class App
             $response = $route ? $route->call() : new Response('Not found', 404);
         } catch (HttpException $e) {
             $response = new Response($e->getMessage(), $e->statusCode);
+        } catch (Throwable $e) {
+            $response = new Response($e->getMessage(), 500);
         }
 
         $this->handleResponse($response);
