@@ -11,12 +11,10 @@
             </p>
 
             <div class="mt-6 space-y-2.5">
-                <button
-                    class="flex w-full items-center justify-center gap-2 rounded-lg border border-input bg-background px-4 py-2.5 text-sm font-medium hover:bg-accent"
-                >
+                <x-ui.button variant="outline" class="w-full">
                     <x-icons.google-icon />
                     Continue with Google
-                </button>
+                </x-ui.button>
             </div>
 
             <div class="my-5 flex items-center gap-3">
@@ -53,15 +51,16 @@
                             placeholder="••••••••"
                             class="w-full rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30"
                         />
-                        <button
-                            type="button"
-                            data-password-toggle
-                            class="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
-                            aria-label="Show password"
+                        <x-ui.button
+                            variant="ghost"
+                            size="icon-sm"
+                            rounded="sm"
+                            class="absolute right-2.5 top-1/2 -translate-y-1/2"
+                            :attrs="['type' => 'button', 'data-password-toggle' => '', 'aria-label' => 'Show password']"
                         >
                             <x-icons.eye-icon />
                             <x-icons.eye-off-icon />
-                        </button>
+                        </x-ui.button>
                     </div>
                 </div>
                 <label class="flex items-center gap-2 text-sm text-muted-foreground">
@@ -71,12 +70,9 @@
                     />
                     Remember me for 30 days
                 </label>
-                <button
-                    type="submit"
-                    class="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                >
+                <x-ui.button class="w-full" :attrs="['type' => 'submit']">
                     Log in
-                </button>
+                </x-ui.button>
             </form>
         </div>
 

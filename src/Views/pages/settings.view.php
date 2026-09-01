@@ -52,11 +52,9 @@
                         class="h-16 w-16 rounded-full"
                     />
                     <div>
-                        <button
-                            class="rounded-lg border border-border px-3 py-1.5 text-sm font-medium hover:bg-accent"
-                        >
+                        <x-ui.button variant="outline" size="sm">
                             Change photo
-                        </button>
+                        </x-ui.button>
                         <p class="mt-1 text-xs text-muted-foreground">
                             JPG or PNG. Max 2MB.
                         </p>
@@ -104,11 +102,9 @@
                     </div>
                 </div>
                 <div class="mt-5 flex justify-end border-t border-border pt-4">
-                    <button
-                        class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                    >
+                    <x-ui.button>
                         Save changes
-                    </button>
+                    </x-ui.button>
                 </div>
             </div>
         </div>
@@ -301,15 +297,16 @@
                                 placeholder="••••••••"
                                 class="w-full rounded-lg border border-input bg-background px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
                             />
-                            <button
-                                type="button"
-                                data-password-toggle
-                                class="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
-                                aria-label="Show password"
+                            <x-ui.button
+                                variant="ghost"
+                                size="icon-sm"
+                                rounded="sm"
+                                class="absolute right-2.5 top-1/2 -translate-y-1/2"
+                                :attrs="['type' => 'button', 'data-password-toggle' => '', 'aria-label' => 'Show password']"
                             >
                                 <x-icons.eye-icon />
                                 <x-icons.eye-off-icon />
-                            </button>
+                            </x-ui.button>
                         </div>
                     </div>
                     <div>
@@ -323,15 +320,16 @@
                                 placeholder="At least 8 characters"
                                 class="w-full rounded-lg border border-input bg-background px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
                             />
-                            <button
-                                type="button"
-                                data-password-toggle
-                                class="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
-                                aria-label="Show password"
+                            <x-ui.button
+                                variant="ghost"
+                                size="icon-sm"
+                                rounded="sm"
+                                class="absolute right-2.5 top-1/2 -translate-y-1/2"
+                                :attrs="['type' => 'button', 'data-password-toggle' => '', 'aria-label' => 'Show password']"
                             >
                                 <x-icons.eye-icon />
                                 <x-icons.eye-off-icon />
-                            </button>
+                            </x-ui.button>
                         </div>
                     </div>
                     <div>
@@ -345,24 +343,23 @@
                                 placeholder="••••••••"
                                 class="w-full rounded-lg border border-input bg-background px-3 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
                             />
-                            <button
-                                type="button"
-                                data-password-toggle
-                                class="absolute right-2.5 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
-                                aria-label="Show password"
+                            <x-ui.button
+                                variant="ghost"
+                                size="icon-sm"
+                                rounded="sm"
+                                class="absolute right-2.5 top-1/2 -translate-y-1/2"
+                                :attrs="['type' => 'button', 'data-password-toggle' => '', 'aria-label' => 'Show password']"
                             >
                                 <x-icons.eye-icon />
                                 <x-icons.eye-off-icon />
-                            </button>
+                            </x-ui.button>
                         </div>
                     </div>
                 </div>
                 <div class="mt-5 flex justify-end border-t border-border pt-4">
-                    <button
-                        class="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                    >
+                    <x-ui.button>
                         Update password
-                    </button>
+                    </x-ui.button>
                 </div>
             </div>
 
@@ -376,11 +373,9 @@
                     Permanently delete your account and all associated data. This
                     cannot be undone.
                 </p>
-                <button
-                    class="rounded-lg bg-destructive px-4 py-2 text-sm font-semibold text-primary-foreground hover:bg-destructive/90"
-                >
-                    Delete account
-                </button>
+                <x-ui.button variant="destructive">
+                        Delete account
+                    </x-ui.button>
             </div>
         </div>
     </div>

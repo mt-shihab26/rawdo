@@ -4,13 +4,10 @@
             <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">All Tasks</h1>
             <div class="flex items-center gap-2">
                 <div class="relative">
-                    <button
-                        data-dropdown-trigger="sort-menu"
-                        class="flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-foreground/80 hover:bg-accent"
-                    >
+                    <x-ui.button variant="outline" size="sm" :attrs="['data-dropdown-trigger' => 'sort-menu']">
                         <x-icons.list-check-icon />
                         Sort
-                    </button>
+                    </x-ui.button>
                     <div
                         id="sort-menu"
                         class="js-dropdown-menu absolute right-0 z-10 mt-1 hidden w-40 rounded-lg border border-border bg-card py-1 shadow-lg"
@@ -37,38 +34,27 @@
                         >
                     </div>
                 </div>
-                <button
-                    data-modal-open="add-task-modal"
-                    class="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                >
+                <x-ui.button size="sm" :attrs="['data-modal-open' => 'add-task-modal']">
                     <x-icons.plus-icon />
                     Add task
-                </button>
+                </x-ui.button>
             </div>
         </div>
 
         <!-- Filter chips -->
         <div class="mb-5 flex flex-wrap gap-2">
-            <button
-                class="rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground"
-            >
+            <x-ui.button size="sm" rounded="full">
                 All <span class="opacity-75">12</span>
-            </button>
-            <button
-                class="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-            >
+            </x-ui.button>
+            <x-ui.button variant="outline" size="sm" rounded="full">
                 Active <span class="opacity-60">9</span>
-            </button>
-            <button
-                class="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-            >
+            </x-ui.button>
+            <x-ui.button variant="outline" size="sm" rounded="full">
                 High priority <span class="opacity-60">3</span>
-            </button>
-            <button
-                class="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-            >
+            </x-ui.button>
+            <x-ui.button variant="outline" size="sm" rounded="full">
                 No due date <span class="opacity-60">2</span>
-            </button>
+            </x-ui.button>
         </div>
 
         <!-- Grouped list -->

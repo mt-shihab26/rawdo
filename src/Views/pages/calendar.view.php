@@ -6,23 +6,15 @@
                     August 2026
                 </h1>
                 <div class="flex items-center gap-1">
-                    <button
-                        class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                        aria-label="Previous month"
-                    >
+                    <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Previous month']">
                         <x-icons.chevron-left-icon />
-                    </button>
-                    <button
-                        class="rounded-lg p-1.5 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                        aria-label="Next month"
-                    >
+                    </x-ui.button>
+                    <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Next month']">
                         <x-icons.chevron-right-icon />
-                    </button>
-                    <button
-                        class="ml-1 rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-foreground/80 hover:bg-accent"
-                    >
+                    </x-ui.button>
+                    <x-ui.button variant="outline" size="sm" class="ml-1">
                         Today
-                    </button>
+                    </x-ui.button>
                 </div>
             </div>
             <div

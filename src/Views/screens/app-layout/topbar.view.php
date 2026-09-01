@@ -1,13 +1,9 @@
 <header
     class="sticky top-0 z-20 flex items-center gap-3 border-b border-border bg-background/80 px-4 py-3 backdrop-blur lg:px-8"
 >
-    <button
-        data-sidebar-toggle
-        class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground lg:hidden"
-        aria-label="Open menu"
-    >
+    <x-ui.button variant="ghost" size="icon-lg" class="lg:hidden" :attrs="['data-sidebar-toggle' => '', 'aria-label' => 'Open menu']">
         <x-icons.menu-icon />
-    </button>
+    </x-ui.button>
     <div class="relative max-w-md flex-1">
         <x-icons.search-icon />
         <input
@@ -17,11 +13,8 @@
         />
     </div>
     <div class="ml-auto flex items-center gap-2">
-        <button
-            class="rounded-lg p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-            aria-label="Notifications"
-        >
+        <x-ui.button variant="ghost" size="icon-lg" :attrs="['aria-label' => 'Notifications']">
             <x-icons.bell-icon />
-        </button>
+        </x-ui.button>
     </div>
 </header>

@@ -2,13 +2,10 @@
     <div class="mx-auto max-w-5xl">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
             <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Projects</h1>
-            <button
-                data-modal-open="new-project-modal"
-                class="flex items-center gap-1.5 rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-            >
+            <x-ui.button :attrs="['data-modal-open' => 'new-project-modal']">
                 <x-icons.plus-icon />
                 New project
-            </button>
+            </x-ui.button>
         </div>
 
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -22,12 +19,9 @@
                     >
                         <span class="h-3 w-3 rounded-full bg-chart-1"></span>
                     </span>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                        aria-label="Project options"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100" :attrs="['aria-label' => 'Project options']">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </div>
                 <h2 class="font-semibold">Website Redesign</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
@@ -59,12 +53,9 @@
                     >
                         <span class="h-3 w-3 rounded-full bg-chart-4"></span>
                     </span>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                        aria-label="Project options"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100" :attrs="['aria-label' => 'Project options']">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </div>
                 <h2 class="font-semibold">Marketing Plan</h2>
                 <p class="mt-1 text-sm text-muted-foreground">
@@ -96,12 +87,9 @@
                     >
                         <span class="h-3 w-3 rounded-full bg-chart-2"></span>
                     </span>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                        aria-label="Project options"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100" :attrs="['aria-label' => 'Project options']">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </div>
                 <h2 class="font-semibold">Personal</h2>
                 <p class="mt-1 text-sm text-muted-foreground">

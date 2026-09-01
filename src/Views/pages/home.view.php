@@ -83,12 +83,9 @@
                             <span class="text-foreground/80">Marketing Plan</span>
                         </div>
                     </a>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                        aria-label="More options"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100" :attrs="['aria-label' => 'More options']">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </li>
 
                 <li data-task-row class="group flex items-start gap-3 px-5 py-3.5">
@@ -114,11 +111,9 @@
                             <span class="text-foreground/80">Website Redesign</span>
                         </div>
                     </a>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </li>
 
                 <li data-task-row class="group flex items-start gap-3 px-5 py-3.5">
@@ -171,11 +166,9 @@
                             <span class="text-foreground/80">Website Redesign</span>
                         </div>
                     </a>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </li>
 
                 <li data-task-row class="group flex items-start gap-3 px-5 py-3.5">
@@ -201,11 +194,9 @@
                             <span class="text-foreground/80">Personal</span>
                         </div>
                     </a>
-                    <button
-                        class="rounded p-1 text-muted-foreground opacity-0 hover:bg-accent group-hover:opacity-100"
-                    >
+                    <x-ui.button variant="ghost" size="icon-sm" rounded="sm" class="opacity-0 group-hover:opacity-100">
                         <x-icons.more-icon />
-                    </button>
+                    </x-ui.button>
                 </li>
             </ul>
         </div>

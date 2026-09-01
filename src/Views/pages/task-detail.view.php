@@ -174,12 +174,10 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                             Due date
                         </dt>
                         <dd>
-                            <button
-                                class="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left hover:bg-accent"
-                            >
+                            <x-ui.button variant="outline" justify="start" class="w-full">
                                 <x-icons.calendar-icon />
                                 Today, 9:00 AM
-                            </button>
+                                </x-ui.button>
                         </dd>
                     </div>
                     <div>
@@ -189,14 +187,12 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                             Priority
                         </dt>
                         <dd>
-                            <button
-                                class="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left hover:bg-accent"
-                            >
+                            <x-ui.button variant="outline" justify="start" class="w-full">
                                 <span
                                     class="h-2.5 w-2.5 rounded-full bg-destructive"
                                 ></span>
                                 High
-                            </button>
+                                </x-ui.button>
                         </dd>
                     </div>
                     <div>
@@ -206,14 +202,12 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                             Project
                         </dt>
                         <dd>
-                            <button
-                                class="flex w-full items-center gap-2 rounded-lg border border-border px-3 py-2 text-left hover:bg-accent"
-                            >
+                            <x-ui.button variant="outline" justify="start" class="w-full">
                                 <span
                                     class="h-2.5 w-2.5 rounded-full bg-chart-4"
                                 ></span>
                                 Marketing Plan
-                            </button>
+                                </x-ui.button>
                         </dd>
                     </div>
                     <div>
@@ -248,11 +242,9 @@ Pull final numbers from finance, tighten the growth narrative on slides 4-9, and
                                 class="rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground"
                                 >deck</span
                             >
-                            <button
-                                class="rounded-full border border-dashed border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent"
-                            >
+                            <x-ui.button variant="outline" size="sm" rounded="full" class="border-dashed">
                                 + Add
-                            </button>
+                            </x-ui.button>
                         </dd>
                     </div>
                 </dl>

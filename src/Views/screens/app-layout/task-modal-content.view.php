@@ -16,44 +16,28 @@
                 class="mt-1 w-full resize-none border-none bg-transparent text-sm text-muted-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-0"
             ></textarea>
             <div class="mt-3 flex flex-wrap gap-2">
-                <button
-                    type="button"
-                    class="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-                >
+                <x-ui.button variant="outline" size="sm" rounded="md" :attrs="['type' => 'button']">
                     <x-icons.due-date-icon />
                     Due date
-                </button>
-                <button
-                    type="button"
-                    class="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-                >
+                </x-ui.button>
+                <x-ui.button variant="outline" size="sm" rounded="md" :attrs="['type' => 'button']">
                     <span class="inline-block h-2.5 w-2.5 rounded-full bg-chart-4"></span>
                     Priority
-                </button>
-                <button
-                    type="button"
-                    class="inline-flex items-center gap-1.5 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-foreground/80 hover:bg-accent"
-                >
+                </x-ui.button>
+                <x-ui.button variant="outline" size="sm" rounded="md" :attrs="['type' => 'button']">
                     <span class="h-2.5 w-2.5 rounded-full bg-chart-1"></span>
                     Project
-                </button>
+                </x-ui.button>
             </div>
             <div
                 class="mt-4 flex items-center justify-end gap-2 border-t border-border pt-4"
             >
-                <button
-                    type="button"
-                    data-modal-close
-                    class="rounded-lg px-3.5 py-2 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                >
+                <x-ui.button variant="ghost" size="sm" :attrs="['type' => 'button', 'data-modal-close' => '']">
                     Cancel
-                </button>
-                <button
-                    type="submit"
-                    class="rounded-lg bg-primary px-3.5 py-2 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
-                >
+                </x-ui.button>
+                <x-ui.button size="sm" :attrs="['type' => 'submit']">
                     Add task
-                </button>
+                </x-ui.button>
             </div>
         </form>
     </div>

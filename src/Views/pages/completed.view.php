@@ -44,11 +44,9 @@
                                     Completed at 8:14 AM · Personal
                                 </p>
                             </div>
-                            <button
-                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <x-ui.button variant="outline" size="sm">
                                 Restore
-                            </button>
+                            </x-ui.button>
                         </li>
                         <li class="flex items-start gap-3 px-5 py-3.5">
                             <span
@@ -66,11 +64,9 @@
                                     Completed at 9:47 AM · Marketing Plan
                                 </p>
                             </div>
-                            <button
-                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <x-ui.button variant="outline" size="sm">
                                 Restore
-                            </button>
+                            </x-ui.button>
                         </li>
                     </ul>
                 </div>
@@ -100,11 +96,9 @@
                                     Completed at 4:32 PM · Website Redesign
                                 </p>
                             </div>
-                            <button
-                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <x-ui.button variant="outline" size="sm">
                                 Restore
-                            </button>
+                            </x-ui.button>
                         </li>
                         <li class="flex items-start gap-3 px-5 py-3.5">
                             <span
@@ -122,11 +116,9 @@
                                     Completed at 1:05 PM · Personal
                                 </p>
                             </div>
-                            <button
-                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <x-ui.button variant="outline" size="sm">
                                 Restore
-                            </button>
+                            </x-ui.button>
                         </li>
                         <li class="flex items-start gap-3 px-5 py-3.5">
                             <span
@@ -144,11 +136,9 @@
                                     Completed at 11:20 AM · Marketing Plan
                                 </p>
                             </div>
-                            <button
-                                class="rounded-lg border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                            >
+                            <x-ui.button variant="outline" size="sm">
                                 Restore
-                            </button>
+                            </x-ui.button>
                         </li>
                     </ul>
                 </div>
