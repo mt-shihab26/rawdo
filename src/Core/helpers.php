@@ -1,6 +1,7 @@
 <?php
 
 use Src\Core\App;
+use Src\Core\Container;
 use Src\Core\Response;
 use Src\Core\View;
 
@@ -10,7 +11,7 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = (new View)->render("pages/$name", $data ?? []);
+        $renderedString = Container::get(View::class)->render("pages/$name", $data ?? []);
 
         return new Response($renderedString);
     }
