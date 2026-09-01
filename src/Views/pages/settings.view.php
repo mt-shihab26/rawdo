@@ -1,11 +1,11 @@
 <x-app-layout title="Settings" description="Manage your account and app preferences.">
-    <div class="mx-auto max-w-3xl">
-        <h1 class="mb-6 text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
+    <div class="mx-auto max-w-3xl space-y-6">
+        <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">Settings</h1>
 
         <div
             data-tabs
             id="settings-tabs"
-            class="mb-6 flex items-center gap-1 rounded-lg bg-muted p-1"
+            class="flex items-center gap-1 rounded-lg bg-muted p-1"
         >
             <button
                 data-tab="profile"
@@ -43,27 +43,27 @@
             data-tabs-for="settings-tabs"
             class="space-y-6"
         >
-            <div class="rounded-xl border border-border bg-card p-5">
-                <h2 class="mb-4 text-sm font-semibold">Profile</h2>
-                <div class="mb-5 flex items-center gap-4">
+            <div class="space-y-5 rounded-xl border border-border bg-card p-5">
+                <h2 class="text-sm font-semibold">Profile</h2>
+                <div class="flex items-center gap-4">
                     <img
                         src="https://i.pravatar.cc/128?img=12"
                         alt=""
                         class="h-16 w-16 rounded-full"
                     />
-                    <div>
+                    <div class="space-y-1">
                         <x-ui.button variant="outline" size="sm">
                             Change photo
                         </x-ui.button>
-                        <p class="mt-1 text-xs text-muted-foreground">
+                        <p class="text-xs text-muted-foreground">
                             JPG or PNG. Max 2MB.
                         </p>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
+                    <div class="space-y-1.5">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >Full name</label
                         >
                         <input
@@ -73,9 +73,9 @@
                             class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
                         />
                     </div>
-                    <div>
+                    <div class="space-y-1.5">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >Email</label
                         >
                         <input
@@ -85,9 +85,9 @@
                             class="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
                         />
                     </div>
-                    <div class="sm:col-span-2">
+                    <div class="space-y-1.5 sm:col-span-2">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >Timezone</label
                         >
                         <select
@@ -101,7 +101,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="mt-5 flex justify-end border-t border-border pt-4">
+                <div class="flex justify-end border-t border-border pt-4">
                     <x-ui.button>
                         Save changes
                     </x-ui.button>
@@ -115,8 +115,9 @@
             data-tabs-for="settings-tabs"
             class="hidden space-y-6"
         >
-            <div class="rounded-xl border border-border bg-card p-5">
-                <h2 class="mb-4 text-sm font-semibold">Appearance</h2>
+            <div class="space-y-4 rounded-xl border border-border bg-card p-5">
+                <h2 class="text-sm font-semibold">Appearance</h2>
+                <div>
                 <div class="flex items-center justify-between py-3">
                     <div>
                         <p class="text-sm font-medium">Theme</p>
@@ -186,9 +187,10 @@
                         ></span>
                     </button>
                 </div>
+                </div>
             </div>
-            <div class="rounded-xl border border-border bg-card p-5">
-                <h2 class="mb-4 text-sm font-semibold">Default view</h2>
+            <div class="space-y-4 rounded-xl border border-border bg-card p-5">
+                <h2 class="text-sm font-semibold">Default view</h2>
                 <div class="grid grid-cols-3 gap-3">
                     <label
                         class="flex cursor-pointer flex-col items-center gap-2 rounded-lg border-2 border-primary bg-primary/5 p-3 text-center text-xs font-medium"
@@ -223,8 +225,9 @@
             data-tabs-for="settings-tabs"
             class="hidden space-y-6"
         >
-            <div class="rounded-xl border border-border bg-card p-5">
-                <h2 class="mb-4 text-sm font-semibold">Email notifications</h2>
+            <div class="space-y-4 rounded-xl border border-border bg-card p-5">
+                <h2 class="text-sm font-semibold">Email notifications</h2>
+                <div>
                 <div class="flex items-center justify-between py-3">
                     <div>
                         <p class="text-sm font-medium">Daily digest</p>
@@ -274,6 +277,7 @@
                         ></span>
                     </button>
                 </div>
+                </div>
             </div>
         </div>
 
@@ -283,12 +287,12 @@
             data-tabs-for="settings-tabs"
             class="hidden space-y-6"
         >
-            <div class="rounded-xl border border-border bg-card p-5">
-                <h2 class="mb-4 text-sm font-semibold">Password</h2>
+            <div class="space-y-5 rounded-xl border border-border bg-card p-5">
+                <h2 class="text-sm font-semibold">Password</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div class="sm:col-span-2">
+                    <div class="space-y-1.5 sm:col-span-2">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >Current password</label
                         >
                         <div class="relative">
@@ -309,9 +313,9 @@
                             </x-ui.button>
                         </div>
                     </div>
-                    <div>
+                    <div class="space-y-1.5">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >New password</label
                         >
                         <div class="relative">
@@ -332,9 +336,9 @@
                             </x-ui.button>
                         </div>
                     </div>
-                    <div>
+                    <div class="space-y-1.5">
                         <label
-                            class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                            class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                             >Confirm password</label
                         >
                         <div class="relative">
@@ -356,7 +360,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-5 flex justify-end border-t border-border pt-4">
+                <div class="flex justify-end border-t border-border pt-4">
                     <x-ui.button>
                         Update password
                     </x-ui.button>
@@ -364,18 +368,20 @@
             </div>
 
             <div
-                class="rounded-xl border border-destructive/30 bg-destructive/5 p-5"
+                class="space-y-4 rounded-xl border border-destructive/30 bg-destructive/5 p-5"
             >
-                <h2 class="mb-1 text-sm font-semibold text-destructive">
-                    Danger zone
-                </h2>
-                <p class="mb-4 text-sm text-muted-foreground">
-                    Permanently delete your account and all associated data. This
-                    cannot be undone.
-                </p>
+                <div class="space-y-1">
+                    <h2 class="text-sm font-semibold text-destructive">
+                        Danger zone
+                    </h2>
+                    <p class="text-sm text-muted-foreground">
+                        Permanently delete your account and all associated data. This
+                        cannot be undone.
+                    </p>
+                </div>
                 <x-ui.button variant="destructive">
-                        Delete account
-                    </x-ui.button>
+                    Delete account
+                </x-ui.button>
             </div>
         </div>
     </div>

@@ -1,27 +1,27 @@
 <x-app-layout title="Website Redesign" description="Track tasks and progress for the Website Redesign project.">
-    <div class="mx-auto max-w-3xl">
-        <div class="mb-6 flex items-start gap-4">
+    <div class="mx-auto max-w-3xl space-y-6">
+        <div class="flex items-start gap-4">
             <span
                 class="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-chart-1/15"
             >
                 <span class="h-4 w-4 rounded-full bg-chart-1"></span>
             </span>
-            <div class="min-w-0 flex-1">
+            <div class="min-w-0 flex-1 space-y-1">
                 <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
                     Website Redesign
                 </h1>
-                <p class="mt-1 text-sm text-muted-foreground">
+                <p class="text-sm text-muted-foreground">
                     Marketing site rebuild for the Q4 launch
                 </p>
             </div>
         </div>
 
-        <div class="mb-8 rounded-xl border border-border bg-card p-5">
+        <div class="space-y-2 rounded-xl border border-border bg-card p-5">
             <div class="flex items-center justify-between text-sm">
                 <span class="font-medium">7 of 12 tasks complete</span>
                 <span class="text-muted-foreground">58%</span>
             </div>
-            <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-muted">
+            <div class="h-2 w-full overflow-hidden rounded-full bg-muted">
                 <div
                     class="h-full rounded-full bg-chart-1"
                     style="width: 58%"
@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="mb-5 flex items-center gap-2 border-b border-border">
+        <div class="flex items-center gap-2 border-b border-border">
             <button
                 class="border-b-2 border-primary px-1 pb-3 text-sm font-semibold text-primary"
             >
@@ -43,7 +43,7 @@
         </div>
 
         <div
-            class="mb-4 flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+            class="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
         >
             <x-icons.plus-muted-icon />
             <input
@@ -61,12 +61,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Review pull request #482
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -81,12 +81,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Sync with design team on new icons
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -101,12 +101,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Renew domain registration
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-destructive"
+                            class="flex flex-wrap items-center gap-2 text-xs text-destructive"
                         >
                             Due 2 days ago
                         </div>
@@ -118,12 +118,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Set up staging environment
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"
@@ -138,12 +138,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Write launch announcement blog post
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"

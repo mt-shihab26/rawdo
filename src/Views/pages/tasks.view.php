@@ -1,6 +1,6 @@
 <x-app-layout title="All Tasks" description="Browse and manage all your tasks.">
-    <div class="mx-auto max-w-4xl">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+    <div class="mx-auto max-w-4xl space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
             <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">All Tasks</h1>
             <div class="flex items-center gap-2">
                 <div class="relative">
@@ -42,7 +42,7 @@
         </div>
 
         <!-- Filter chips -->
-        <div class="mb-5 flex flex-wrap gap-2">
+        <div class="flex flex-wrap gap-2">
             <x-ui.button size="sm" rounded="full">
                 All <span class="opacity-75">12</span>
             </x-ui.button>
@@ -59,9 +59,9 @@
 
         <!-- Grouped list -->
         <div class="space-y-6">
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-destructive"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-destructive"
                 >
                     Overdue
                 </h2>
@@ -76,7 +76,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -84,7 +84,7 @@
                                     Send client invoice #1092
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-destructive/80"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-destructive/80"
                                 >
                                     <span>Due yesterday</span><span>·</span
                                     ><span class="text-foreground/80"
@@ -102,7 +102,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -110,7 +110,7 @@
                                     Renew domain registration
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-destructive/80"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-destructive/80"
                                 >
                                     <span>Due 2 days ago</span><span>·</span
                                     ><span class="text-foreground/80"
@@ -123,9 +123,9 @@
                 </div>
             </div>
 
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                     Today
                 </h2>
@@ -140,7 +140,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -148,7 +148,7 @@
                                     Finalize Q3 investor deck
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-destructive"
@@ -170,7 +170,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -178,7 +178,7 @@
                                     Review pull request #482
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -201,7 +201,7 @@
                                 checked
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium line-through text-muted-foreground"
@@ -209,7 +209,7 @@
                                     Water the office plants
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"
@@ -225,9 +225,9 @@
                 </div>
             </div>
 
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                     This week
                 </h2>
@@ -242,7 +242,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -250,7 +250,7 @@
                                     Prepare onboarding docs for new hire
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -272,7 +272,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -280,7 +280,7 @@
                                     Quarterly budget review meeting
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-destructive"
@@ -297,9 +297,9 @@
                 </div>
             </div>
 
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                     No due date
                 </h2>
@@ -314,7 +314,7 @@
                                 data-task-checkbox
                                 class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                             />
-                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                            <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                                 <p
                                     data-task-title
                                     class="truncate text-sm font-medium"
@@ -322,7 +322,7 @@
                                     Read "Deep Work"
                                 </p>
                                 <div
-                                    class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                                    class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                                 >
                                     <span
                                         class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"

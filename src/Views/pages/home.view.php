@@ -1,6 +1,6 @@
 <x-app-layout title="Today" description="See today's tasks, streaks, and progress at a glance.">
-    <div class="mx-auto max-w-3xl">
-        <div class="mb-8 flex flex-col gap-1">
+    <div class="mx-auto max-w-3xl space-y-8">
+        <div class="flex flex-col gap-1">
             <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
                 Good afternoon, Alex
             </h1>
@@ -17,7 +17,7 @@
         </div>
 
         <!-- Stats -->
-        <div class="mb-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
             <div class="rounded-xl border border-border bg-card p-4">
                 <div class="flex items-center gap-3">
                     <div class="relative flex h-12 w-12 shrink-0 items-center justify-center">
@@ -34,9 +34,11 @@
                 <p class="text-2xl font-bold text-destructive">2</p>
                 <p class="text-xs font-medium text-muted-foreground">Overdue</p>
             </div>
-            <div class="rounded-xl border border-border bg-card p-4">
-                <p class="text-2xl font-bold text-chart-2">8</p>
-                <p class="text-xs font-medium text-muted-foreground">Completed</p>
+            <div class="space-y-2 rounded-xl border border-border bg-card p-4">
+                <div>
+                    <p class="text-2xl font-bold text-chart-2">8</p>
+                    <p class="text-xs font-medium text-muted-foreground">Completed</p>
+                </div>
                 <x-icons.sparkline-icon />
             </div>
             <div class="rounded-xl border border-border bg-card p-4">
@@ -46,7 +48,7 @@
         </div>
 
         <!-- Today's tasks -->
-        <div class="mb-8 rounded-xl border border-border bg-card">
+        <div class="rounded-xl border border-border bg-card">
             <div
                 class="flex items-center justify-between border-b border-border px-5 py-4"
             >
@@ -63,12 +65,12 @@
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                         aria-label="Mark task complete"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Finalize Q3 investor deck
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-destructive"
@@ -94,12 +96,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Review pull request #482
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -123,7 +125,7 @@
                         checked
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p
                             data-task-title
                             class="truncate text-sm font-medium line-through text-muted-foreground"
@@ -131,7 +133,7 @@
                             Water the office plants
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"
@@ -149,12 +151,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Sync with design team on new icons
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-chart-4"
@@ -177,12 +179,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Book flights for conference
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
+                            class="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"
                         >
                             <span
                                 class="inline-block h-2 w-2 rounded-full bg-muted-foreground/40"
@@ -221,12 +223,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Send client invoice #1092
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-destructive/80"
+                            class="flex flex-wrap items-center gap-2 text-xs text-destructive/80"
                         >
                             <span>Due yesterday</span>
                             <span>·</span>
@@ -240,12 +242,12 @@
                         data-task-checkbox
                         class="mt-1 h-4 w-4 shrink-0 rounded border-input accent-primary focus:ring-2 focus:ring-ring/30"
                     />
-                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1">
+                    <a href="{{ route('task-detail.index') }}" class="min-w-0 flex-1 space-y-1">
                         <p data-task-title class="truncate text-sm font-medium">
                             Renew domain registration
                         </p>
                         <div
-                            class="mt-1 flex flex-wrap items-center gap-2 text-xs text-destructive/80"
+                            class="flex flex-wrap items-center gap-2 text-xs text-destructive/80"
                         >
                             <span>Due 2 days ago</span>
                             <span>·</span>

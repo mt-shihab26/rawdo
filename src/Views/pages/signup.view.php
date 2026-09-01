@@ -1,66 +1,50 @@
 <x-auth-layout title="Sign up" description="Create a Rawdo account to start tracking your tasks.">
-    <div class="w-full max-w-sm rounded-xl border border-border bg-card p-6 shadow-sm">
+    <div class="w-full max-w-sm space-y-6 rounded-xl border border-border bg-card p-6 shadow-sm">
         <x-elements.heading heading="Create your account" subheading="Start organizing your work in minutes." />
 
-        <div class="mt-6 space-y-2.5">
+        <div class="space-y-2.5">
             <x-ui.button variant="outline" class="w-full">
                 <x-icons.google-icon />
                 Continue with Google
             </x-ui.button>
         </div>
 
-        <div class="my-5 flex items-center gap-3">
+        <div class="flex items-center gap-3">
             <div class="h-px flex-1 bg-border"></div>
             <span class="text-xs font-medium text-muted-foreground">OR</span>
             <div class="h-px flex-1 bg-border"></div>
         </div>
 
         <form class="space-y-4">
-            <div>
-                <label
-                    class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                    >Full name</label
-                >
-                <input
-                    type="text"
-                    placeholder="Alex Morgan"
-                    class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30"
-                />
-            </div>
-            <div>
-                <label
-                    class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                    >Email</label
-                >
-                <input
-                    type="email"
-                    placeholder="you@example.com"
-                    class="w-full rounded-lg border border-input bg-background px-3 py-2.5 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30"
-                />
-            </div>
-            <div>
-                <label
-                    class="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted-foreground"
-                    >Password</label
-                >
-                <div class="relative">
-                    <input
-                        type="password"
-                        placeholder="At least 8 characters"
-                        class="w-full rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring/30"
-                    />
-                    <x-ui.button
-                        variant="ghost"
-                        size="icon-sm"
-                        rounded="sm"
-                        class="absolute right-2.5 top-1/2 -translate-y-1/2"
-                        :attrs="['type' => 'button', 'data-password-toggle' => '', 'aria-label' => 'Show password']"
-                    >
-                        <x-icons.eye-icon />
-                        <x-icons.eye-off-icon />
-                    </x-ui.button>
-                </div>
-            </div>
+            <x-elements.text-input
+                label="Full name"
+                id="name"
+                name="name"
+                placeholder="Alex Morgan"
+                :required="true"
+                :attrs="['autocomplete' => 'name']"
+            />
+            <x-elements.email-input
+                id="email"
+                name="email"
+                :required="true"
+                :attrs="['autocomplete' => 'email']"
+            />
+            <x-elements.password-input
+                id="password"
+                name="password"
+                placeholder="At least 8 characters"
+                :required="true"
+                :attrs="['minlength' => '8', 'autocomplete' => 'new-password']"
+            />
+            <x-elements.password-input
+                label="Confirm password"
+                id="password_confirmation"
+                name="password_confirmation"
+                placeholder="Re-enter your password"
+                :required="true"
+                :attrs="['minlength' => '8', 'autocomplete' => 'new-password']"
+            />
             <label class="flex items-start gap-2 text-sm text-muted-foreground">
                 <input
                     type="checkbox"
@@ -83,7 +67,7 @@
         </form>
     </div>
 
-    <p class="mt-6 text-sm text-muted-foreground">
+    <p class="text-sm text-muted-foreground">
         Already have an account?
         <a href="{{ route('login.index') }}" class="font-semibold text-primary hover:underline">Log in</a>
     </p>

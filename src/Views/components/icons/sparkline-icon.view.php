@@ -1,4 +1,4 @@
-<svg viewBox="0 0 120 36" class="mt-2 h-8 w-full" aria-hidden="true">
+<svg viewBox="0 0 120 36" class="h-8 w-full" aria-hidden="true">
     <polyline
         points="4,20.8 22.7,9.6 41.3,15.2 60,4 78.7,20.8 97.3,26.4"
         fill="none"

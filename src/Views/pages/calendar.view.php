@@ -1,18 +1,20 @@
 <x-app-layout title="Calendar" description="View your tasks laid out across the calendar.">
-    <div class="mx-auto max-w-5xl">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="mx-auto max-w-5xl space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-4">
             <div class="flex items-center gap-3">
                 <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
                     August 2026
                 </h1>
-                <div class="flex items-center gap-1">
-                    <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Previous month']">
-                        <x-icons.chevron-left-icon />
-                    </x-ui.button>
-                    <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Next month']">
-                        <x-icons.chevron-right-icon />
-                    </x-ui.button>
-                    <x-ui.button variant="outline" size="sm" class="ml-1">
+                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-1">
+                        <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Previous month']">
+                            <x-icons.chevron-left-icon />
+                        </x-ui.button>
+                        <x-ui.button variant="ghost" size="icon" :attrs="['aria-label' => 'Next month']">
+                            <x-icons.chevron-right-icon />
+                        </x-ui.button>
+                    </div>
+                    <x-ui.button variant="outline" size="sm">
                         Today
                     </x-ui.button>
                 </div>
@@ -47,7 +49,7 @@
         </div>
 
         <!-- Legend -->
-        <div class="mb-3 flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
+        <div class="flex flex-wrap items-center gap-4 text-xs text-muted-foreground">
             <span class="flex items-center gap-1.5">
                 <span class="h-2 w-2 rounded-full bg-destructive"></span>
                 Deadline
@@ -131,10 +133,10 @@
                     3
                 </div>
                 <div
-                    class="min-h-24 border-b border-r border-border p-2 text-xs sm:min-h-28"
+                    class="min-h-24 space-y-1 border-b border-r border-border p-2 text-xs sm:min-h-28"
                 >
                     <span
-                        class="mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full font-semibold"
+                        class="inline-flex h-5 w-5 items-center justify-center rounded-full font-semibold"
                         >4</span
                     >
                     <div
@@ -186,10 +188,10 @@
                     12
                 </div>
                 <div
-                    class="min-h-24 border-b border-r border-border p-2 text-xs sm:min-h-28"
+                    class="min-h-24 space-y-1 border-b border-r border-border p-2 text-xs sm:min-h-28"
                 >
                     <span
-                        class="mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full font-semibold"
+                        class="inline-flex h-5 w-5 items-center justify-center rounded-full font-semibold"
                         >13</span
                     >
                     <div
@@ -281,7 +283,7 @@
                     class="min-h-24 border-primary bg-primary/5! p-2 text-xs ring-1 ring-inset ring-primary/30 sm:min-h-28"
                 >
                     <span
-                        class="mb-1 inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground"
+                        class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-primary font-semibold text-primary-foreground"
                         >29</span
                     >
                 </div>

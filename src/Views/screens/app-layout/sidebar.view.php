@@ -19,16 +19,18 @@ $projects = [
 
 <aside
     id="sidebar"
-    class="group fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full transform flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-all duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:translate-x-0"
+    class="group fixed inset-y-0 left-0 z-40 flex w-72 -translate-x-full transform flex-col gap-6 border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-all duration-200 lg:sticky lg:top-0 lg:h-screen lg:w-72 lg:translate-x-0"
     data-collapsed="false"
 >
-    <div class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0">
-        <x-elements.logo />
-        <x-app-layout.header-controls />
+    <div>
+        <div class="flex items-center justify-between gap-2 px-5 py-5 group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-0">
+            <x-elements.logo />
+            <x-app-layout.header-controls />
+        </div>
+        <x-app-layout.task-modal-button />
     </div>
-    <x-app-layout.task-modal-button />
     <nav
-        class="mt-6 flex-1 space-y-6 overflow-y-auto px-3 pb-4 group-data-[collapsed=true]:px-2"
+        class="flex-1 space-y-6 overflow-y-auto px-3 pb-4 group-data-[collapsed=true]:px-2"
     >
         <div class="space-y-1">
             <?php foreach ($links as $item) { $active = route()->current($item['route']); ?>
@@ -80,10 +82,10 @@ $projects = [
             </div>
         </div>
     </nav>
-    <div class="border-t border-sidebar-border p-3">
+    <div class="space-y-1 border-t border-sidebar-border p-3">
         <a
             href="{{ route('settings.index') }}"
-            class="mb-1 flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
+            class="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground group-data-[collapsed=true]:justify-center group-data-[collapsed=true]:px-2"
         >
             <x-icons.gear-icon />
             <span class="group-data-[collapsed=true]:hidden">Settings</span>

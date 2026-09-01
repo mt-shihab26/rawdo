@@ -1,11 +1,11 @@
 <x-app-layout title="Completed" description="Browse the tasks you've already finished.">
-    <div class="mx-auto max-w-3xl">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
-            <div>
+    <div class="mx-auto max-w-3xl space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+            <div class="space-y-1">
                 <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">
                     Completed
                 </h1>
-                <p class="mt-1 text-sm text-muted-foreground">
+                <p class="text-sm text-muted-foreground">
                     42 tasks completed this month
                 </p>
             </div>
@@ -20,9 +20,9 @@
         </div>
 
         <div class="space-y-6">
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                     Today — Aug 31
                 </h2>
@@ -34,13 +34,13 @@
                             >
                                 <x-icons.check-icon />
                             </span>
-                            <div class="min-w-0 flex-1">
+                            <div class="min-w-0 flex-1 space-y-1">
                                 <p
                                     class="truncate text-sm font-medium text-muted-foreground line-through"
                                 >
                                     Water the office plants
                                 </p>
-                                <p class="mt-1 text-xs text-muted-foreground">
+                                <p class="text-xs text-muted-foreground">
                                     Completed at 8:14 AM · Personal
                                 </p>
                             </div>
@@ -54,13 +54,13 @@
                             >
                                 <x-icons.check-icon />
                             </span>
-                            <div class="min-w-0 flex-1">
+                            <div class="min-w-0 flex-1 space-y-1">
                                 <p
                                     class="truncate text-sm font-medium text-muted-foreground line-through"
                                 >
                                     Publish blog post: "Q3 roadmap"
                                 </p>
-                                <p class="mt-1 text-xs text-muted-foreground">
+                                <p class="text-xs text-muted-foreground">
                                     Completed at 9:47 AM · Marketing Plan
                                 </p>
                             </div>
@@ -72,9 +72,9 @@
                 </div>
             </div>
 
-            <div>
+            <div class="space-y-2">
                 <h2
-                    class="mb-2 px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    class="px-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                 >
                     Yesterday — Aug 30
                 </h2>
@@ -86,13 +86,13 @@
                             >
                                 <x-icons.check-icon />
                             </span>
-                            <div class="min-w-0 flex-1">
+                            <div class="min-w-0 flex-1 space-y-1">
                                 <p
                                     class="truncate text-sm font-medium text-muted-foreground line-through"
                                 >
                                     Merge feature/auth-refresh branch
                                 </p>
-                                <p class="mt-1 text-xs text-muted-foreground">
+                                <p class="text-xs text-muted-foreground">
                                     Completed at 4:32 PM · Website Redesign
                                 </p>
                             </div>
@@ -106,13 +106,13 @@
                             >
                                 <x-icons.check-icon />
                             </span>
-                            <div class="min-w-0 flex-1">
+                            <div class="min-w-0 flex-1 space-y-1">
                                 <p
                                     class="truncate text-sm font-medium text-muted-foreground line-through"
                                 >
                                     Book dentist appointment
                                 </p>
-                                <p class="mt-1 text-xs text-muted-foreground">
+                                <p class="text-xs text-muted-foreground">
                                     Completed at 1:05 PM · Personal
                                 </p>
                             </div>
@@ -126,13 +126,13 @@
                             >
                                 <x-icons.check-icon />
                             </span>
-                            <div class="min-w-0 flex-1">
+                            <div class="min-w-0 flex-1 space-y-1">
                                 <p
                                     class="truncate text-sm font-medium text-muted-foreground line-through"
                                 >
                                     Update pricing page copy
                                 </p>
-                                <p class="mt-1 text-xs text-muted-foreground">
+                                <p class="text-xs text-muted-foreground">
                                     Completed at 11:20 AM · Marketing Plan
                                 </p>
                             </div>

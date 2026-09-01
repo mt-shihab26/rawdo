@@ -23,13 +23,18 @@ class View
     {
         $this->ensureCompiled($name);
 
+        // Resolve the cache path before extract() below, since $data may itself
+        // contain a "name" key (e.g. a form input's name prop) that would
+        // otherwise overwrite this method's $name parameter
+        $__path = $this->cachePath($name);
+
         // Extract array keys as variables for the template
         extract($data);
 
         // Start output buffering
         ob_start();
 
-        include $this->cachePath($name);
+        include $__path;
 
         // Get the contents of the buffer and turn it off
         return ob_get_clean();
