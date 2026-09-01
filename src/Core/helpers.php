@@ -2,6 +2,7 @@
 
 use Src\Core\App;
 use Src\Core\Container;
+use Src\Core\HttpException;
 use Src\Core\Response;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
@@ -31,6 +32,16 @@ if (! function_exists('route')) {
         }
 
         return $route->getPath();
+    }
+}
+
+if (! function_exists('abort')) {
+    /**
+     * Halt the request and respond with the given HTTP status code and message
+     */
+    function abort(int $statusCode, string $message = ''): never
+    {
+        throw new HttpException($statusCode, $message);
     }
 }
 

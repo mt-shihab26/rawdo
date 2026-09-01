@@ -17,7 +17,11 @@ class App
 
         $route = self::matchRouteByRequest($request);
 
-        $response = $route ? $route->call() : new Response('Not found', 404);
+        try {
+            $response = $route ? $route->call() : new Response('Not found', 404);
+        } catch (HttpException $e) {
+            $response = new Response($e->getMessage(), $e->statusCode);
+        }
 
         $this->handleResponse($response);
 
