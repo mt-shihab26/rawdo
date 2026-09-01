@@ -9,8 +9,8 @@
                 id="email"
                 name="email"
                 :required="true"
-                :value="old('email', '')"
-                :error="errors()['email'] ?? ''"
+                :value="old('email')"
+                :error="errors('email')"
             />
             <x-elements.password-input
                 id="password"

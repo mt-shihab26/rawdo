@@ -76,7 +76,7 @@ if (! function_exists('old')) {
      * Get a value flashed as old input on the previous request's validation failure,
      * or the whole old-input array when called with no key
      */
-    function old(?string $key = null, mixed $default = null): mixed
+    function old(?string $key = null, mixed $default = ''): mixed
     {
         $old = App::make(Session::class)->get('old', []);
 
@@ -86,11 +86,14 @@ if (! function_exists('old')) {
 
 if (! function_exists('errors')) {
     /**
-     * Get the validation errors flashed on the previous request's failed submission
+     * Get a validation error flashed on the previous request's failed submission,
+     * or the whole errors array when called with no key
      */
-    function errors(): array
+    function errors(?string $key = null, mixed $default = ''): mixed
     {
-        return App::make(Session::class)->get('errors', []);
+        $errors = App::make(Session::class)->get('errors', []);
+
+        return $key === null ? $errors : ($errors[$key] ?? $default);
     }
 }
 
