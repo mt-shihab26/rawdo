@@ -5,7 +5,7 @@ namespace Src\Core;
 trait HasReasonPhrases
 {
     /**
-     * Standard reason phrases for every HTTP status code (except 200), used as fallback error text
+     * Standard reason phrases for every HTTP status code, used as fallback error text
      */
     private const REASON_PHRASES = [
         100 => 'Continue',
@@ -13,6 +13,7 @@ trait HasReasonPhrases
         102 => 'Processing',
         103 => 'Early Hints',
 
+        200 => 'OK',
         201 => 'Created',
         202 => 'Accepted',
         203 => 'Non-Authoritative Information',
