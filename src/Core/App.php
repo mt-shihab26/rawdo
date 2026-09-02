@@ -6,7 +6,16 @@ use Throwable;
 
 class App
 {
-    use Container, HasReasonPhrases, RegistersRoutes;
+    use Container, HasReasonPhrases;
+
+    /**
+     * Create the app with the route registry it dispatches requests against
+     */
+    public function __construct(
+        private RouteRegistry $routes)
+    {
+        //
+    }
 
     /**
      * Match the current request to a route and send back its response
@@ -18,7 +27,7 @@ class App
         self::instance(Request::class, $request);
         self::singleton(Session::class, fn () => new Session($request));
 
-        $route = self::matchRouteByRequest($request);
+        $route = $this->routes->matchRequest($request);
         if ($route) {
             self::instance(Route::class, $route);
         }

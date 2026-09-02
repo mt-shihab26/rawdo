@@ -7,7 +7,7 @@ use Closure;
 class Route
 {
     /**
-     * The route's name, used to look it up via App::matchRouteByName()
+     * The route's name, used to look it up via RouteRegistry::matchName()
      */
     private ?string $name = null;
 
@@ -84,13 +84,13 @@ class Route
     }
 
     /**
-     * Build a route for the given method, register it with the App, and return it for chaining
+     * Build a route for the given method, register it with the RouteRegistry, and return it for chaining
      */
     private static function register(string $method, string $path, Closure|array $callback): self
     {
         $route = new self($method, $path, $callback);
 
-        App::addRoute($route);
+        App::make(RouteRegistry::class)->add($route);
 
         return $route;
     }

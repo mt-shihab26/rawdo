@@ -5,6 +5,7 @@ use Src\Core\HttpException;
 use Src\Core\Request;
 use Src\Core\Response;
 use Src\Core\RouteHelper;
+use Src\Core\RouteRegistry;
 use Src\Core\Session;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
@@ -31,7 +32,7 @@ if (! function_exists('route')) {
             return new RouteHelper;
         }
 
-        $route = App::matchRouteByName($name);
+        $route = App::make(RouteRegistry::class)->matchName($name);
 
         if (! $route) {
             throw new RuntimeException("Route [{$name}] not found.");

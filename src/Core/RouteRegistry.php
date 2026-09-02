@@ -2,29 +2,29 @@
 
 namespace Src\Core;
 
-trait RegistersRoutes
+class RouteRegistry
 {
     /**
-     * All routes registered via Route::get()
+     * All routes registered via Route::get()/Route::post()
      *
      * @var Route[]
      */
-    private static array $routes = [];
+    private array $routes = [];
 
     /**
      * Register a route
      */
-    public static function addRoute(Route $route): void
+    public function add(Route $route): void
     {
-        self::$routes[] = $route;
+        $this->routes[] = $route;
     }
 
     /**
      * Find the route matching the given request, if any
      */
-    public static function matchRouteByRequest(Request $request): ?Route
+    public function matchRequest(Request $request): ?Route
     {
-        foreach (self::$routes as $route) {
+        foreach ($this->routes as $route) {
             if ($route->getMethod() === $request->method && $route->getPath() === $request->path) {
                 return $route;
             }
@@ -36,9 +36,9 @@ trait RegistersRoutes
     /**
      * Find a route by its registered name, if any
      */
-    public static function matchRouteByName(string $name): ?Route
+    public function matchName(string $name): ?Route
     {
-        foreach (self::$routes as $route) {
+        foreach ($this->routes as $route) {
             if ($route->getName() === $name) {
                 return $route;
             }
