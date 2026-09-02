@@ -80,10 +80,3 @@ class App
         return $response;
     }
 }
-
-App::registerProviders([
-    CoreServiceProvider::class,
-    ...require __DIR__.'/../providers.php',
-]);
-
-require __DIR__.'/../routes.php';
