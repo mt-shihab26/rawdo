@@ -61,7 +61,7 @@ class Route
      */
     public function call()
     {
-        return Container::current()->call($this->callback);
+        return App::current()->container()->call($this->callback);
     }
 
     /**

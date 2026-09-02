@@ -13,12 +13,6 @@ use RuntimeException;
 class Container
 {
     /**
-     * The booted container, for code with no object to receive it via constructor
-     * injection (route definitions, global helper functions)
-     */
-    private static self $current;
-
-    /**
      * Resolved singleton instances, keyed by class/abstract name
      *
      * @var array<string, object>
@@ -38,16 +32,6 @@ class Container
     public function __construct()
     {
         $this->instances[self::class] = $this;
-
-        self::$current = $this;
-    }
-
-    /**
-     * Get the booted container, for code with no object to inject it into
-     */
-    public static function current(): self
-    {
-        return self::$current;
     }
 
     /**

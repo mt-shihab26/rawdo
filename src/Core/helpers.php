@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\Container;
+use Src\Core\App;
 use Src\Core\HttpException;
 use Src\Core\Request;
 use Src\Core\Response;
@@ -16,7 +16,9 @@ if (! function_exists('app')) {
      */
     function app(?string $class = null): mixed
     {
-        return $class === null ? Container::current() : Container::current()->make($class);
+        $container = App::current()->container();
+
+        return $class === null ? $container : $container->make($class);
     }
 }
 
@@ -26,7 +28,7 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = Container::current()->get(View::class)->renderPage($name, $data ?? []);
+        $renderedString = app()->get(View::class)->renderPage($name, $data ?? []);
 
         return new Response(renderedString: $renderedString, statusCode: 200);
     }
@@ -42,7 +44,7 @@ if (! function_exists('route')) {
             return new RouteHelper;
         }
 
-        $route = Container::current()->get(RouteRegistry::class)->matchName($name);
+        $route = app()->get(RouteRegistry::class)->matchName($name);
 
         if (! $route) {
             throw new RuntimeException("Route [{$name}] not found.");

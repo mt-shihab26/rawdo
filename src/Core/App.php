@@ -6,13 +6,35 @@ use Throwable;
 
 class App
 {
+    private static self $current;
+
+    private Container $container;
+
     /**
-     * Create the app with the container it resolves everything through
+     * Create the app, building the container it resolves everything through
      */
-    public function __construct(
-        private Container $container,
-    ) {
-        //
+    public function __construct()
+    {
+        $this->container = new Container;
+
+        self::$current = $this;
+    }
+
+    /**
+     * Get the booted app, for code with no object to receive it via constructor
+     * injection (route definitions, global helper functions)
+     */
+    public static function current(): self
+    {
+        return self::$current;
+    }
+
+    /**
+     * Get the container this app resolves everything through
+     */
+    public function container(): Container
+    {
+        return $this->container;
     }
 
     /**
