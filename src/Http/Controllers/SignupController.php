@@ -57,8 +57,8 @@ class SignupController
         }
 
         if ($errors) {
-            $session->flash('errors', $errors);
-            $session->flash('old', ['name' => $name, 'email' => $email]);
+            $session->put('errors', $errors);
+            $session->put('old', ['name' => $name, 'email' => $email]);
 
             return redirect(route('signup.index'));
         }
@@ -69,8 +69,8 @@ class SignupController
             'password' => password_hash($password, PASSWORD_DEFAULT),
         ]);
 
-        $session->put('user_id', $userId);
         $session->regenerate();
+        $session->put('user_id', $userId);
 
         return redirect(route('home.index'));
     }

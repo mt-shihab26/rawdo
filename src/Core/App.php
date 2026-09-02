@@ -33,8 +33,6 @@ class App
 
         $this->handleResponse($response);
 
-        self::get(Session::class)->flashClear();
-
         ob_flush();
         flush();
 

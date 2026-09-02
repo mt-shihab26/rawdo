@@ -75,10 +75,15 @@ if (! function_exists('old')) {
     /**
      * Get a value flashed as old input on the previous request's validation failure,
      * or the whole old-input array when called with no key
+     *
+     * Reads (and clears) the session only once per request, no matter how many times
+     * this is called, so e.g. old('name') then old('email') both see the same data.
      */
     function old(?string $key = null, mixed $default = ''): mixed
     {
-        $old = App::make(Session::class)->get('old', []);
+        static $old = null;
+
+        $old ??= App::make(Session::class)->pull('old', []);
 
         return $key === null ? $old : ($old[$key] ?? $default);
     }
@@ -88,10 +93,15 @@ if (! function_exists('errors')) {
     /**
      * Get a validation error flashed on the previous request's failed submission,
      * or the whole errors array when called with no key
+     *
+     * Reads (and clears) the session only once per request, no matter how many times
+     * this is called, so multiple errors('field') calls on one page all see the data.
      */
     function errors(?string $key = null, mixed $default = ''): mixed
     {
-        $errors = App::make(Session::class)->get('errors', []);
+        static $errors = null;
+
+        $errors ??= App::make(Session::class)->pull('errors', []);
 
         return $key === null ? $errors : ($errors[$key] ?? $default);
     }

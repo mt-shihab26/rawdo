@@ -38,18 +38,6 @@ class Session
     }
 
     /**
-     * Get a value from the session and remove it
-     */
-    public function pull(string $key, mixed $default = null): mixed
-    {
-        $value = $this->get($key, $default);
-
-        $this->forget($key);
-
-        return $value;
-    }
-
-    /**
      * Remove a value from the session
      */
     public function forget(string $key): void
@@ -58,30 +46,14 @@ class Session
     }
 
     /**
-     * Put a value into the session that's readable via get() for exactly the next
-     * request, then automatically removed even if nothing ever reads it
+     * Get a value from the session and remove it
      */
-    public function flash(string $key, mixed $value): void
+    public function pull(string $key, mixed $default = null): mixed
     {
-        $_SESSION[$key] = $value;
-        $_SESSION['_flash']['new'][] = $key;
-    }
+        $value = $this->get($key, $default);
+        $this->forget($key);
 
-    /**
-     * Age flash data by one request: drop whatever was readable this request (it's now
-     * two requests old), then promote what was flashed last request to be readable now
-     *
-     * Called once by App::handle(), after the response has rendered, so data flashed
-     * during this request survives to be read on the very next one.
-     */
-    public function flashClear(): void
-    {
-        foreach ($_SESSION['_flash']['old'] ?? [] as $key) {
-            unset($_SESSION[$key]);
-        }
-
-        $_SESSION['_flash']['old'] = $_SESSION['_flash']['new'] ?? [];
-        $_SESSION['_flash']['new'] = [];
+        return $value;
     }
 
     /**
@@ -89,20 +61,23 @@ class Session
      */
     public function token(): string
     {
-        if (! isset($_SESSION['_token'])) {
-            $_SESSION['_token'] = bin2hex(random_bytes(32));
+        $token = $this->get('_token');
+
+        if ($token === null) {
+            $token = bin2hex(random_bytes(32));
+            $this->put('_token', $token);
         }
 
-        return $_SESSION['_token'];
+        return $token;
     }
 
     /**
-     * Rotate the session ID (fixation protection) and issue a fresh CSRF token
+     * Rotate the session ID (fixation protection) and clear all session data
      */
     public function regenerate(): void
     {
         session_regenerate_id(true);
 
-        $this->forget('_token');
+        session_unset();
     }
 }

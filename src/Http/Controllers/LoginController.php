@@ -30,14 +30,14 @@ class LoginController
         $user = $email !== '' ? $users->findByEmail($email) : null;
 
         if (! $user || ! password_verify($password, $user['password'])) {
-            $session->flash('errors', ['email' => 'These credentials do not match our records.']);
-            $session->flash('old', ['email' => $email]);
+            $session->put('errors', ['email' => 'These credentials do not match our records.']);
+            $session->put('old', ['email' => $email]);
 
             return redirect(route('login.index'));
         }
 
-        $session->put('user_id', $user['id']);
         $session->regenerate();
+        $session->put('user_id', $user['id']);
 
         return redirect(route('home.index'));
     }
@@ -47,7 +47,6 @@ class LoginController
      */
     public function destroy(Session $session): Response
     {
-        $session->forget('user_id');
         $session->regenerate();
 
         return redirect(route('login.index'));
