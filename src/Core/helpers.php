@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\App;
+use Src\Core\Container;
 use Src\Core\HttpException;
 use Src\Core\Request;
 use Src\Core\Response;
@@ -16,7 +16,7 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = App::get(View::class)->renderPage($name, $data ?? []);
+        $renderedString = Container::current()->get(View::class)->renderPage($name, $data ?? []);
 
         return new Response(renderedString: $renderedString, statusCode: 200);
     }
@@ -32,7 +32,7 @@ if (! function_exists('route')) {
             return new RouteHelper;
         }
 
-        $route = App::make(RouteRegistry::class)->matchName($name);
+        $route = Container::current()->make(RouteRegistry::class)->matchName($name);
 
         if (! $route) {
             throw new RuntimeException("Route [{$name}] not found.");
@@ -58,7 +58,7 @@ if (! function_exists('csrf_token')) {
      */
     function csrf_token(): string
     {
-        return App::make(Session::class)->token();
+        return Container::current()->make(Session::class)->token();
     }
 }
 
@@ -84,7 +84,7 @@ if (! function_exists('old')) {
     {
         static $old = null;
 
-        $old ??= App::make(Session::class)->pull('old', []);
+        $old ??= Container::current()->make(Session::class)->pull('old', []);
 
         return $key === null ? $old : ($old[$key] ?? $default);
     }
@@ -102,7 +102,7 @@ if (! function_exists('errors')) {
     {
         static $errors = null;
 
-        $errors ??= App::make(Session::class)->pull('errors', []);
+        $errors ??= Container::current()->make(Session::class)->pull('errors', []);
 
         return $key === null ? $errors : ($errors[$key] ?? $default);
     }

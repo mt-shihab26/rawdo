@@ -7,17 +7,17 @@ class CoreServiceProvider implements ServiceProvider
     /**
      * Share a single View instance for the whole request
      */
-    public function register(): void
+    public function register(Container $container): void
     {
-        App::singleton(View::class, fn () => new View);
-        App::singleton(Database::class, fn () => new Database);
-        App::singleton(RouteRegistry::class, fn () => new RouteRegistry);
+        $container->singleton(View::class, fn () => new View);
+        $container->singleton(Database::class, fn () => new Database);
+        $container->singleton(RouteRegistry::class, fn () => new RouteRegistry);
     }
 
     /**
      * Run after every provider has finished registering
      */
-    public function boot(): void
+    public function boot(Container $container): void
     {
         //
     }

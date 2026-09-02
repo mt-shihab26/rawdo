@@ -6,14 +6,16 @@ use Throwable;
 
 class App
 {
-    use Container, HasReasonPhrases;
+    use HasReasonPhrases;
 
     /**
-     * Create the app with the route registry it dispatches requests against
+     * Create the app with the route registry it dispatches requests against and the
+     * container it resolves everything else through
      */
     public function __construct(
-        private RouteRegistry $routes)
-    {
+        private RouteRegistry $routes,
+        private Container $container,
+    ) {
         //
     }
 
@@ -24,12 +26,12 @@ class App
     {
         $request = Request::capture();
 
-        self::instance(Request::class, $request);
-        self::singleton(Session::class, fn () => new Session($request));
+        $this->container->instance(Request::class, $request);
+        $this->container->singleton(Session::class, fn () => new Session($request));
 
         $route = $this->routes->matchRequest($request);
         if ($route) {
-            self::instance(Route::class, $route);
+            $this->container->instance(Route::class, $route);
         }
 
         try {
@@ -79,7 +81,7 @@ class App
             return $response;
         }
 
-        if (self::get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
+        if ($this->container->get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {

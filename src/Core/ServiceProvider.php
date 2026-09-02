@@ -7,10 +7,10 @@ interface ServiceProvider
     /**
      * Register bindings into the Container
      */
-    public function register(): void;
+    public function register(Container $container): void;
 
     /**
      * Run after every provider has finished registering
      */
-    public function boot(): void;
+    public function boot(Container $container): void;
 }

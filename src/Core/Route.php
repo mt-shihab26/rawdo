@@ -57,11 +57,11 @@ class Route
     /**
      * Run the route's callback and return its result
      *
-     * The callback's type-hinted parameters (e.g. Request) are autowired via App.
+     * The callback's type-hinted parameters (e.g. Request) are autowired via the Container.
      */
     public function call()
     {
-        return App::call($this->callback);
+        return Container::current()->call($this->callback);
     }
 
     /**
@@ -90,7 +90,7 @@ class Route
     {
         $route = new self($method, $path, $callback);
 
-        App::make(RouteRegistry::class)->add($route);
+        Container::current()->make(RouteRegistry::class)->add($route);
 
         return $route;
     }

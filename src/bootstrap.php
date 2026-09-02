@@ -1,9 +1,11 @@
 <?php
 
-use Src\Core\App;
+use Src\Core\Container;
 use Src\Core\CoreServiceProvider;
 
-App::registerProviders([
+$container = new Container;
+
+$container->registerProviders([
     CoreServiceProvider::class,
     ...require __DIR__.'/providers.php',
 ]);

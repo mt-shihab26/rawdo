@@ -10,79 +10,78 @@ use ReflectionMethod;
 use ReflectionNamedType;
 use RuntimeException;
 
-trait Container
+class Container
 {
+    /**
+     * The booted container, for code with no object to receive it via constructor
+     * injection (route definitions, global helper functions)
+     */
+    private static self $current;
+
     /**
      * Resolved singleton instances, keyed by class/abstract name
      *
      * @var array<string, object>
      */
-    private static array $instances = [];
+    private array $instances = [];
 
     /**
-     * Factories registered via bind()/singleton(), keyed by abstract name
+     * Factories registered via singleton(), keyed by abstract name
      *
      * @var array<string, Closure>
      */
-    private static array $bindings = [];
+    private array $bindings = [];
 
     /**
-     * Which bound abstracts should be cached as a singleton after first resolution
-     *
-     * @var array<string, bool>
+     * Create the container, registering itself so it can resolve its own type-hint
      */
-    private static array $shared = [];
+    public function __construct()
+    {
+        $this->instances[self::class] = $this;
+
+        self::$current = $this;
+    }
+
+    /**
+     * Get the booted container, for code with no object to inject it into
+     */
+    public static function current(): self
+    {
+        return self::$current;
+    }
 
     /**
      * Register an already-built instance to be handed out for the given class
      */
-    public static function instance(string $abstract, object $instance): void
+    public function instance(string $abstract, object $instance): void
     {
-        self::$instances[$abstract] = $instance;
-    }
-
-    /**
-     * Whether a singleton/instance has already been resolved for the given class this request
-     */
-    public static function resolved(string $class): bool
-    {
-        return isset(self::$instances[$class]);
-    }
-
-    /**
-     * Register a factory that builds a fresh instance every time it's resolved
-     */
-    public static function bind(string $abstract, Closure $factory): void
-    {
-        self::$bindings[$abstract] = $factory;
-        self::$shared[$abstract] = false;
+        $this->instances[$abstract] = $instance;
     }
 
     /**
      * Register a factory whose result is built once and reused for every later resolution
      */
-    public static function singleton(string $abstract, Closure $factory): void
+    public function singleton(string $abstract, Closure $factory): void
     {
-        self::$bindings[$abstract] = $factory;
-        self::$shared[$abstract] = true;
+        $this->bindings[$abstract] = $factory;
     }
 
     /**
      * Resolve a class from a registered instance/binding only; throws if nothing is registered for it
      */
-    public static function get(string $class): object
+    public function get(string $class): object
     {
-        return self::resolveRegistered($class) ?? throw new RuntimeException(
-            "Nothing is bound for [{$class}]. Use App::make() to autowire it instead."
+        return $this->resolveRegistered($class) ?? throw new RuntimeException(
+            "Nothing is bound for [{$class}]. Use make() to autowire it instead."
         );
     }
 
     /**
      * Resolve a class via a registered instance/binding, falling back to autowiring its constructor
      */
-    public static function make(string $class): object
+    public function make(string $class): object
     {
-        if ($object = self::resolveRegistered($class)) {
+        if ($object = $this->resolveRegistered($class)) {
             return $object;
         }
 
@@ -93,55 +92,41 @@ trait Container
             return new $class;
         }
 
-        return $reflection->newInstanceArgs(self::resolveParameters($constructor));
+        return $reflection->newInstanceArgs($this->resolveParameters($constructor));
     }
 
     /**
-     * Resolve a class from a registered instance/binding, or null if nothing is registered for it
+     * Resolve a class from a registered instance/binding, building and caching it on first use
      */
-    private static function resolveRegistered(string $class): ?object
+    private function resolveRegistered(string $class): ?object
     {
-        if (isset(self::$instances[$class])) {
-            return self::$instances[$class];
+        if (isset($this->instances[$class])) {
+            return $this->instances[$class];
         }
 
-        if (isset(self::$bindings[$class])) {
-            return self::resolveBinding($class);
+        if (isset($this->bindings[$class])) {
+            return $this->instances[$class] = ($this->bindings[$class])();
         }
 
         return null;
     }
 
     /**
-     * Build (and cache, if shared) the object for a registered binding
-     */
-    private static function resolveBinding(string $class): object
-    {
-        $object = (self::$bindings[$class])();
-
-        if (self::$shared[$class]) {
-            self::$instances[$class] = $object;
-        }
-
-        return $object;
-    }
-
-    /**
      * Call a closure or [class, method] callback, autowiring its type-hinted parameters
      */
-    public static function call(Closure|array $callback): mixed
+    public function call(Closure|array $callback): mixed
     {
         if (is_array($callback)) {
             [$class, $method] = $callback;
-            $instance = self::make($class);
+            $instance = $this->make($class);
             $reflection = new ReflectionMethod($instance, $method);
 
-            return $instance->$method(...self::resolveParameters($reflection));
+            return $instance->$method(...$this->resolveParameters($reflection));
         }
 
         $reflection = new ReflectionFunction($callback);
 
-        return $callback(...self::resolveParameters($reflection));
+        return $callback(...$this->resolveParameters($reflection));
     }
 
     /**
@@ -152,23 +137,23 @@ trait Container
      *
      * @param  class-string<ServiceProvider>[]  $providers
      */
-    public static function registerProviders(array $providers): void
+    public function registerProviders(array $providers): void
     {
         $providers = array_map(fn (string $provider) => new $provider, $providers);
 
         foreach ($providers as $provider) {
-            $provider->register();
+            $provider->register($this);
         }
 
         foreach ($providers as $provider) {
-            $provider->boot();
+            $provider->boot($this);
         }
     }
 
     /**
      * Resolve each of the reflected function/method's type-hinted parameters
      */
-    private static function resolveParameters(ReflectionFunctionAbstract $reflection): array
+    private function resolveParameters(ReflectionFunctionAbstract $reflection): array
     {
         $args = [];
 
@@ -181,7 +166,7 @@ trait Container
                 );
             }
 
-            $args[] = self::make($type->getName());
+            $args[] = $this->make($type->getName());
         }
 
         return $args;
