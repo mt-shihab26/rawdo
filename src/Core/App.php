@@ -9,11 +9,9 @@ class App
     use HasReasonPhrases;
 
     /**
-     * Create the app with the route registry it dispatches requests against and the
-     * container it resolves everything else through
+     * Create the app with the container it resolves everything through
      */
     public function __construct(
-        private RouteRegistry $routes,
         private Container $container,
     ) {
         //
@@ -29,7 +27,7 @@ class App
         $this->container->instance(Request::class, $request);
         $this->container->singleton(Session::class, fn () => new Session($request));
 
-        $route = $this->routes->matchRequest($request);
+        $route = $this->container->make(RouteRegistry::class)->matchRequest($request);
         if ($route) {
             $this->container->instance(Route::class, $route);
         }

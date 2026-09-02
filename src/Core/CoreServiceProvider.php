@@ -9,9 +9,9 @@ class CoreServiceProvider implements ServiceProvider
      */
     public function register(Container $container): void
     {
+        $container->singleton(RouteRegistry::class, fn () => new RouteRegistry);
         $container->singleton(View::class, fn () => new View);
         $container->singleton(Database::class, fn () => new Database);
-        $container->singleton(RouteRegistry::class, fn () => new RouteRegistry);
     }
 
     /**

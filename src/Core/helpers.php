@@ -10,6 +10,16 @@ use Src\Core\Session;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
 
+if (! function_exists('app')) {
+    /**
+     * Get the container, or resolve a class through it when given one
+     */
+    function app(?string $class = null): mixed
+    {
+        return $class === null ? Container::current() : Container::current()->make($class);
+    }
+}
+
 if (! function_exists('view')) {
     /**
      * Render a page view and return it as a Response object
@@ -32,7 +42,7 @@ if (! function_exists('route')) {
             return new RouteHelper;
         }
 
-        $route = Container::current()->make(RouteRegistry::class)->matchName($name);
+        $route = Container::current()->get(RouteRegistry::class)->matchName($name);
 
         if (! $route) {
             throw new RuntimeException("Route [{$name}] not found.");
@@ -58,7 +68,7 @@ if (! function_exists('csrf_token')) {
      */
     function csrf_token(): string
     {
-        return Container::current()->make(Session::class)->token();
+        return app(Session::class)->token();
     }
 }
 
@@ -84,7 +94,7 @@ if (! function_exists('old')) {
     {
         static $old = null;
 
-        $old ??= Container::current()->make(Session::class)->pull('old', []);
+        $old ??= app(Session::class)->pull('old', []);
 
         return $key === null ? $old : ($old[$key] ?? $default);
     }
@@ -102,7 +112,7 @@ if (! function_exists('errors')) {
     {
         static $errors = null;
 
-        $errors ??= Container::current()->make(Session::class)->pull('errors', []);
+        $errors ??= app(Session::class)->pull('errors', []);
 
         return $key === null ? $errors : ($errors[$key] ?? $default);
     }

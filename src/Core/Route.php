@@ -90,7 +90,7 @@ class Route
     {
         $route = new self($method, $path, $callback);
 
-        Container::current()->make(RouteRegistry::class)->add($route);
+        app(RouteRegistry::class)->add($route);
 
         return $route;
     }
