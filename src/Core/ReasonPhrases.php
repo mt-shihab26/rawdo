@@ -2,7 +2,7 @@
 
 namespace Src\Core;
 
-trait HasReasonPhrases
+class ReasonPhrases
 {
     /**
      * Standard reason phrases for every HTTP status code, used as fallback error text
@@ -80,7 +80,7 @@ trait HasReasonPhrases
     /**
      * "{code} {reason phrase}" text for a status code, e.g. "404 Not Found"
      */
-    private function getStatusText(int $statusCode): string
+    public function text(int $statusCode): string
     {
         return $statusCode.' '.(self::REASON_PHRASES[$statusCode] ?? 'Error');
     }

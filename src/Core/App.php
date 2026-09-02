@@ -6,8 +6,6 @@ use Throwable;
 
 class App
 {
-    use HasReasonPhrases;
-
     /**
      * Create the app with the container it resolves everything through
      */
@@ -83,7 +81,7 @@ class App
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {
-            $response->renderedString = $this->getStatusText($statusCode);
+            $response->renderedString = (new ReasonPhrases)->text($statusCode);
         }
 
         return $response;
