@@ -4,14 +4,8 @@ namespace Src\Core;
 
 class View
 {
-    /**
-     * Base directory the view() helper renders page names from
-     */
     private const PAGES_DIRECTORY = 'pages';
 
-    /**
-     * Base directories searched, in order, when resolving a <x-name> tag; the last is used as the fallback
-     */
     private const COMPONENT_DIRECTORIES = ['components', 'layouts', 'screens'];
 
     /**
@@ -33,11 +27,6 @@ class View
         $this->exists($this->pagePath($name));
     }
 
-    private function pagePath(string $name): string
-    {
-        return self::PAGES_DIRECTORY."/$name";
-    }
-
     /**
      * Render a <x-name> component, layout, or screen, passing its slot content if given
      *
@@ -49,6 +38,27 @@ class View
             $props['slot'] = $slot;
         }
 
+        return $this->render($this->componentPath($name), $props);
+    }
+
+    /**
+     * Does a <x-name> component, layout, or screen exist for the given name
+     */
+    public function componentExists(string $name): bool
+    {
+        return $this->exists($this->componentPath($name));
+    }
+
+    private function pagePath(string $name): string
+    {
+        return self::PAGES_DIRECTORY."/$name";
+    }
+
+    /**
+     * Resolve a component name to its first matching directory, falling back to the last if none match
+     */
+    private function componentPath(string $name): string
+    {
         $name = str_replace('.', '/', $name);
 
         $path = '';
@@ -61,7 +71,15 @@ class View
             }
         }
 
-        return $this->render($path, $props);
+        return $path;
+    }
+
+    /**
+     * Whether a view file exists for the given name
+     */
+    private function exists(string $name): bool
+    {
+        return is_file($this->filePath($name));
     }
 
     /**
@@ -107,14 +125,6 @@ class View
         }
 
         file_put_contents($cached, $compiled);
-    }
-
-    /**
-     * Whether a view file exists for the given name
-     */
-    private function exists(string $name): bool
-    {
-        return is_file($this->filePath($name));
     }
 
     /**
