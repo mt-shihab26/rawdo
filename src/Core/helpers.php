@@ -4,8 +4,8 @@ use Src\Core\App;
 use Src\Core\HttpException;
 use Src\Core\Request;
 use Src\Core\Response;
-use Src\Core\RouteHelper;
-use Src\Core\RouteRegistry;
+use Src\Core\Route;
+use Src\Core\RouteInspector;
 use Src\Core\Session;
 use Src\Core\View;
 use Symfony\Component\VarDumper\VarDumper;
@@ -32,21 +32,11 @@ if (! function_exists('view')) {
 
 if (! function_exists('route')) {
     /**
-     * Resolve a named route to its path, or get the RouteHelper when called with no name
+     * Resolve a named route to its path, or get the RouteInspector when called with no name
      */
-    function route(?string $name = null): string|RouteHelper
+    function route(?string $name = null): string|RouteInspector
     {
-        if ($name === null) {
-            return new RouteHelper;
-        }
-
-        $route = app()->get(RouteRegistry::class)->matchName($name);
-
-        if (! $route) {
-            throw new RuntimeException("Route [{$name}] not found.");
-        }
-
-        return $route->getPath();
+        return Route::resolveByName($name);
     }
 }
 
@@ -82,11 +72,7 @@ if (! function_exists('csrf_field')) {
 
 if (! function_exists('old')) {
     /**
-     * Get a value flashed as old input on the previous request's validation failure,
-     * or the whole old-input array when called with no key
-     *
-     * Reads (and clears) the session only once per request, no matter how many times
-     * this is called, so e.g. old('name') then old('email') both see the same data.
+     * Get a value flashed as old input on the previous request's validation failure, or the whole old-input array when called with no key, reading (and clearing) the session only once per request
      */
     function old(?string $key = null, mixed $default = ''): mixed
     {
@@ -100,11 +86,7 @@ if (! function_exists('old')) {
 
 if (! function_exists('errors')) {
     /**
-     * Get a validation error flashed on the previous request's failed submission,
-     * or the whole errors array when called with no key
-     *
-     * Reads (and clears) the session only once per request, no matter how many times
-     * this is called, so multiple errors('field') calls on one page all see the data.
+     * Get a validation error flashed on the previous request's failed submission, or the whole errors array when called with no key, reading (and clearing) the session only once per request
      */
     function errors(?string $key = null, mixed $default = ''): mixed
     {
@@ -140,9 +122,7 @@ if (! function_exists('abort')) {
 
 if (! function_exists('dump')) {
     /**
-     * Dump one or more values without halting execution
-     *
-     * Returns the single value (or all values) back so it can be chained inline, e.g. return dump($x);
+     * Dump one or more values without halting execution, returning the single value (or all values) back so it can be chained inline
      */
     function dump(mixed ...$values): mixed
     {

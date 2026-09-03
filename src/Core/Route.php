@@ -3,12 +3,10 @@
 namespace Src\Core;
 
 use Closure;
+use RuntimeException;
 
 class Route
 {
-    /**
-     * The route's name, used to look it up via RouteRegistry::matchName()
-     */
     private ?string $name = null;
 
     /**
@@ -18,7 +16,9 @@ class Route
         private string $method,
         private string $path,
         private Closure|array $callback,
-    ) {}
+    ) {
+        //
+    }
 
     /**
      * Set a name for the route so it can be looked up later
@@ -55,20 +55,15 @@ class Route
     }
 
     /**
-     * Run the route's callback and return its result
-     *
-     * The callback's type-hinted parameters (e.g. Request) are autowired via the Container.
+     * Run the route's callback and return its result, autowiring type-hinted parameters (e.g. Request) via the Container
      */
     public function call()
     {
-        return App::current()->container()->call($this->callback);
+        return App::get()->call($this->callback);
     }
 
     /**
-     * Register a new GET route with the App and return it for chaining
-     *
-     * The callback may be a closure or a [ControllerClass, 'method'] array,
-     * in which case the controller is instantiated when the route is called.
+     * Register a new GET route with the App and return it for chaining; the callback may be a closure or a [ControllerClass, 'method'] array
      */
     public static function get(string $path, Closure|array $callback): self
     {
@@ -84,13 +79,30 @@ class Route
     }
 
     /**
+     * Resolve a named route to its path, or get the RouteInspector when called with no name
+     */
+    public static function resolveByName(?string $name = null): string|RouteInspector
+    {
+        if ($name === null) {
+            return new RouteInspector;
+        }
+        $route = App::get(RouteRegistry::class)->matchName($name);
+
+        if (! $route) {
+            throw new RuntimeException("Route [{$name}] not found.");
+        }
+
+        return $route->getPath();
+    }
+
+    /**
      * Build a route for the given method, register it with the RouteRegistry, and return it for chaining
      */
     private static function register(string $method, string $path, Closure|array $callback): self
     {
         $route = new self($method, $path, $callback);
 
-        app(RouteRegistry::class)->add($route);
+        App::get(RouteRegistry::class)->add($route);
 
         return $route;
     }

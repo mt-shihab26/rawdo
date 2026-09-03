@@ -16,6 +16,7 @@ class App
     public function __construct()
     {
         $this->container = new Container;
+
         self::$current = $this;
     }
 
@@ -24,9 +25,17 @@ class App
      */
     public static function get(?string $class = null): mixed
     {
-        $container = self::current()->container();
+        $container = self::$current->container();
 
         return $class === null ? $container : $container->make($class);
+    }
+
+    /**
+     * Get the container this app resolves everything through
+     */
+    public function container(): Container
+    {
+        return $this->container;
     }
 
     /**
@@ -35,13 +44,14 @@ class App
     public function handle()
     {
         $request = Request::capture();
+        $container = $this->container;
 
-        $this->container->instance(Request::class, $request);
-        $this->container->singleton(Session::class, fn () => new Session($request));
+        $container->instance(Request::class, $request);
+        $container->singleton(Session::class, fn () => new Session($request));
 
-        $route = $this->container->make(RouteRegistry::class)->matchRequest($request);
+        $route = $container->make(RouteRegistry::class)->matchRequest($request);
         if ($route) {
-            $this->container->instance(Route::class, $route);
+            $container->instance(Route::class, $route);
         }
 
         try {
@@ -58,23 +68,6 @@ class App
         flush();
 
         exit();
-    }
-
-    /**
-     * Get the booted app, for code with no object to receive it via constructor
-     * injection (route definitions, global helper functions)
-     */
-    private static function current(): self
-    {
-        return self::$current;
-    }
-
-    /**
-     * Get the container this app resolves everything through
-     */
-    public function container(): Container
-    {
-        return $this->container;
     }
 
     /**
@@ -97,8 +90,7 @@ class App
     }
 
     /**
-     * Swap an error response's body for its pages/{status} view (e.g. pages/404, pages/500), if one is
-     * defined; otherwise fall back to "{status} {reason phrase}" text when the response has no body of its own
+     * Swap an error response's body for its pages/{status} view if one is defined, otherwise fall back to "{status} {reason phrase}" text
      */
     private function resolveStatusPageResponse(Response $response): Response
     {

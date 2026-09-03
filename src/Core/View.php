@@ -28,9 +28,7 @@ class View
     }
 
     /**
-     * Render a <x-name> component, layout, or screen, passing its slot content if given
-     *
-     * Dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
+     * Render a <x-name> component, layout, or screen, passing its slot content if given; dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
      */
     public function component(string $name, array $props = [], ?string $slot = null): string
     {
@@ -49,6 +47,9 @@ class View
         return $this->exists($this->componentPath($name));
     }
 
+    /**
+     * Resolve a page name to its path within the pages directory
+     */
     private function pagePath(string $name): string
     {
         return self::PAGES_DIRECTORY."/$name";

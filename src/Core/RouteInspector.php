@@ -4,7 +4,7 @@ namespace Src\Core;
 
 use RuntimeException;
 
-class RouteHelper
+class RouteInspector
 {
     /**
      * Whether the given route name matches the currently matched route
@@ -12,7 +12,7 @@ class RouteHelper
     public function current(string $name): bool
     {
         try {
-            $route = App::current()->container()->get(Route::class);
+            $route = App::get(Route::class);
         } catch (RuntimeException) {
             return false;
         }
