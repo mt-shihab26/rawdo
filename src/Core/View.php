@@ -5,21 +5,69 @@ namespace Src\Core;
 class View
 {
     /**
+     * Base directory the view() helper renders page names from
+     */
+    private const PAGES_DIRECTORY = 'pages';
+
+    /**
      * Base directories searched, in order, when resolving a <x-name> tag; the last is used as the fallback
-     *
-     * @var string[]
      */
     private const COMPONENT_DIRECTORIES = ['components', 'layouts', 'screens'];
 
     /**
-     * Base directory the view() helper renders page names from
+     * Render a page view and return it as a Response object
      */
-    public const PAGES_DIRECTORY = 'pages';
+    public function page(string $name, ?array $data = null): Response
+    {
+        return new Response(
+            renderedString: $this->render($this->pagePath($name), $data ?? []),
+            statusCode: 200,
+        );
+    }
+
+    /**
+     * Does the page exists on the pages directory
+     */
+    public function pageExists(string $name)
+    {
+        $this->exists($this->pagePath($name));
+    }
+
+    private function pagePath(string $name): string
+    {
+        return self::PAGES_DIRECTORY."/$name";
+    }
+
+    /**
+     * Render a <x-name> component, layout, or screen, passing its slot content if given
+     *
+     * Dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
+     */
+    public function component(string $name, array $props = [], ?string $slot = null): string
+    {
+        if ($slot !== null) {
+            $props['slot'] = $slot;
+        }
+
+        $name = str_replace('.', '/', $name);
+
+        $path = '';
+
+        foreach (self::COMPONENT_DIRECTORIES as $directory) {
+            $path = "$directory/$name";
+
+            if ($this->exists($path)) {
+                break;
+            }
+        }
+
+        return $this->render($path, $props);
+    }
 
     /**
      * Render a view file to a string, passing $data in as local variables
      */
-    public function render(string $name, array $data = []): string
+    private function render(string $name, array $data = []): string
     {
         $this->ensureCompiled($name);
 
@@ -41,17 +89,9 @@ class View
     }
 
     /**
-     * Render a page view, proxying render() with the pages/ base directory prefixed
-     */
-    public function renderPage(string $name, array $data = []): string
-    {
-        return $this->render(self::PAGES_DIRECTORY."/$name", $data);
-    }
-
-    /**
      * Compile a view into the cache if it's missing or older than its source
      */
-    public function ensureCompiled(string $name): void
+    private function ensureCompiled(string $name): void
     {
         $source = $this->filePath($name);
         $cached = $this->cachePath($name);
@@ -70,33 +110,9 @@ class View
     }
 
     /**
-     * Render a <x-name> component, layout, or screen, passing its slot content if given
-     *
-     * Dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
-     */
-    public function component(string $name, array $props = [], ?string $slot = null): string
-    {
-        if ($slot !== null) {
-            $props['slot'] = $slot;
-        }
-
-        $name = str_replace('.', '/', $name);
-
-        foreach (self::COMPONENT_DIRECTORIES as $directory) {
-            $path = "$directory/$name";
-
-            if ($this->exists($path)) {
-                break;
-            }
-        }
-
-        return $this->render($path, $props);
-    }
-
-    /**
      * Whether a view file exists for the given name
      */
-    public function exists(string $name): bool
+    private function exists(string $name): bool
     {
         return is_file($this->filePath($name));
     }

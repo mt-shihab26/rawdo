@@ -16,25 +16,17 @@ class App
     public function __construct()
     {
         $this->container = new Container;
-
         self::$current = $this;
     }
 
     /**
-     * Get the booted app, for code with no object to receive it via constructor
-     * injection (route definitions, global helper functions)
+     * Get the container, or resolve a class through it when given one
      */
-    public static function current(): self
+    public static function get(?string $class = null): mixed
     {
-        return self::$current;
-    }
+        $container = self::current()->container();
 
-    /**
-     * Get the container this app resolves everything through
-     */
-    public function container(): Container
-    {
-        return $this->container;
+        return $class === null ? $container : $container->make($class);
     }
 
     /**
@@ -69,6 +61,23 @@ class App
     }
 
     /**
+     * Get the booted app, for code with no object to receive it via constructor
+     * injection (route definitions, global helper functions)
+     */
+    private static function current(): self
+    {
+        return self::$current;
+    }
+
+    /**
+     * Get the container this app resolves everything through
+     */
+    public function container(): Container
+    {
+        return $this->container;
+    }
+
+    /**
      * Send a response to the browser, rendering a matching pages/{status} view for any error response if one exists
      */
     private function handleResponse(Response $response)
@@ -99,7 +108,7 @@ class App
             return $response;
         }
 
-        if ($this->container->get(View::class)->exists(View::PAGES_DIRECTORY."/{$statusCode}")) {
+        if ($this->container->get(View::class)->pageExists("{$statusCode}")) {
             $response = view((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {

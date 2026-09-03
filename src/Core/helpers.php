@@ -16,9 +16,7 @@ if (! function_exists('app')) {
      */
     function app(?string $class = null): mixed
     {
-        $container = App::current()->container();
-
-        return $class === null ? $container : $container->make($class);
+        return App::get($class);
     }
 }
 
@@ -28,9 +26,7 @@ if (! function_exists('view')) {
      */
     function view(string $name, ?array $data = null): Response
     {
-        $renderedString = app()->get(View::class)->renderPage($name, $data ?? []);
-
-        return new Response(renderedString: $renderedString, statusCode: 200);
+        return app(View::class)->page($name, $data);
     }
 }
 
