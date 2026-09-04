@@ -1,9 +1,10 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Database;
 
 use PDO;
 use PDOStatement;
+use Src\Core\Paths;
 
 class Database extends PDO
 {

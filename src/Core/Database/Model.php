@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Database;
 
 use ReflectionClass;
 use RuntimeException;
@@ -60,11 +60,15 @@ abstract class Model
      */
     public static function find(int $id): ?static
     {
-        $blank = (new ReflectionClass(static::class))->newInstanceWithoutConstructor();
+        return static::where('id', $id)->first();
+    }
 
-        $row = app(Database::class)->selectOne('SELECT * FROM '.$blank->table().' WHERE id = ? LIMIT 1', $id);
-
-        return $row ? static::fromRow($row) : null;
+    /**
+     * Start a query against this model's table, filtered by an equality condition
+     */
+    public static function where(string $column, mixed $value): ModelQuery
+    {
+        return new ModelQuery(static::class, self::blank()->table(), $column, $value);
     }
 
     /**
@@ -74,7 +78,7 @@ abstract class Model
      */
     public static function create(array $data): static
     {
-        $blank = (new ReflectionClass(static::class))->newInstanceWithoutConstructor();
+        $blank = self::blank();
 
         $data = self::filterFillable($data, $blank->fillable());
         $data = self::applyCasts($data, $blank->casts());
@@ -88,6 +92,15 @@ abstract class Model
         );
 
         return static::find($id) ?? throw new RuntimeException(static::class." [{$id}] not found after insert.");
+    }
+
+    /**
+     * Build an instance of this model with none of its properties set, to call instance methods like table() on
+     * without a real row (find(), create(), and where() all need table()/fillable()/casts() before any row exists)
+     */
+    private static function blank(): static
+    {
+        return (new ReflectionClass(static::class))->newInstanceWithoutConstructor();
     }
 
     /**
@@ -127,6 +140,16 @@ abstract class Model
     }
 
     /**
+     * Build a model instance from a raw row; the public entry point ModelQuery uses to hydrate its results
+     *
+     * @param  array<string, mixed>  $row
+     */
+    public static function hydrate(array $row): static
+    {
+        return static::fromRow($row);
+    }
+
+    /**
      * Build a model from a raw database row, assigning each column via __set() with no per-field property
      * declarations or constructor, then re-applying casts() so e.g. a stored 0/1 comes back as a real bool
      *
@@ -134,7 +157,7 @@ abstract class Model
      */
     protected static function fromRow(array $row): static
     {
-        $model = (new ReflectionClass(static::class))->newInstanceWithoutConstructor();
+        $model = self::blank();
 
         foreach ($row as $field => $value) {
             $model->$field = $value;

@@ -2,7 +2,7 @@
 
 namespace Src\Core\Validation;
 
-use Src\Core\Database;
+use Src\Core\Database\Database;
 use Src\Core\Foundation\App;
 
 class ExistsRule implements Rule

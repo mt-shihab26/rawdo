@@ -2,7 +2,7 @@
 
 namespace Src\Core\Foundation;
 
-use Src\Core\Database;
+use Src\Core\Database\Database;
 use Src\Core\Http\HttpException;
 use Src\Core\Http\ReasonPhrases;
 use Src\Core\Http\Request;

@@ -2,8 +2,7 @@
 
 namespace Src\Models;
 
-use Src\Core\Database;
-use Src\Core\Model;
+use Src\Core\Database\Model;
 
 class User extends Model
 {
@@ -48,8 +47,6 @@ class User extends Model
      */
     public static function findByEmail(string $email): ?self
     {
-        $row = app(Database::class)->selectOne('SELECT * FROM '.(new self)->table().' WHERE email = ? LIMIT 1', $email);
-
-        return $row ? self::fromRow($row) : null;
+        return self::where('email', $email)->first();
     }
 }
