@@ -4,7 +4,7 @@ namespace Src\Core\Routing;
 
 use Closure;
 use RuntimeException;
-use Src\Core\App;
+use Src\Core\Foundation\App;
 
 class Route
 {

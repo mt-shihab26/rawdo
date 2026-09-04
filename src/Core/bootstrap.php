@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\App;
+use Src\Core\Foundation\App;
 use Src\Core\Paths;
 
 $app = new App;

@@ -2,8 +2,8 @@
 
 namespace Src\Providers;
 
-use Src\Core\Container;
-use Src\Core\ServiceProvider;
+use Src\Core\Foundation\Container;
+use Src\Core\Foundation\ServiceProvider;
 
 class AppServiceProvider implements ServiceProvider
 {

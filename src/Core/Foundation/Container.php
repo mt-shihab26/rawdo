@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Foundation;
 
 use Closure;
 use ReflectionClass;

@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\App;
+use Src\Core\Foundation\App;
 use Src\Core\Http\HttpException;
 use Src\Core\Http\Response;
 use Src\Core\Http\Session;

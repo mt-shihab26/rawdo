@@ -10,8 +10,8 @@ class User
      * Create the model with the database connection it queries
      */
     public function __construct(
-        private Database $db)
-    {
+        private Database $db,
+    ) {
         //
     }
 

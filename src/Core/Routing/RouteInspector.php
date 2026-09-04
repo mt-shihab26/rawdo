@@ -3,7 +3,7 @@
 namespace Src\Core\Routing;
 
 use RuntimeException;
-use Src\Core\App;
+use Src\Core\Foundation\App;
 
 class RouteInspector
 {
