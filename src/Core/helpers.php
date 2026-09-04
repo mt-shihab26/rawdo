@@ -1,5 +1,6 @@
 <?php
 
+use Src\Core\Debug;
 use Src\Core\Foundation\App;
 use Src\Core\Http\HttpException;
 use Src\Core\Http\Response;
@@ -7,7 +8,6 @@ use Src\Core\Http\Session;
 use Src\Core\Routing\Route;
 use Src\Core\Routing\RouteInspector;
 use Src\Core\View\View;
-use Symfony\Component\VarDumper\VarDumper;
 
 if (! function_exists('app')) {
     /**
@@ -105,7 +105,7 @@ if (! function_exists('abort')) {
      */
     function abort(int $statusCode, string $message = ''): never
     {
-        throw new HttpException($statusCode, $message);
+        HttpException::abort($statusCode, $message);
     }
 }
 
@@ -115,11 +115,7 @@ if (! function_exists('dump')) {
      */
     function dump(mixed ...$values): mixed
     {
-        foreach ($values as $value) {
-            VarDumper::dump($value);
-        }
-
-        return count($values) === 1 ? $values[0] : $values;
+        return Debug::dump(...$values);
     }
 }
 
@@ -129,7 +125,6 @@ if (! function_exists('dd')) {
      */
     function dd(mixed ...$values): never
     {
-        dump(...$values);
-        exit(1);
+        Debug::dd(...$values);
     }
 }

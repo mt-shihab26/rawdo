@@ -15,4 +15,12 @@ class HttpException extends RuntimeException
     ) {
         parent::__construct($message);
     }
+
+    /**
+     * Halt the request and respond with the given HTTP status code and message
+     */
+    public static function abort(int $statusCode, string $message = ''): never
+    {
+        throw new self($statusCode, $message);
+    }
 }
