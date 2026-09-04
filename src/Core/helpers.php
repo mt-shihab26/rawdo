@@ -2,7 +2,6 @@
 
 use Src\Core\App;
 use Src\Core\HttpException;
-use Src\Core\Request;
 use Src\Core\Response;
 use Src\Core\Route;
 use Src\Core\RouteInspector;
@@ -72,29 +71,21 @@ if (! function_exists('csrf_field')) {
 
 if (! function_exists('old')) {
     /**
-     * Get a value flashed as old input on the previous request's validation failure, or the whole old-input array when called with no key, reading (and clearing) the session only once per request
+     * Get a value flashed as old input on the previous request's validation failure, or the whole old-input array when called with no key
      */
     function old(?string $key = null, mixed $default = ''): mixed
     {
-        static $old = null;
-
-        $old ??= app(Session::class)->pull('old', []);
-
-        return $key === null ? $old : ($old[$key] ?? $default);
+        return app(Session::class)->old($key, $default);
     }
 }
 
 if (! function_exists('errors')) {
     /**
-     * Get a validation error flashed on the previous request's failed submission, or the whole errors array when called with no key, reading (and clearing) the session only once per request
+     * Get a validation error flashed on the previous request's failed submission, or the whole errors array when called with no key
      */
     function errors(?string $key = null, mixed $default = ''): mixed
     {
-        static $errors = null;
-
-        $errors ??= app(Session::class)->pull('errors', []);
-
-        return $key === null ? $errors : ($errors[$key] ?? $default);
+        return app(Session::class)->errors($key, $default);
     }
 }
 
@@ -102,11 +93,9 @@ if (! function_exists('verify_csrf')) {
     /**
      * Abort with a 419 if the request's _token doesn't match the session's CSRF token
      */
-    function verify_csrf(Request $request): void
+    function verify_csrf(): void
     {
-        if (! hash_equals(csrf_token(), (string) $request->input('_token', ''))) {
-            abort(419, 'Page expired. Please refresh and try again.');
-        }
+        app(Session::class)->verifyCsrf();
     }
 }
 
@@ -141,7 +130,6 @@ if (! function_exists('dd')) {
     function dd(mixed ...$values): never
     {
         dump(...$values);
-
         exit(1);
     }
 }

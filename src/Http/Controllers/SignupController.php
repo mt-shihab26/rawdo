@@ -22,7 +22,7 @@ class SignupController
      */
     public function store(Request $request, Session $session, User $users): Response
     {
-        verify_csrf($request);
+        verify_csrf();
 
         $name = trim((string) $request->input('name', ''));
         $email = trim((string) $request->input('email', ''));

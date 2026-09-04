@@ -80,6 +80,40 @@ class Session
     }
 
     /**
+     * Abort with a 419 if the request's _token doesn't match the session's CSRF token
+     */
+    public function verifyCsrf(): void
+    {
+        if (! hash_equals($this->csrfToken(), (string) $this->request->input('_token', ''))) {
+            abort(419, 'Page expired. Please refresh and try again.');
+        }
+    }
+
+    /**
+     * Get a value flashed as old input on the previous request's validation failure, or the whole old-input array when called with no key, reading (and clearing) the session only once per request
+     */
+    public function old(?string $key = null, mixed $default = ''): mixed
+    {
+        static $old = null;
+
+        $old ??= $this->pull('old', []);
+
+        return $key === null ? $old : ($old[$key] ?? $default);
+    }
+
+    /**
+     * Get a validation error flashed on the previous request's failed submission, or the whole errors array when called with no key, reading (and clearing) the session only once per request
+     */
+    public function errors(?string $key = null, mixed $default = ''): mixed
+    {
+        static $errors = null;
+
+        $errors ??= $this->pull('errors', []);
+
+        return $key === null ? $errors : ($errors[$key] ?? $default);
+    }
+
+    /**
      * Rotate the session ID (fixation protection) and clear all session data
      */
     public function regenerate(): void

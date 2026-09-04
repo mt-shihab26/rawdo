@@ -22,7 +22,7 @@ class LoginController
      */
     public function store(Request $request, Session $session, User $users): Response
     {
-        verify_csrf($request);
+        verify_csrf();
 
         $email = trim((string) $request->input('email', ''));
         $password = (string) $request->input('password', '');
