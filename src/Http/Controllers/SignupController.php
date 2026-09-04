@@ -29,11 +29,7 @@ class SignupController
             'terms' => ['accepted'],
         ]);
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => $validated['password'],
-        ]);
+        $user = User::create($validated);
 
         $session->regenerate();
         $session->put('user_id', $user->id);
