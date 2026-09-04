@@ -83,7 +83,9 @@ abstract class Model
         $data = self::filterFillable($data, $blank->fillable());
         $data = self::applyCasts($data, $blank->casts());
 
+        /** @var list<string> $columns */
         $columns = array_keys($data);
+
         $placeholders = implode(', ', array_fill(0, count($columns), '?'));
 
         $id = app(Database::class)->insert(

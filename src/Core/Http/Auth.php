@@ -18,4 +18,15 @@ class Auth
         $session->regenerate();
         $session->put('user_id', $user->id);
     }
+
+    /**
+     * Log the current user out by regenerating the session, which also clears all its data
+     */
+    public static function logout(): void
+    {
+        /** @var Session $session */
+        $session = App::get(Session::class);
+
+        $session->regenerate();
+    }
 }

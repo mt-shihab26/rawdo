@@ -41,6 +41,8 @@ class ModelQuery
     public function first(): ?Model
     {
         $conditions = implode(' AND ', array_map(fn (array $where): string => "{$where[0]} = ?", $this->wheres));
+
+        /** @var list<mixed> $bindings */
         $bindings = array_column($this->wheres, 1);
 
         $row = app(Database::class)->selectOne("SELECT * FROM {$this->table} WHERE {$conditions} LIMIT 1", $bindings);

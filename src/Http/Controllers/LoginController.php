@@ -5,7 +5,6 @@ namespace Src\Http\Controllers;
 use Src\Core\Http\Auth;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
-use Src\Core\Http\Session;
 use Src\Core\Validation\ValidationException;
 use Src\Models\User;
 
@@ -50,9 +49,9 @@ class LoginController
     /**
      * Log the current user out
      */
-    public function destroy(Session $session): Response
+    public function destroy(): Response
     {
-        $session->regenerate();
+        Auth::logout();
 
         return redirect(route('login.index'));
     }

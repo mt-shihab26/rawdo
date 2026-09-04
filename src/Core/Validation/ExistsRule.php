@@ -44,7 +44,10 @@ class ExistsRule implements Rule
      */
     public function passes(string $field, mixed $value, array $data): bool
     {
-        return App::get(Database::class)->selectOne("SELECT 1 FROM {$this->table} WHERE {$this->column} = ? LIMIT 1", $value) !== null;
+        /** @var Database $database */
+        $database = App::get(Database::class);
+
+        return $database->selectOne("SELECT 1 FROM {$this->table} WHERE {$this->column} = ? LIMIT 1", $value) !== null;
     }
 
     /**
