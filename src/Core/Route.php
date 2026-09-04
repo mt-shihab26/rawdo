@@ -7,6 +7,8 @@ use RuntimeException;
 
 class Route
 {
+    private static string $groupPrefix = '';
+
     private ?string $name = null;
 
     /**
@@ -79,6 +81,27 @@ class Route
     }
 
     /**
+     * Start a route group under the given prefix, e.g. Route::prefix('/signup')->group(fn () => ...)
+     */
+    public static function prefix(string $prefix): RouteGroup
+    {
+        return new RouteGroup($prefix);
+    }
+
+    /**
+     * Run the callback with the given prefix applied to every route it registers, restoring the previous prefix after
+     */
+    public static function withPrefix(string $prefix, Closure $callback): void
+    {
+        $previous = self::$groupPrefix;
+        self::$groupPrefix = $previous.$prefix;
+
+        $callback();
+
+        self::$groupPrefix = $previous;
+    }
+
+    /**
      * Resolve a named route to its path, or get the RouteInspector when called with no name
      */
     public static function resolveByName(?string $name = null): string|RouteInspector
@@ -100,10 +123,22 @@ class Route
      */
     private static function register(string $method, string $path, Closure|array $callback): self
     {
-        $route = new self($method, $path, $callback);
+        $route = new self($method, self::prefixedPath($path), $callback);
 
         App::get(RouteRegistry::class)->add($route);
 
         return $route;
+    }
+
+    /**
+     * Apply the current group prefix to a route path, treating "/" as the group's own path rather than appending it
+     */
+    private static function prefixedPath(string $path): string
+    {
+        if (self::$groupPrefix === '') {
+            return $path;
+        }
+
+        return $path === '/' ? self::$groupPrefix : self::$groupPrefix.$path;
     }
 }
