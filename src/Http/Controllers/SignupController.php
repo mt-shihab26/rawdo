@@ -4,7 +4,7 @@ namespace Src\Http\Controllers;
 
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
-use Src\Core\Session;
+use Src\Core\Http\Session;
 use Src\Models\User;
 
 class SignupController

@@ -6,6 +6,7 @@ use Src\Core\Http\HttpException;
 use Src\Core\Http\ReasonPhrases;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
+use Src\Core\Http\Session;
 use Src\Core\Routing\Route;
 use Src\Core\Routing\RouteRegistry;
 use Src\Core\View\View;

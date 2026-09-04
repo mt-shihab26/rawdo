@@ -3,9 +3,9 @@
 use Src\Core\App;
 use Src\Core\Http\HttpException;
 use Src\Core\Http\Response;
+use Src\Core\Http\Session;
 use Src\Core\Routing\Route;
 use Src\Core\Routing\RouteInspector;
-use Src\Core\Session;
 use Src\Core\View\View;
 use Symfony\Component\VarDumper\VarDumper;
 

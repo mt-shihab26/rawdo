@@ -1,8 +1,6 @@
 <?php
 
-namespace Src\Core;
-
-use Src\Core\Http\Request;
+namespace Src\Core\Http;
 
 class Session
 {
