@@ -80,22 +80,6 @@ class Container
     }
 
     /**
-     * Resolve a class from a registered instance/binding, building and caching it on first use
-     */
-    private function resolveRegistered(string $class): ?object
-    {
-        if (isset($this->instances[$class])) {
-            return $this->instances[$class];
-        }
-
-        if (isset($this->bindings[$class])) {
-            return $this->instances[$class] = ($this->bindings[$class])();
-        }
-
-        return null;
-    }
-
-    /**
      * Call a closure or [class, method] callback, autowiring its type-hinted parameters
      */
     public function call(Closure|array $callback): mixed
@@ -127,6 +111,22 @@ class Container
         foreach ($providers as $provider) {
             $provider->boot($this);
         }
+    }
+
+    /**
+     * Resolve a class from a registered instance/binding, building and caching it on first use
+     */
+    private function resolveRegistered(string $class): ?object
+    {
+        if (isset($this->instances[$class])) {
+            return $this->instances[$class];
+        }
+
+        if (isset($this->bindings[$class])) {
+            return $this->instances[$class] = ($this->bindings[$class])();
+        }
+
+        return null;
     }
 
     /**

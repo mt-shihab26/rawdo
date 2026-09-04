@@ -17,6 +17,10 @@ class App
     {
         $this->container = new Container;
 
+        $this->container->singleton(RouteRegistry::class, fn () => new RouteRegistry);
+        $this->container->singleton(View::class, fn () => new View);
+        $this->container->singleton(Database::class, fn () => new Database);
+
         self::$current = $this;
     }
 
