@@ -2,10 +2,24 @@
 
 namespace Src\Core\Validation;
 
-use Src\Core\Database;
+use RuntimeException;
 
 class Validator
 {
+    /**
+     * Every rule class available by name (each exposes its own name via Rule::name())
+     */
+    private const RULES = [
+        RequiredRule::class,
+        NullableRule::class,
+        EmailRule::class,
+        MinRule::class,
+        MaxRule::class,
+        ConfirmedRule::class,
+        AcceptedRule::class,
+        ExistsRule::class,
+    ];
+
     /**
      * Errors collected so far, keyed by field; each field stops at its first failing rule
      */
@@ -17,7 +31,7 @@ class Validator
     private array $data;
 
     /**
-     * Hold the trimmed data being validated, its rules, and any message overrides
+     * Hold the trimmed data being validated, its "field => ['rule', 'rule:param', new SomeRule]" rules, and any message overrides
      */
     public function __construct(
         array $data,
@@ -28,7 +42,7 @@ class Validator
     }
 
     /**
-     * Build a validator for the given data against the given "field => ['rule', 'rule:param']" rules
+     * Build a validator for the given data against the given "field => ['rule', 'rule:param', new SomeRule]" rules
      */
     public static function make(array $data, array $rules, array $messages = []): self
     {
@@ -40,8 +54,8 @@ class Validator
      */
     public function validate(): array
     {
-        foreach ($this->rules as $field => $ruleset) {
-            $this->validateField($field, is_array($ruleset) ? $ruleset : explode('|', $ruleset));
+        foreach ($this->rules as $field => $rules) {
+            $this->validateField($field, $rules);
         }
 
         if ($this->errors) {
@@ -52,15 +66,26 @@ class Validator
     }
 
     /**
-     * Apply each rule to a field in order, stopping at the first one that fails
+     * Apply each rule to a field in order, stopping at the first one that fails; skips every other rule when the
+     * field is marked "nullable" and its value is empty, rather than running them against nothing
      */
     private function validateField(string $field, array $rules): void
     {
-        foreach ($rules as $rule) {
-            [$name, $parameter] = array_pad(explode(':', $rule, 2), 2, null);
+        $resolved = array_map(fn ($rule) => $this->resolveRule($rule), $rules);
 
-            if (! $this->passes($field, $name, $parameter)) {
-                $this->errors[$field] = $this->messages[$field] ?? $this->messages["$field.$name"] ?? $this->defaultMessage($field, $name, $parameter);
+        $value = $this->data[$field] ?? null;
+
+        if (($value === null || $value === '') && $this->isNullable($resolved)) {
+            return;
+        }
+
+        foreach ($resolved as [$name, $instance]) {
+            if ($name === NullableRule::name()) {
+                continue;
+            }
+
+            if (! $instance->passes($field, $value, $this->data)) {
+                $this->errors[$field] = $this->messages[$field] ?? $this->messages["$field.$name"] ?? $instance->message($field);
 
                 return;
             }
@@ -68,51 +93,47 @@ class Validator
     }
 
     /**
-     * Whether a single named rule (e.g. "min" with parameter "8") passes for the field's current value
+     * Whether the field's resolved rules include "nullable"
      */
-    private function passes(string $field, string $rule, ?string $parameter): bool
+    private function isNullable(array $resolved): bool
     {
-        $value = $this->data[$field] ?? null;
+        foreach ($resolved as [$name, $_]) {
+            if ($name === NullableRule::name()) {
+                return true;
+            }
+        }
 
-        return match ($rule) {
-            'required' => $value !== null && $value !== '',
-            'email' => filter_var($value, FILTER_VALIDATE_EMAIL) !== false,
-            'min' => mb_strlen((string) $value) >= (int) $parameter,
-            'max' => mb_strlen((string) $value) <= (int) $parameter,
-            'confirmed' => $value === ($this->data["{$field}_confirmation"] ?? null),
-            'accepted' => $value !== null && $value !== '' && $value !== '0' && $value !== false,
-            'exists' => $this->exists($value, $parameter),
-            default => true,
-        };
+        return false;
     }
 
     /**
-     * Whether a row exists whose column (the "table,column" rule parameter) equals the value
+     * Turn a "name:param" rule string, or an already-built Rule instance, into its [name, Rule instance] pair
      */
-    private function exists(mixed $value, ?string $parameter): bool
+    private function resolveRule(string|Rule $rule): array
     {
-        [$table, $column] = explode(',', (string) $parameter, 2);
+        if ($rule instanceof Rule) {
+            return [$rule::name(), $rule];
+        }
 
-        return app(Database::class)->selectOne("SELECT 1 FROM {$table} WHERE {$column} = ? LIMIT 1", $value) !== null;
+        [$name, $parameter] = array_pad(explode(':', $rule, 2), 2, null);
+
+        $class = $this->ruleClass($name);
+
+        return [$name, $class::fromParameter($parameter)];
     }
 
     /**
-     * Fall-back "field rule" error message, used when no override is given
+     * Find the registered rule class whose name matches, or fail loudly for an unknown rule
      */
-    private function defaultMessage(string $field, string $rule, ?string $parameter): string
+    private function ruleClass(string $name): string
     {
-        $label = str_replace('_', ' ', $field);
+        foreach (self::RULES as $class) {
+            if ($class::name() === $name) {
+                return $class;
+            }
+        }
 
-        return match ($rule) {
-            'required' => "Please enter your {$label}.",
-            'email' => 'Please enter a valid email address.',
-            'min' => "The {$label} must be at least {$parameter} characters.",
-            'max' => "The {$label} must be at most {$parameter} characters.",
-            'confirmed' => ucfirst($label).' confirmation does not match.',
-            'accepted' => "Please accept the {$label}.",
-            'exists' => "The selected {$label} is invalid.",
-            default => "The {$label} is invalid.",
-        };
+        throw new RuntimeException("Unknown validation rule [{$name}].");
     }
 
     /**
