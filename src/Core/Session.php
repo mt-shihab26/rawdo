@@ -59,7 +59,7 @@ class Session
     /**
      * Get the current request's CSRF token, creating one if none exists yet
      */
-    public function token(): string
+    public function csrfToken(): string
     {
         $token = $this->get('_token');
 
@@ -69,6 +69,14 @@ class Session
         }
 
         return $token;
+    }
+
+    /**
+     * Build the hidden input field carrying the CSRF token, for use inside a <form>
+     */
+    public function csrfField(): string
+    {
+        return '<input type="hidden" name="_token" value="'.htmlspecialchars($this->csrfToken(), ENT_QUOTES).'">';
     }
 
     /**

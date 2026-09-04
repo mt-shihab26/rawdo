@@ -56,7 +56,7 @@ if (! function_exists('csrf_token')) {
      */
     function csrf_token(): string
     {
-        return app(Session::class)->token();
+        return app(Session::class)->csrfToken();
     }
 }
 
@@ -66,7 +66,7 @@ if (! function_exists('csrf_field')) {
      */
     function csrf_field(): string
     {
-        return '<input type="hidden" name="_token" value="'.htmlspecialchars(csrf_token(), ENT_QUOTES).'">';
+        return app(Session::class)->csrfField();
     }
 }
 
