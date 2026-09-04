@@ -2,6 +2,7 @@
 
 namespace Src\Http\Controllers;
 
+use Src\Core\Http\Auth;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
 use Src\Core\Http\Session;
@@ -21,7 +22,7 @@ class LoginController
     /**
      * Validate credentials and log the user in
      */
-    public function store(Request $request, Session $session): Response
+    public function store(Request $request): Response
     {
         /** @var array{email: string, password: string} $validated */
         $validated = $request->validate([
@@ -41,8 +42,7 @@ class LoginController
             );
         }
 
-        $session->regenerate();
-        $session->put('user_id', $user->id);
+        Auth::login($user);
 
         return redirect(route('home.index'));
     }

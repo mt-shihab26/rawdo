@@ -2,9 +2,9 @@
 
 namespace Src\Http\Controllers;
 
+use Src\Core\Http\Auth;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
-use Src\Core\Http\Session;
 use Src\Models\User;
 
 class SignupController
@@ -20,7 +20,7 @@ class SignupController
     /**
      * Validate and create a new account, then log the user in
      */
-    public function store(Request $request, Session $session): Response
+    public function store(Request $request): Response
     {
         $validated = $request->validate([
             'name' => ['required'],
@@ -31,8 +31,7 @@ class SignupController
 
         $user = User::create($validated);
 
-        $session->regenerate();
-        $session->put('user_id', $user->id);
+        Auth::login($user);
 
         return redirect(route('home.index'));
     }
