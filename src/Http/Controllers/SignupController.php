@@ -5,6 +5,7 @@ namespace Src\Http\Controllers;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
 use Src\Core\Http\Session;
+use Src\Core\Validation\ValidationException;
 use Src\Models\User;
 
 class SignupController
@@ -24,32 +25,24 @@ class SignupController
     {
         verify_csrf();
 
-        $name = trim((string) $request->input('name', ''));
-        $email = trim((string) $request->input('email', ''));
-        $password = (string) $request->input('password', '');
-
-        $errors = $request->validate([
+        $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email'],
             'password' => ['required', 'min:8', 'confirmed'],
             'terms' => ['accepted'],
         ]);
 
-        if (! isset($errors['email']) && User::emailExists($email)) {
-            $errors['email'] = 'An account with this email already exists.';
-        }
-
-        if ($errors) {
-            $session->put('errors', $errors);
-            $session->put('old', ['name' => $name, 'email' => $email]);
-
-            return redirect(route('signup.index'));
+        if (User::emailExists($validated['email'])) {
+            throw new ValidationException(
+                ['email' => 'An account with this email already exists.'],
+                ['name' => $validated['name'], 'email' => $validated['email']],
+            );
         }
 
         $userId = User::create([
-            'name' => $name,
-            'email' => $email,
-            'password' => password_hash($password, PASSWORD_DEFAULT),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => password_hash($validated['password'], PASSWORD_DEFAULT),
         ]);
 
         $session->regenerate();

@@ -2,6 +2,8 @@
 
 namespace Src\Core\Validation;
 
+use Src\Core\Database;
+
 class Validator
 {
     /**
@@ -10,14 +12,19 @@ class Validator
     private array $errors = [];
 
     /**
-     * Hold the data being validated, its rules, and any message overrides
+     * Data being validated, trimmed upfront so rules and errors alike see the same sanitized values
+     */
+    private array $data;
+
+    /**
+     * Hold the trimmed data being validated, its rules, and any message overrides
      */
     public function __construct(
-        private array $data,
+        array $data,
         private array $rules,
         private array $messages = [],
     ) {
-        //
+        $this->data = $this->sanitize($data);
     }
 
     /**
@@ -29,7 +36,7 @@ class Validator
     }
 
     /**
-     * Run every rule and return the errors found, keyed by field; empty when validation passes
+     * Run every rule and return the sanitized, validated data, or throw with the errors found if any rule fails
      */
     public function validate(): array
     {
@@ -37,7 +44,11 @@ class Validator
             $this->validateField($field, is_array($ruleset) ? $ruleset : explode('|', $ruleset));
         }
 
-        return $this->errors;
+        if ($this->errors) {
+            throw new ValidationException($this->errors, $this->old());
+        }
+
+        return $this->validated();
     }
 
     /**
@@ -70,8 +81,19 @@ class Validator
             'max' => mb_strlen((string) $value) <= (int) $parameter,
             'confirmed' => $value === ($this->data["{$field}_confirmation"] ?? null),
             'accepted' => $value !== null && $value !== '' && $value !== '0' && $value !== false,
+            'exists' => $this->exists($value, $parameter),
             default => true,
         };
+    }
+
+    /**
+     * Whether a row exists whose column (the "table,column" rule parameter) equals the value
+     */
+    private function exists(mixed $value, ?string $parameter): bool
+    {
+        [$table, $column] = explode(',', (string) $parameter, 2);
+
+        return app(Database::class)->selectOne("SELECT 1 FROM {$table} WHERE {$column} = ? LIMIT 1", $value) !== null;
     }
 
     /**
@@ -88,7 +110,36 @@ class Validator
             'max' => "The {$label} must be at most {$parameter} characters.",
             'confirmed' => ucfirst($label).' confirmation does not match.',
             'accepted' => "Please accept the {$label}.",
+            'exists' => "The selected {$label} is invalid.",
             default => "The {$label} is invalid.",
         };
+    }
+
+    /**
+     * The (already-trimmed) values for just the fields that have rules
+     */
+    private function validated(): array
+    {
+        return array_intersect_key($this->data, $this->rules);
+    }
+
+    /**
+     * The (already-trimmed) submitted data to flash as old input, excluding the CSRF token and any password field
+     */
+    private function old(): array
+    {
+        return array_filter(
+            $this->data,
+            fn ($field) => $field !== '_token' && ! str_contains(strtolower($field), 'password'),
+            ARRAY_FILTER_USE_KEY,
+        );
+    }
+
+    /**
+     * Trim every string value; HTML escaping is the view layer's job (see the {{ }} compiler), not the validator's
+     */
+    private function sanitize(array $data): array
+    {
+        return array_map(fn ($value) => is_string($value) ? trim($value) : $value, $data);
     }
 }

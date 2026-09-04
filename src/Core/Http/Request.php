@@ -40,7 +40,7 @@ class Request
     }
 
     /**
-     * Validate the request body against the given rules and return the errors found, keyed by field
+     * Validate the request body against the given rules and return the sanitized, validated data, or throw a ValidationException if any rule fails
      */
     public function validate(array $rules, array $messages = []): array
     {

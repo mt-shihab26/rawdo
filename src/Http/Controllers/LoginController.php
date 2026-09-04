@@ -5,6 +5,7 @@ namespace Src\Http\Controllers;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
 use Src\Core\Http\Session;
+use Src\Core\Validation\ValidationException;
 use Src\Models\User;
 
 class LoginController
@@ -24,16 +25,21 @@ class LoginController
     {
         verify_csrf();
 
-        $email = trim((string) $request->input('email', ''));
-        $password = (string) $request->input('password', '');
+        $validated = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+            'password' => ['required'],
+        ], [
+            'email' => 'These credentials do not match our records.',
+            'password' => 'These credentials do not match our records.',
+        ]);
 
-        $user = $email !== '' ? User::findByEmail($email) : null;
+        $user = User::findByEmail($validated['email']);
 
-        if (! $user || ! password_verify($password, $user['password'])) {
-            $session->put('errors', ['email' => 'These credentials do not match our records.']);
-            $session->put('old', ['email' => $email]);
-
-            return redirect(route('login.index'));
+        if (! password_verify($validated['password'], $user['password'])) {
+            throw new ValidationException(
+                ['email' => 'These credentials do not match our records.'],
+                ['email' => $validated['email']],
+            );
         }
 
         $session->regenerate();

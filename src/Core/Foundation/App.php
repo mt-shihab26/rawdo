@@ -10,6 +10,7 @@ use Src\Core\Http\Response;
 use Src\Core\Http\Session;
 use Src\Core\Routing\Route;
 use Src\Core\Routing\RouteRegistry;
+use Src\Core\Validation\ValidationException;
 use Src\Core\View\View;
 use Throwable;
 
@@ -69,6 +70,10 @@ class App
 
         try {
             $response = $route ? $route->call() : new Response('Not found', 404);
+        } catch (ValidationException $e) {
+            $container->make(Session::class)->put('errors', $e->errors);
+            $container->make(Session::class)->put('old', $e->old);
+            $response = Response::redirect($request->path);
         } catch (HttpException $e) {
             $response = new Response($e->getMessage(), $e->statusCode);
         } catch (Throwable $e) {
