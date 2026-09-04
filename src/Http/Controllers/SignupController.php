@@ -27,33 +27,16 @@ class SignupController
         $name = trim((string) $request->input('name', ''));
         $email = trim((string) $request->input('email', ''));
         $password = (string) $request->input('password', '');
-        $passwordConfirmation = (string) $request->input('password_confirmation', '');
-        $termsAccepted = $request->input('terms') !== null;
 
-        $errors = [];
+        $errors = $request->validate([
+            'name' => ['required'],
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:8', 'confirmed'],
+            'terms' => ['accepted'],
+        ]);
 
-        if ($name === '') {
-            $errors['name'] = 'Please enter your full name.';
-        }
-
-        if ($email === '') {
-            $errors['email'] = 'Please enter your email address.';
-        } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Please enter a valid email address.';
-        } elseif (User::emailExists($email)) {
+        if (! isset($errors['email']) && User::emailExists($email)) {
             $errors['email'] = 'An account with this email already exists.';
-        }
-
-        if ($password === '') {
-            $errors['password'] = 'Please enter a password.';
-        } elseif (strlen($password) < 8) {
-            $errors['password'] = 'Password must be at least 8 characters.';
-        } elseif ($password !== $passwordConfirmation) {
-            $errors['password'] = 'Passwords do not match.';
-        }
-
-        if (! $termsAccepted) {
-            $errors['terms'] = 'You must agree to the Terms of Service and Privacy Policy.';
         }
 
         if ($errors) {

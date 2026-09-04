@@ -2,6 +2,8 @@
 
 namespace Src\Core\Http;
 
+use Src\Core\Validation\Validator;
+
 class Request
 {
     /**
@@ -35,5 +37,13 @@ class Request
     public function input(string $key, mixed $default = null): mixed
     {
         return $this->data[$key] ?? $default;
+    }
+
+    /**
+     * Validate the request body against the given rules and return the errors found, keyed by field
+     */
+    public function validate(array $rules, array $messages = []): array
+    {
+        return Validator::make($this->data, $rules, $messages)->validate();
     }
 }
