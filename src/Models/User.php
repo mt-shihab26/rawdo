@@ -15,7 +15,11 @@ class User
      */
     public function fillable(): array
     {
-        return ['name', 'email', 'password'];
+        return [
+            'name',
+            'email',
+            'password',
+        ];
     }
 
     /**
