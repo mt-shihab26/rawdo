@@ -3,6 +3,7 @@
 namespace Src\Core\View;
 
 use Src\Core\Http\Response;
+use Src\Core\Paths;
 
 class View
 {
@@ -135,7 +136,7 @@ class View
      */
     private function filePath(string $name): string
     {
-        return __DIR__.'/../../Views/'.$name.'.view.php';
+        return Paths::view("$name.view.php");
     }
 
     /**
@@ -143,6 +144,6 @@ class View
      */
     private function cachePath(string $name): string
     {
-        return __DIR__.'/../../../storage/views/'.$name.'.php';
+        return Paths::storage("views/$name.php");
     }
 }
