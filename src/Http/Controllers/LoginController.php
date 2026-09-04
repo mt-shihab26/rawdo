@@ -5,7 +5,6 @@ namespace Src\Http\Controllers;
 use Src\Core\Http\Auth;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
-use Src\Core\Validation\ValidationException;
 use Src\Models\User;
 
 class LoginController
@@ -23,7 +22,6 @@ class LoginController
      */
     public function store(Request $request): Response
     {
-        /** @var array{email: string, password: string} $validated */
         $validated = $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
@@ -32,15 +30,9 @@ class LoginController
             'password' => 'These credentials do not match our records.',
         ]);
 
-        $user = User::findByEmail($validated['email']);
+        $user = User::where('email', $validated['email'])->first();
 
-        if (! $user || ! password_verify($validated['password'], $user->password)) {
-            throw new ValidationException(
-                ['email' => 'These credentials do not match our records.'],
-                ['email' => $validated['email']],
-            );
-        }
-
+        Auth::attempt($user, $validated);
         Auth::login($user);
 
         return redirect(route('home.index'));

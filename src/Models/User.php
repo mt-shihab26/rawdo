@@ -41,12 +41,4 @@ class User extends Model
             'terms' => 'bool',
         ];
     }
-
-    /**
-     * Find a user by email, or null if none exists
-     */
-    public static function findByEmail(string $email): ?self
-    {
-        return self::where('email', $email)->first();
-    }
 }
