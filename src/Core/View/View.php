@@ -1,6 +1,8 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\View;
+
+use Src\Core\Http\Response;
 
 class View
 {
@@ -133,7 +135,7 @@ class View
      */
     private function filePath(string $name): string
     {
-        return __DIR__.'/../Views/'.$name.'.view.php';
+        return __DIR__.'/../../Views/'.$name.'.view.php';
     }
 
     /**
@@ -141,6 +143,6 @@ class View
      */
     private function cachePath(string $name): string
     {
-        return __DIR__.'/../../storage/views/'.$name.'.php';
+        return __DIR__.'/../../../storage/views/'.$name.'.php';
     }
 }

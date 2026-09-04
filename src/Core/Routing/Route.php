@@ -1,9 +1,10 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Routing;
 
 use Closure;
 use RuntimeException;
+use Src\Core\App;
 
 class Route
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Routing;
 
 use Closure;
 

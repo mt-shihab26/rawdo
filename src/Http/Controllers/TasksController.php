@@ -2,8 +2,8 @@
 
 namespace Src\Http\Controllers;
 
-use Src\Core\Request;
-use Src\Core\Response;
+use Src\Core\Http\Request;
+use Src\Core\Http\Response;
 
 class TasksController
 {

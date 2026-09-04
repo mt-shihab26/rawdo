@@ -1,6 +1,6 @@
 <?php
 
-use Src\Core\Route;
+use Src\Core\Routing\Route;
 use Src\Http\Controllers\CalendarController;
 use Src\Http\Controllers\CompletedController;
 use Src\Http\Controllers\HomeController;

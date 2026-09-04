@@ -2,6 +2,8 @@
 
 namespace Src\Core;
 
+use Src\Core\Http\Request;
+
 class Session
 {
     /**

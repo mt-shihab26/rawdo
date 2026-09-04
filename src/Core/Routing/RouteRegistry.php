@@ -1,6 +1,8 @@
 <?php
 
-namespace Src\Core;
+namespace Src\Core\Routing;
+
+use Src\Core\Http\Request;
 
 class RouteRegistry
 {
