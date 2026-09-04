@@ -70,6 +70,10 @@ class App
         }
 
         try {
+            if ($route && $request->method !== 'GET') {
+                $container->make(Session::class)->verifyCsrf();
+            }
+
             $response = $route ? $route->call() : new Response('Not found', 404);
         } catch (ValidationException $e) {
             $container->make(Session::class)->put('errors', $e->errors);
@@ -120,7 +124,7 @@ class App
         }
 
         if ($this->container->get(View::class)->pageExists("{$statusCode}")) {
-            $response = view((string) $statusCode);
+            $response = $this->container->get(View::class)->page((string) $statusCode);
             $response->statusCode = $statusCode;
         } elseif ($response->renderedString === '') {
             $response->renderedString = (new ReasonPhrases)->text($statusCode);

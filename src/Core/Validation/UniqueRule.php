@@ -5,10 +5,10 @@ namespace Src\Core\Validation;
 use Src\Core\Database;
 use Src\Core\Foundation\App;
 
-class ExistsRule implements Rule
+class UniqueRule implements Rule
 {
     /**
-     * Hold the table and column to look the value up against
+     * Hold the table and column to check the value against
      */
     public function __construct(
         private string $table,
@@ -18,15 +18,15 @@ class ExistsRule implements Rule
     }
 
     /**
-     * This rule's name, "exists"
+     * This rule's name, "unique"
      */
     public static function name(): string
     {
-        return 'exists';
+        return 'unique';
     }
 
     /**
-     * Build the rule from its "exists:table,column" parameter
+     * Build the rule from its "unique:table,column" parameter
      */
     public static function fromParameter(?string $parameter): self
     {
@@ -38,20 +38,20 @@ class ExistsRule implements Rule
     }
 
     /**
-     * Whether a row exists whose column equals the value
+     * Whether no row exists whose column already equals the value
      *
      * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {
-        return App::get(Database::class)->selectOne("SELECT 1 FROM {$this->table} WHERE {$this->column} = ? LIMIT 1", $value) !== null;
+        return App::get(Database::class)->selectOne("SELECT 1 FROM {$this->table} WHERE {$this->column} = ? LIMIT 1", $value) === null;
     }
 
     /**
-     * The error message to show when no matching row exists
+     * The error message to show when a matching row already exists
      */
     public function message(string $field): string
     {
-        return 'The selected '.str_replace('_', ' ', $field).' is invalid.';
+        return 'This '.str_replace('_', ' ', $field).' is already taken.';
     }
 }

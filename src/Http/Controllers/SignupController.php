@@ -5,7 +5,6 @@ namespace Src\Http\Controllers;
 use Src\Core\Http\Request;
 use Src\Core\Http\Response;
 use Src\Core\Http\Session;
-use Src\Core\Validation\ValidationException;
 use Src\Models\User;
 
 class SignupController
@@ -23,22 +22,13 @@ class SignupController
      */
     public function store(Request $request, Session $session): Response
     {
-        verify_csrf();
-
         /** @var array{name: string, email: string, password: string, terms: string} $validated */
         $validated = $request->validate([
             'name' => ['required'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8', 'confirmed'],
             'terms' => ['accepted'],
         ]);
-
-        if (User::emailExists($validated['email'])) {
-            throw new ValidationException(
-                ['email' => 'An account with this email already exists.'],
-                ['name' => $validated['name'], 'email' => $validated['email']],
-            );
-        }
 
         $userId = User::create([
             'name' => $validated['name'],

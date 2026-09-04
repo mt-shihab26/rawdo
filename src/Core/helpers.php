@@ -91,16 +91,6 @@ if (! function_exists('errors')) {
     }
 }
 
-if (! function_exists('verify_csrf')) {
-    /**
-     * Abort with a 419 if the request's _token doesn't match the session's CSRF token
-     */
-    function verify_csrf(): void
-    {
-        app(Session::class)->verifyCsrf();
-    }
-}
-
 if (! function_exists('abort')) {
     /**
      * Halt the request and respond with the given HTTP status code and message

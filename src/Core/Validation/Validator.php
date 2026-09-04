@@ -20,6 +20,7 @@ class Validator
         ConfirmedRule::class,
         AcceptedRule::class,
         ExistsRule::class,
+        UniqueRule::class,
     ];
 
     /**

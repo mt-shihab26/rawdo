@@ -17,14 +17,6 @@ class User
     }
 
     /**
-     * Whether a user with the given email already exists
-     */
-    public static function emailExists(string $email): bool
-    {
-        return self::findByEmail($email) !== null;
-    }
-
-    /**
      * Insert a new user (expects an already-hashed password) and return its id
      *
      * @param  array{name: string, email: string, password: string}  $data

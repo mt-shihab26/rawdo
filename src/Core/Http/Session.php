@@ -86,7 +86,7 @@ class Session
     public function verifyCsrf(): void
     {
         if (! hash_equals($this->csrfToken(), (string) $this->request->input('_token', ''))) {
-            abort(419, 'Page expired. Please refresh and try again.');
+            HttpException::abort(419, 'Page expired. Please refresh and try again.');
         }
     }
 
