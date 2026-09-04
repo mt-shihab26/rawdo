@@ -30,14 +30,14 @@ class SignupController
             'terms' => ['accepted'],
         ]);
 
-        $userId = User::create([
+        $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => password_hash($validated['password'], PASSWORD_DEFAULT),
         ]);
 
         $session->regenerate();
-        $session->put('user_id', $userId);
+        $session->put('user_id', $user->id);
 
         return redirect(route('home.index'));
     }

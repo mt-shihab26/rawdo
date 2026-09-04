@@ -32,10 +32,9 @@ class LoginController
             'password' => 'These credentials do not match our records.',
         ]);
 
-        /** @var array<string, mixed> $user */
         $user = User::findByEmail($validated['email']);
 
-        if (! password_verify($validated['password'], $user['password'])) {
+        if (! $user || ! password_verify($validated['password'], $user->password)) {
             throw new ValidationException(
                 ['email' => 'These credentials do not match our records.'],
                 ['email' => $validated['email']],
@@ -43,7 +42,7 @@ class LoginController
         }
 
         $session->regenerate();
-        $session->put('user_id', $user['id']);
+        $session->put('user_id', $user->id);
 
         return redirect(route('home.index'));
     }
