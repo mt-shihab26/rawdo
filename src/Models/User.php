@@ -37,20 +37,6 @@ class User
     }
 
     /**
-     * Hold this user's database columns
-     */
-    public function __construct(
-        public int $id,
-        public string $name,
-        public string $email,
-        public string $password,
-        public bool $terms,
-        public string $created_at,
-    ) {
-        //
-    }
-
-    /**
      * Find a user by email, or null if none exists
      */
     public static function findByEmail(string $email): ?self
@@ -78,6 +64,29 @@ class User
         );
 
         return self::find($id);
+    }
+
+    /**
+     * This user's database columns, keyed by field name; accessed via __get()/__set() as $user->name etc.
+     *
+     * @var array<string, mixed>
+     */
+    private array $attributes = [];
+
+    /**
+     * Read a column, e.g. $user->name
+     */
+    public function __get(string $name): mixed
+    {
+        return $this->attributes[$name] ?? null;
+    }
+
+    /**
+     * Write a column, e.g. $user->name = 'Jane'
+     */
+    public function __set(string $name, mixed $value): void
+    {
+        $this->attributes[$name] = $value;
     }
 
     /**
@@ -131,19 +140,25 @@ class User
     }
 
     /**
-     * Build a User from a raw database row
+     * Build a User from a raw database row, assigning each column via __set() with no per-field property
+     * declarations or constructor, then re-applying casts() so e.g. a stored 0/1 comes back as a real bool
      *
      * @param  array<string, mixed>  $row
      */
     private static function fromRow(array $row): self
     {
-        return new self(
-            id: (int) $row['id'],
-            name: (string) $row['name'],
-            email: (string) $row['email'],
-            password: (string) $row['password'],
-            terms: (bool) $row['terms'],
-            created_at: (string) $row['created_at'],
-        );
+        $user = (new ReflectionClass(self::class))->newInstanceWithoutConstructor();
+
+        foreach ($row as $field => $value) {
+            $user->$field = $value;
+        }
+
+        foreach ($user->casts() as $field => $cast) {
+            if ($cast === 'bool') {
+                $user->$field = (bool) $user->$field;
+            }
+        }
+
+        return $user;
     }
 }
