@@ -21,6 +21,18 @@ class User
     }
 
     /**
+     * Fields that need transforming before they're written to the database, keyed by field name
+     *
+     * @return array<string, string>
+     */
+    private static function casts(): array
+    {
+        return [
+            'password' => 'hash',
+        ];
+    }
+
+    /**
      * Find a user by email, or null if none exists
      */
     public static function findByEmail(string $email): ?self
@@ -31,18 +43,37 @@ class User
     }
 
     /**
-     * Insert a new user (expects an already-hashed password) and return it
+     * Insert a new user and return it, applying casts() to the given data first
      *
      * @param  array{name: string, email: string, password: string}  $data
      */
     public static function create(array $data): self
     {
+        $data = self::applyCasts($data);
+
         $id = app(Database::class)->insert(
             'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
             $data['name'], $data['email'], $data['password']
         );
 
         return self::find($id);
+    }
+
+    /**
+     * Apply each of casts()'s transforms to the given data
+     *
+     * @param  array<string, mixed>  $data
+     * @return array<string, mixed>
+     */
+    private static function applyCasts(array $data): array
+    {
+        foreach (self::casts() as $field => $cast) {
+            if (isset($data[$field]) && $cast === 'hash') {
+                $data[$field] = password_hash($data[$field], PASSWORD_DEFAULT);
+            }
+        }
+
+        return $data;
     }
 
     /**

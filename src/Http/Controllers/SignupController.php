@@ -22,7 +22,6 @@ class SignupController
      */
     public function store(Request $request, Session $session): Response
     {
-        /** @var array{name: string, email: string, password: string, terms: string} $validated */
         $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email'],
@@ -33,7 +32,7 @@ class SignupController
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => password_hash($validated['password'], PASSWORD_DEFAULT),
+            'password' => $validated['password'],
         ]);
 
         $session->regenerate();
