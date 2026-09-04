@@ -25,9 +25,7 @@ class Compiler
     }
 
     /**
-     * Compile @props(['name' => default, ...]) into code that fills in any prop
-     * not already passed in (unset or explicitly null), so a component can
-     * declare its own defaults instead of every use site writing $x ?? default
+     * Compile @props(['name' => default, ...]) into code that fills in any prop not already passed in, so a component can declare its own defaults
      */
     private function compilePropsDirective(string $template): string
     {
@@ -65,10 +63,7 @@ class Compiler
     }
 
     /**
-     * Turn a tag's attribute string into a PHP array literal
-     *
-     * A plain attr="..." becomes a literal string; a :attr="..." is evaluated
-     * as a raw PHP expression, so pages can forward variables into a component.
+     * Turn a tag's attribute string into a PHP array literal; a plain attr="..." becomes a literal string, a :attr="..." is evaluated as a raw PHP expression
      */
     private function compileAttributes(string $attributes): string
     {

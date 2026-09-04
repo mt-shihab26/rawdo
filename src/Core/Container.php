@@ -114,12 +114,7 @@ class Container
     }
 
     /**
-     * Instantiate each provider, call register() on all, then boot() on all
-     *
-     * Splitting into two passes means a provider's boot() can safely depend on
-     * bindings registered by any other provider, regardless of load order.
-     *
-     * @param  class-string<ServiceProvider>[]  $providers
+     * Instantiate each provider, call register() on all, then boot() on all, so any provider's boot() can depend on bindings from any other regardless of load order
      */
     public function registerProviders(array $providers): void
     {
