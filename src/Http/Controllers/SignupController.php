@@ -20,7 +20,7 @@ class SignupController
     /**
      * Validate and create a new account, then log the user in
      */
-    public function store(Request $request, Session $session, User $users): Response
+    public function store(Request $request, Session $session): Response
     {
         verify_csrf();
 
@@ -40,7 +40,7 @@ class SignupController
             $errors['email'] = 'Please enter your email address.';
         } elseif (! filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $errors['email'] = 'Please enter a valid email address.';
-        } elseif ($users->emailExists($email)) {
+        } elseif (User::emailExists($email)) {
             $errors['email'] = 'An account with this email already exists.';
         }
 
@@ -63,7 +63,7 @@ class SignupController
             return redirect(route('signup.index'));
         }
 
-        $userId = $users->create([
+        $userId = User::create([
             'name' => $name,
             'email' => $email,
             'password' => password_hash($password, PASSWORD_DEFAULT),

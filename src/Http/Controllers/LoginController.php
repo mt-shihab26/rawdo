@@ -20,14 +20,14 @@ class LoginController
     /**
      * Validate credentials and log the user in
      */
-    public function store(Request $request, Session $session, User $users): Response
+    public function store(Request $request, Session $session): Response
     {
         verify_csrf();
 
         $email = trim((string) $request->input('email', ''));
         $password = (string) $request->input('password', '');
 
-        $user = $email !== '' ? $users->findByEmail($email) : null;
+        $user = $email !== '' ? User::findByEmail($email) : null;
 
         if (! $user || ! password_verify($password, $user['password'])) {
             $session->put('errors', ['email' => 'These credentials do not match our records.']);
