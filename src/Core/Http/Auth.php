@@ -29,15 +29,20 @@ class Auth
     }
 
     /**
-     * Regenerate the session (fixation protection) and remember the given model as the logged-in user
+     * Regenerate the session (fixation protection) and remember the given model as the logged-in user, extending
+     * the session cookie to 30 days when $remember is true instead of expiring it when the browser closes
      */
-    public static function login(Model $user): void
+    public static function login(Model $user, bool $remember = false): void
     {
         /** @var Session $session */
         $session = App::get(Session::class);
 
         $session->regenerate();
         $session->put('user_id', $user->id);
+
+        if ($remember) {
+            $session->remember(30 * 24 * 60);
+        }
     }
 
     /**

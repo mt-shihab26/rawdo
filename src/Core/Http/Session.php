@@ -125,4 +125,18 @@ class Session
 
         session_unset();
     }
+
+    /**
+     * Re-issue the session cookie to expire in the given number of minutes instead of when the browser closes
+     */
+    public function remember(int $minutes): void
+    {
+        setcookie(session_name(), session_id(), [
+            'expires' => time() + $minutes * 60,
+            'path' => '/',
+            'httponly' => true,
+            'samesite' => 'Lax',
+            'secure' => $this->request->secure,
+        ]);
+    }
 }

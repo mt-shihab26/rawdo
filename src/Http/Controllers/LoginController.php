@@ -33,7 +33,7 @@ class LoginController
         $user = User::where('email', $validated['email'])->first();
 
         Auth::attempt($user, $validated);
-        Auth::login($user);
+        Auth::login($user, $request->input('remember') !== null);
 
         return redirect(route('home.index'));
     }
