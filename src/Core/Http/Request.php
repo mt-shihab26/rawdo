@@ -2,12 +2,15 @@
 
 namespace Src\Core\Http;
 
+use Src\Core\Validation\Rule;
 use Src\Core\Validation\Validator;
 
 class Request
 {
     /**
      * Create a request from its HTTP method, path, body data, and whether it arrived over HTTPS
+     *
+     * @param  array<string, mixed>  $data
      */
     public function __construct(
         public string $method,
@@ -41,6 +44,10 @@ class Request
 
     /**
      * Validate the request body against the given rules and return the sanitized, validated data, or throw a ValidationException if any rule fails
+     *
+     * @param  array<string, array<int, string|Rule>>  $rules
+     * @param  array<string, string>  $messages
+     * @return array<string, mixed>
      */
     public function validate(array $rules, array $messages = []): array
     {

@@ -55,7 +55,7 @@ class App
     /**
      * Match the current request to a route and send back its response
      */
-    public function handle()
+    public function handle(): never
     {
         $request = Request::capture();
         $container = $this->container;
@@ -63,6 +63,7 @@ class App
         $container->instance(Request::class, $request);
         $container->singleton(Session::class, fn () => new Session($request));
 
+        /** @var Route|null $route */
         $route = $container->make(RouteRegistry::class)->matchRequest($request);
         if ($route) {
             $container->instance(Route::class, $route);
@@ -91,7 +92,7 @@ class App
     /**
      * Send a response to the browser, rendering a matching pages/{status} view for any error response if one exists
      */
-    private function handleResponse(Response $response)
+    private function handleResponse(Response $response): void
     {
         if ($response->redirectTo !== null) {
             http_response_code($response->statusCode);

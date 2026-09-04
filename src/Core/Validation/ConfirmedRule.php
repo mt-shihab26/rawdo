@@ -22,6 +22,8 @@ class ConfirmedRule implements Rule
 
     /**
      * Whether the value matches the "{field}_confirmation" field in the submitted data
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {

@@ -62,6 +62,8 @@ class Container
 
     /**
      * Resolve a class via a registered instance/binding, falling back to autowiring its constructor
+     *
+     * @param  class-string  $class
      */
     public function make(string $class): object
     {
@@ -81,6 +83,8 @@ class Container
 
     /**
      * Call a closure or [class, method] callback, autowiring its type-hinted parameters
+     *
+     * @param  Closure|array{0: class-string, 1: string}  $callback
      */
     public function call(Closure|array $callback): mixed
     {
@@ -99,16 +103,19 @@ class Container
 
     /**
      * Instantiate each provider, call register() on all, then boot() on all, so any provider's boot() can depend on bindings from any other regardless of load order
+     *
+     * @param  list<class-string<ServiceProvider>>  $providers
      */
     public function registerProviders(array $providers): void
     {
-        $providers = array_map(fn (string $provider) => new $provider, $providers);
+        /** @var list<ServiceProvider> $instances */
+        $instances = array_map(fn (string $provider): ServiceProvider => new $provider, $providers);
 
-        foreach ($providers as $provider) {
+        foreach ($instances as $provider) {
             $provider->register($this);
         }
 
-        foreach ($providers as $provider) {
+        foreach ($instances as $provider) {
             $provider->boot($this);
         }
     }
@@ -131,9 +138,12 @@ class Container
 
     /**
      * Resolve each of the reflected function/method's type-hinted parameters
+     *
+     * @return list<object>
      */
     private function resolveParameters(ReflectionFunctionAbstract $reflection): array
     {
+        /** @var list<object> $args */
         $args = [];
 
         foreach ($reflection->getParameters() as $parameter) {

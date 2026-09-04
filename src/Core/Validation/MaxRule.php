@@ -31,6 +31,8 @@ class MaxRule implements Rule
 
     /**
      * Whether the value's string length is at most the maximum
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {

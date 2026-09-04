@@ -61,6 +61,7 @@ class Session
      */
     public function csrfToken(): string
     {
+        /** @var string|null $token */
         $token = $this->get('_token');
 
         if ($token === null) {
@@ -94,6 +95,7 @@ class Session
      */
     public function old(?string $key = null, mixed $default = ''): mixed
     {
+        /** @var array<string, mixed>|null $old */
         static $old = null;
 
         $old ??= $this->pull('old', []);
@@ -106,6 +108,7 @@ class Session
      */
     public function errors(?string $key = null, mixed $default = ''): mixed
     {
+        /** @var array<string, string>|null $errors */
         static $errors = null;
 
         $errors ??= $this->pull('errors', []);

@@ -22,6 +22,8 @@ if (! function_exists('app')) {
 if (! function_exists('view')) {
     /**
      * Render a page view and return it as a Response object
+     *
+     * @param  array<string, mixed>|null  $data
      */
     function view(string $name, ?array $data = null): Response
     {

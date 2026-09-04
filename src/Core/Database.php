@@ -20,6 +20,8 @@ class Database extends PDO
 
     /**
      * Run a SELECT query and return every matching row
+     *
+     * @return list<array<string, mixed>>
      */
     public function select(string $query, mixed ...$bindings): array
     {
@@ -28,9 +30,12 @@ class Database extends PDO
 
     /**
      * Run a SELECT query and return the first matching row, or null if none
+     *
+     * @return array<string, mixed>|null
      */
     public function selectOne(string $query, mixed ...$bindings): ?array
     {
+        /** @var array<string, mixed>|false $row */
         $row = $this->run($query, $bindings)->fetch();
 
         return $row ?: null;
@@ -64,9 +69,12 @@ class Database extends PDO
 
     /**
      * Prepare and execute a query with its bindings, returning the executed statement
+     *
+     * @param  list<mixed>  $bindings
      */
     private function run(string $query, array $bindings): PDOStatement
     {
+        /** @var PDOStatement $statement */
         $statement = $this->prepare($query);
         $statement->execute($this->flattenBindings($bindings));
 
@@ -75,6 +83,9 @@ class Database extends PDO
 
     /**
      * Unwrap bindings passed as a single array (e.g. update($query, [$name, $id])) instead of variadic scalars
+     *
+     * @param  list<mixed>  $bindings
+     * @return list<mixed>
      */
     private function flattenBindings(array $bindings): array
     {

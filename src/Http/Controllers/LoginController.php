@@ -25,6 +25,7 @@ class LoginController
     {
         verify_csrf();
 
+        /** @var array{email: string, password: string} $validated */
         $validated = $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
@@ -33,6 +34,7 @@ class LoginController
             'password' => 'These credentials do not match our records.',
         ]);
 
+        /** @var array<string, mixed> $user */
         $user = User::findByEmail($validated['email']);
 
         if (! password_verify($validated['password'], $user['password'])) {

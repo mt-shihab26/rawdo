@@ -22,6 +22,8 @@ class EmailRule implements Rule
 
     /**
      * Whether the value is a well-formed email address
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {

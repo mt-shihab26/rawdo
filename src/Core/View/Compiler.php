@@ -17,7 +17,7 @@ class Compiler
 
         $template = preg_replace_callback(
             '/<x-([\w.-]+)((?:\s+:?[\w-]+="[^"]*")*)\s*\/>/',
-            fn ($m) => $this->compileTag($m[1], $m[2]),
+            fn (array $m): string => $this->compileTag($m[1], $m[2]),
             $template
         );
 
@@ -43,7 +43,7 @@ class Compiler
     {
         return preg_replace_callback(
             '/<x-([\w.-]+)((?:\s+:?[\w-]+="[^"]*")*)\s*>(.*?)<\/x-\1>/s',
-            fn ($m) => $this->compileTag($m[1], $m[2], $this->compilePairedTags($m[3])),
+            fn (array $m): string => $this->compileTag($m[1], $m[2], $this->compilePairedTags($m[3])),
             $template
         );
     }
@@ -67,10 +67,13 @@ class Compiler
      */
     private function compileAttributes(string $attributes): string
     {
+        /** @var list<array<int, string>> $matches */
+        $matches = [];
         preg_match_all('/(:?)([\w-]+)="([^"]*)"/', $attributes, $matches, PREG_SET_ORDER);
 
+        /** @var list<string> $pairs */
         $pairs = array_map(
-            fn ($match) => var_export($match[2], true).' => '.($match[1] === ':' ? $match[3] : var_export($match[3], true)),
+            fn (array $match): string => var_export($match[2], true).' => '.($match[1] === ':' ? $match[3] : var_export($match[3], true)),
             $matches
         );
 

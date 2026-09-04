@@ -9,10 +9,15 @@ class View
 {
     private const PAGES_DIRECTORY = 'pages';
 
+    /**
+     * @var list<string>
+     */
     private const COMPONENT_DIRECTORIES = ['components', 'layouts', 'screens'];
 
     /**
      * Render a page view and return it as a Response object
+     *
+     * @param  array<string, mixed>|null  $data
      */
     public function page(string $name, ?array $data = null): Response
     {
@@ -25,13 +30,15 @@ class View
     /**
      * Does the page exists on the pages directory
      */
-    public function pageExists(string $name)
+    public function pageExists(string $name): bool
     {
-        $this->exists($this->pagePath($name));
+        return $this->exists($this->pagePath($name));
     }
 
     /**
      * Render a <x-name> component, layout, or screen, passing its slot content if given; dots in the name address a subdirectory, e.g. "icons.logo-icon" -> components/icons/logo-icon.view.php
+     *
+     * @param  array<string, mixed>  $props
      */
     public function component(string $name, array $props = [], ?string $slot = null): string
     {
@@ -88,6 +95,8 @@ class View
 
     /**
      * Render a view file to a string, passing $data in as local variables
+     *
+     * @param  array<string, mixed>  $data
      */
     private function render(string $name, array $data = []): string
     {
@@ -106,8 +115,11 @@ class View
 
         include $__path;
 
+        /** @var string $__rendered */
+        $__rendered = ob_get_clean();
+
         // Get the contents of the buffer and turn it off
-        return ob_get_clean();
+        return $__rendered;
     }
 
     /**

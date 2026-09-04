@@ -8,6 +8,8 @@ class User
 {
     /**
      * Find a user by email, or null if none exists
+     *
+     * @return array<string, mixed>|null
      */
     public static function findByEmail(string $email): ?array
     {
@@ -24,6 +26,8 @@ class User
 
     /**
      * Insert a new user (expects an already-hashed password) and return its id
+     *
+     * @param  array{name: string, email: string, password: string}  $data
      */
     public static function create(array $data): int
     {

@@ -16,6 +16,8 @@ interface Rule
 
     /**
      * Whether the field's value satisfies this rule, given the full submitted data (for cross-field rules like "confirmed")
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool;
 

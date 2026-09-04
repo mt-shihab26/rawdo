@@ -8,6 +8,9 @@ class ValidationException extends RuntimeException
 {
     /**
      * Create an exception carrying the errors and old input the caller should flash and redirect back with
+     *
+     * @param  array<string, string>  $errors
+     * @param  array<string, mixed>  $old
      */
     public function __construct(
         public array $errors,

@@ -9,7 +9,7 @@ class RouteRegistry
     /**
      * All routes registered via Route::get()/Route::post()
      *
-     * @var Route[]
+     * @var list<Route>
      */
     private array $routes = [];
 

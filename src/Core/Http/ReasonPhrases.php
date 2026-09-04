@@ -6,6 +6,8 @@ class ReasonPhrases
 {
     /**
      * Standard reason phrases for every HTTP status code, used as fallback error text
+     *
+     * @var array<int, string>
      */
     private const REASON_PHRASES = [
         100 => 'Continue',

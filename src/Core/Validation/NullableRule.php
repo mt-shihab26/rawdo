@@ -22,6 +22,8 @@ class NullableRule implements Rule
 
     /**
      * Always passes; Validator short-circuits a field's other rules when it's empty and marked nullable, rather than calling this
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {

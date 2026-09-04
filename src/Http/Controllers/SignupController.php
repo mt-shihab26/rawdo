@@ -25,6 +25,7 @@ class SignupController
     {
         verify_csrf();
 
+        /** @var array{name: string, email: string, password: string, terms: string} $validated */
         $validated = $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email'],

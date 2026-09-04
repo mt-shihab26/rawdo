@@ -14,6 +14,8 @@ class Route
 
     /**
      * Create a new route with its HTTP method, path, and callback
+     *
+     * @param  Closure|array{0: class-string, 1: string}  $callback
      */
     public function __construct(
         private string $method,
@@ -60,13 +62,15 @@ class Route
     /**
      * Run the route's callback and return its result, autowiring type-hinted parameters (e.g. Request) via the Container
      */
-    public function call()
+    public function call(): mixed
     {
         return App::get()->call($this->callback);
     }
 
     /**
      * Register a new GET route with the App and return it for chaining; the callback may be a closure or a [ControllerClass, 'method'] array
+     *
+     * @param  Closure|array{0: class-string, 1: string}  $callback
      */
     public static function get(string $path, Closure|array $callback): self
     {
@@ -75,6 +79,8 @@ class Route
 
     /**
      * Register a new POST route with the App and return it for chaining
+     *
+     * @param  Closure|array{0: class-string, 1: string}  $callback
      */
     public static function post(string $path, Closure|array $callback): self
     {
@@ -110,6 +116,8 @@ class Route
         if ($name === null) {
             return new RouteInspector;
         }
+
+        /** @var Route|null $route */
         $route = App::get(RouteRegistry::class)->matchName($name);
 
         if (! $route) {
@@ -121,6 +129,8 @@ class Route
 
     /**
      * Build a route for the given method, register it with the RouteRegistry, and return it for chaining
+     *
+     * @param  Closure|array{0: class-string, 1: string}  $callback
      */
     private static function register(string $method, string $path, Closure|array $callback): self
     {

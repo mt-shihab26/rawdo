@@ -6,6 +6,8 @@ class Paths
 {
     /**
      * Absolute path to the project root, resolved once from this file's own fixed location
+     *
+     * @var string
      */
     private const ROOT = __DIR__.'/../..';
 

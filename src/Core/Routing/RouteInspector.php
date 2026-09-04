@@ -13,6 +13,7 @@ class RouteInspector
     public function current(string $name): bool
     {
         try {
+            /** @var Route $route */
             $route = App::get(Route::class);
         } catch (RuntimeException) {
             return false;

@@ -29,6 +29,8 @@ class ExistsRule implements Rule
      */
     public static function fromParameter(?string $parameter): self
     {
+        /** @var string $table */
+        /** @var string $column */
         [$table, $column] = explode(',', (string) $parameter, 2);
 
         return new self($table, $column);
@@ -36,6 +38,8 @@ class ExistsRule implements Rule
 
     /**
      * Whether a row exists whose column equals the value
+     *
+     * @param  array<string, mixed>  $data
      */
     public function passes(string $field, mixed $value, array $data): bool
     {
