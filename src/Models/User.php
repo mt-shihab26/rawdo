@@ -19,6 +19,7 @@ class User
             'name',
             'email',
             'password',
+            'terms',
         ];
     }
 
@@ -31,6 +32,7 @@ class User
     {
         return [
             'password' => 'hash',
+            'terms' => 'bool',
         ];
     }
 
@@ -42,6 +44,7 @@ class User
         public string $name,
         public string $email,
         public string $password,
+        public bool $terms,
         public string $created_at,
     ) {
         //
@@ -70,8 +73,8 @@ class User
         $data = self::applyCasts($data, $blank->casts());
 
         $id = app(Database::class)->insert(
-            'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-            $data['name'], $data['email'], $data['password']
+            'INSERT INTO users (name, email, password, terms) VALUES (?, ?, ?, ?)',
+            $data['name'], $data['email'], $data['password'], $data['terms']
         );
 
         return self::find($id);
@@ -99,9 +102,15 @@ class User
     private static function applyCasts(array $data, array $casts): array
     {
         foreach ($casts as $field => $cast) {
-            if (isset($data[$field]) && $cast === 'hash') {
-                $data[$field] = password_hash($data[$field], PASSWORD_DEFAULT);
+            if (! isset($data[$field])) {
+                continue;
             }
+
+            $data[$field] = match ($cast) {
+                'hash' => password_hash($data[$field], PASSWORD_DEFAULT),
+                'bool' => $data[$field] ? 1 : 0,
+                default => $data[$field],
+            };
         }
 
         return $data;
@@ -133,6 +142,7 @@ class User
             name: (string) $row['name'],
             email: (string) $row['email'],
             password: (string) $row['password'],
+            terms: (bool) $row['terms'],
             created_at: (string) $row['created_at'],
         );
     }
