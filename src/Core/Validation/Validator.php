@@ -19,6 +19,7 @@ class Validator
         MaxRule::class,
         ConfirmedRule::class,
         AcceptedRule::class,
+        BoolRule::class,
         ExistsRule::class,
         UniqueRule::class,
     ];
@@ -36,6 +37,14 @@ class Validator
      * @var array<string, mixed>
      */
     private array $data;
+
+    /**
+     * Each field's resolved rule names, captured during validateField() so validated() can tell which fields
+     * are marked "bool" and need their raw value cast to a real boolean
+     *
+     * @var array<string, list<string>>
+     */
+    private array $ruleNames = [];
 
     /**
      * Hold the trimmed data being validated, its "field => ['rule', 'rule:param', new SomeRule]" rules, and any message overrides
@@ -92,6 +101,8 @@ class Validator
     {
         /** @var list<array{0: string, 1: Rule}> $resolved */
         $resolved = array_map(fn (string|Rule $rule): array => $this->resolveRule($rule), $rules);
+
+        $this->ruleNames[$field] = array_column($resolved, 0);
 
         /** @var mixed $value */
         $value = $this->data[$field] ?? null;
@@ -166,13 +177,27 @@ class Validator
     }
 
     /**
-     * The (already-trimmed) values for just the fields that have rules
+     * The (already-trimmed) values for just the fields that have rules, defaulting a field to null if it was
+     * never submitted at all (e.g. an unchecked checkbox), so every ruled key is always present in the result;
+     * a field marked "bool" gets its raw value cast to a real boolean (absent/null counts as false)
      *
      * @return array<string, mixed>
      */
     private function validated(): array
     {
-        return array_intersect_key($this->data, $this->rules);
+        $validated = [];
+
+        foreach (array_keys($this->rules) as $field) {
+            $value = $this->data[$field] ?? null;
+
+            if (in_array(BoolRule::name(), $this->ruleNames[$field] ?? [], true)) {
+                $value = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+            }
+
+            $validated[$field] = $value;
+        }
+
+        return $validated;
     }
 
     /**

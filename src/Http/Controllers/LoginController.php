@@ -25,6 +25,7 @@ class LoginController
         $validated = $request->validate([
             'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
+            'remember' => ['nullable', 'bool'],
         ], [
             'email' => 'These credentials do not match our records.',
             'password' => 'These credentials do not match our records.',
@@ -33,7 +34,7 @@ class LoginController
         $user = User::where('email', $validated['email'])->first();
 
         Auth::attempt($user, $validated);
-        Auth::login($user, $request->input('remember') !== null);
+        Auth::login($user, $validated['remember']);
 
         return redirect(route('home.index'));
     }

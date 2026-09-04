@@ -4,6 +4,7 @@ namespace Src\Core\Http;
 
 use Src\Core\Database\Model;
 use Src\Core\Foundation\App;
+use Src\Core\Paths;
 use Src\Core\Validation\ValidationException;
 
 class Auth
@@ -41,7 +42,10 @@ class Auth
         $session->put('user_id', $user->id);
 
         if ($remember) {
-            $session->remember(30 * 24 * 60);
+            /** @var array{remember_for: int} $config */
+            $config = require Paths::config('auth.php');
+
+            $session->remember($config['remember_for']);
         }
     }
 

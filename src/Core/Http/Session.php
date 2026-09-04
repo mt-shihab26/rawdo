@@ -127,12 +127,12 @@ class Session
     }
 
     /**
-     * Re-issue the session cookie to expire in the given number of minutes instead of when the browser closes
+     * Re-issue the session cookie to expire in the given number of seconds instead of when the browser closes
      */
-    public function remember(int $minutes): void
+    public function remember(int $seconds): void
     {
         setcookie(session_name(), session_id(), [
-            'expires' => time() + $minutes * 60,
+            'expires' => time() + $seconds,
             'path' => '/',
             'httponly' => true,
             'samesite' => 'Lax',

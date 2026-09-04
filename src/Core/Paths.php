@@ -34,4 +34,12 @@ class Paths
     {
         return self::base($path ? "storage/$path" : 'storage');
     }
+
+    /**
+     * Resolve a path relative to the config directory
+     */
+    public static function config(?string $path = null): string
+    {
+        return self::base($path ? "config/$path" : 'config');
+    }
 }
